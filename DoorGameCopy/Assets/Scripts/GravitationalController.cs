@@ -15,7 +15,7 @@ public class GravitationalController : controller
         switch (status)
         {
             case 1:
-                verticalSpeed = 150f;
+                verticalSpeed = jumpInitSpeed;
                 break;
             case 0:
                 verticalSpeed = 0f;
@@ -25,8 +25,8 @@ public class GravitationalController : controller
                 break;
 
         }
-        if (verticalSpeed < -100f)
-            verticalSpeed = -100f;
+        if (verticalSpeed < -fallMaxSpeed)
+            verticalSpeed = -fallMaxSpeed;
     }
   
 }

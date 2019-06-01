@@ -14,15 +14,18 @@ public class LineMark : MonoBehaviour
     private bool isBlackHoleOpen = false;
     public float precision = 0.01f;
     public float lineWidth = 0.05f;
-    public float characterHeight = 1f;
-    public float characterWidth = 1f;
+    private float characterHeight ;
+    private float characterWidth ;
     private float timer = 0f;
+    private GameObject player;
 
     private enum vec3 { top,bottom,left,right,center}
     // Use this for initialization
     void Start()
     {
-
+        player = GameObject.FindWithTag("Player");
+        characterWidth = player.GetComponent<BoxCollider2D>().size.x;
+        characterHeight = player.GetComponent<BoxCollider2D>().size.y;
     }
 
     void FixedUpdate()

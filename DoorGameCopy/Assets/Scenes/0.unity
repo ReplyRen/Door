@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 432792955}
   m_Layer: 8
   m_Name: IsLand
-  m_TagString: Untagged
+  m_TagString: floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -722,8 +722,6 @@ MonoBehaviour:
   obs: {fileID: 7412459490736524814, guid: 1757ed511c7c95242b7ee0c5a89e4337, type: 3}
   precision: 0.01
   lineWidth: 0.05
-  characterHeight: 1
-  characterWidth: 1
 --- !u!4 &1181316800
 Transform:
   m_ObjectHideFlags: 0
@@ -881,6 +879,7 @@ MonoBehaviour:
   gNormal: 9.8
   g: 0
   gSmooth: 2
+  jumpInitSpeed: 150
   verticalSpeed: 0
   density: 0.1
 --- !u!114 &1566468675
@@ -998,7 +997,7 @@ GameObject:
   - component: {fileID: 1874872804}
   m_Layer: 8
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

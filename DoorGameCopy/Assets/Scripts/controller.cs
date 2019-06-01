@@ -10,6 +10,9 @@ public class controller : MonoBehaviour
     public float gNormal = 9.8f;//正常的重力值
     public float g;
     public float gSmooth = 2f;//达到最高点时的重力值
+    public float jumpInitSpeed = 150f;
+    public float fallMaxSpeed = -100f;
+    public float smoothCriticalSpeed = 10f;
     private float lerp;//每帧y方向的位移差
     public float verticalSpeed=0f;//y方向的速度
     private float verticalPos;//y方向的位置
@@ -63,7 +66,7 @@ public class controller : MonoBehaviour
         if (Input.GetKey(KeyCode.W)&&status==0)//跳跃
             status = 1;
         UpRayDetection();//上方射线检测
-        if (verticalSpeed < 10 && verticalSpeed > -10)//接近最高点时平滑的速度
+        if (verticalSpeed < smoothCriticalSpeed && verticalSpeed > -smoothCriticalSpeed)//接近最高点时平滑的速度
             g = gSmooth;
         else
             g = gNormal;
@@ -87,13 +90,13 @@ public class controller : MonoBehaviour
 
         else if (status == 1)//起跳的移动
         {
-            transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(deltaPos.x,verticalPos, 0f), speed * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(deltaPos.x,verticalPos, 0f), 4f * Time.deltaTime);
         }
         else if (status == 3)//悬空的移动
-            transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(deltaPos.x, verticalPos, 0f), speed * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(deltaPos.x, verticalPos, 0f), 4f * Time.deltaTime);
         else if (status == 2)//上方碰到东西的移动
         {
-            transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(deltaPos.x, -2.0f, 0f), speed * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(deltaPos.x, -2.0f, 0f), 4f * Time.deltaTime);
             verticalSpeed = 0f;
             status = 3;
         }
@@ -160,7 +163,7 @@ public class controller : MonoBehaviour
                 downHitStatus[i] = 0;
                 ang[i] = Vector2.Angle(downHit[i].normal, Vector2.up);
             }
-            else if(downHit[i].collider.tag=="specialPlace")
+            else if(downHit[i].collider.tag=="Canvas")
             {
                 print("进入特殊平台");
                 downHitStatus[i] = 3;
