@@ -18,6 +18,7 @@ public class LineMark : MonoBehaviour
     private float characterWidth ;
     private float timer = 0f;
     private GameObject player;
+    private List<Vector3> doorList = new List<Vector3>();
 
     private enum vec3 { top,bottom,left,right,center}
     // Use this for initialization
@@ -26,6 +27,7 @@ public class LineMark : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         characterWidth = player.GetComponent<BoxCollider2D>().size.x;
         characterHeight = player.GetComponent<BoxCollider2D>().size.y;
+        doorList.Clear();
     }
 
     void FixedUpdate()
@@ -96,6 +98,7 @@ public class LineMark : MonoBehaviour
                 else
                 {
                     Debug.Log("传送门");
+
                     clone.GetComponent<LineMark>().enabled = false;
                 }
 

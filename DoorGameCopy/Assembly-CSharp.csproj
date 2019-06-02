@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\controller.cs" />
     <Compile Include="Assets\Scripts\GravitationalController.cs" />
     <Compile Include="Assets\Scripts\LineMark.cs" />
+    <Compile Include="Assets\Scripts\Manager.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>E:/Work/Unity/Game Project/DoorGameGit/DoorGameCopy/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
