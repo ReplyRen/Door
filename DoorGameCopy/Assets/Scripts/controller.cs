@@ -27,6 +27,8 @@ public class controller : MonoBehaviour
     private int verticalStatus;//水平方向的状态
     private float maxUpPos;
     public float density=0.1f;//射线密度
+    private bool isSpaceDown = false;
+    private  float timer = 0f;
     Ray2D[] downRay;
     Ray2D[] upRay;
     Ray2D[] rightRay;
@@ -45,6 +47,8 @@ public class controller : MonoBehaviour
         h = (int)(height/ density);
         verticalStatus = 0;
         maxUpPos = 100f;
+        isSpaceDown = false;
+        timer = 0f;
     }
     public void FixedUpdate()
     {
@@ -63,8 +67,10 @@ public class controller : MonoBehaviour
     {
         DownRayDetection();//下方的射线检测
         VerticalRayDetection(deltaPos);//水平 射线检测
-        if (Input.GetKey(KeyCode.W)&&status==0)//跳跃
+        if (Input.GetKey(KeyCode.Space) && status == 0)//跳跃
+        {
             status = 1;
+        }
         UpRayDetection();//上方射线检测
         if (verticalSpeed < smoothCriticalSpeed && verticalSpeed > -smoothCriticalSpeed)//接近最高点时平滑的速度
             g = gSmooth;
