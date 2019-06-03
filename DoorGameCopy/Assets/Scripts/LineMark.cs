@@ -239,7 +239,7 @@ public class LineMark : MonoBehaviour
 
     private void Portal(Vector3 from,Vector3 to)
     {
-        if (IsClose(player.transform.position,from))
+        if ((player.transform.position - from).sqrMagnitude <0.1f)
         {
             player.transform.position = to;
         }
