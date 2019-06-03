@@ -6,7 +6,7 @@ using UnityEngine;
 public class LineMark : MonoBehaviour
 {
     private GameObject clone;
-    private LineRenderer line;
+    public LineRenderer line;
     private int i;
     public GameObject obs;
     private List<Vector3> posList = new List<Vector3>();
