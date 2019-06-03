@@ -43,6 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c70e763d080fb4525b8323dfedd4e6df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obs: {fileID: 7412459490736524814, guid: 1757ed511c7c95242b7ee0c5a89e4337, type: 3}
+  line: {fileID: 0}
+  obs: {fileID: 4589602747460776477, guid: 1757ed511c7c95242b7ee0c5a89e4337, type: 3}
   precision: 0.01
   lineWidth: 0.05
+  drawCount: 2
