@@ -29,6 +29,7 @@ public class controller : MonoBehaviour
     public float density=0.1f;//射线密度
     private bool isSpaceDown = false;
     private  float timer = 0f;
+    public bool Jump = false;
     Ray2D[] downRay;
     Ray2D[] upRay;
     Ray2D[] rightRay;
@@ -50,6 +51,7 @@ public class controller : MonoBehaviour
         isSpaceDown = false;
         timer = 0f;
     }
+
     public void FixedUpdate()
     {
         InitRay();//初始化射线
@@ -176,7 +178,9 @@ public class controller : MonoBehaviour
             }
             q += downHitStatus[i];
             if (q == downHitStatus.Length * 3)
+            {
                 status = 3;
+            }
             if (downHitStatus[i] == 0)
                 status = 0;
         }
