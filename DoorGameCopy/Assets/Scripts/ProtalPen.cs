@@ -1,64 +1,59 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LineMark : MonoBehaviour
+public class ProtalPen : MonoBehaviour
 {
     private GameObject clone;
-    public LineRenderer line;
+    private LineRenderer line;
     private int i;
     public GameObject obs;
-    private List<Vector3> posList = new List<Vector3>();
-    private  bool isPortalOpen = false;
-    private bool isBlackHoleOpen = false;
-    public float precision = 0.01f;
     public float lineWidth = 0.05f;
-    private float characterHeight ;
-    private float characterWidth ;
-    private float timer = 0f;
-    private GameObject player;
+    public float precision = 0.05f;
+    private List<Vector3> posList = new List<Vector3>();
     private List<Vector3> portalList = new List<Vector3>();
-    private List<Vector3> bHList = new List<Vector3>();
-    public int drawCount = 2;
+    private bool isPortalOpen = false;
+    private float characterHeight;
+    private float characterWidth;
+    private GameObject player;
+    public KeyCode protalKey = KeyCode.Q;
 
-    private enum vec3 { top,bottom,left,right,center}
-    // Use this for initialization
-    void Start()
+    private enum vec3 { top, bottom, left, right, center }
+
+    private void Start()
     {
         player = GameObject.FindWithTag("Player");
         characterWidth = player.GetComponent<BoxCollider2D>().size.x;
         characterHeight = player.GetComponent<BoxCollider2D>().size.y;
         portalList.Clear();
-        bHList.Clear();
     }
-
     void FixedUpdate()
     {
-        Mouse();
-        timer += Time.deltaTime;
-        if ((portalList.Count+bHList.Count) <= drawCount&&Mouse())
+        
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
+            clone = (GameObject)Instantiate(obs, obs.transform.position, transform.rotation);//克隆一个带有LineRender的物体   
+            line = clone.GetComponent<LineRenderer>();//获得该物体上的LineRender组件  
+            line.SetColors(Color.blue, Color.red);//设置颜色  
+            line.SetWidth(lineWidth, lineWidth);//设置宽度  
+            i = 0;
+            posList.Clear();
+            isPortalOpen = false;
+        }
+        if (Input.GetMouseButton(0)&&!MousePositionDetection())
+        {
+            if (clone != null)
+                Destroy(clone);
+        }
+        if (Input.GetMouseButton(0)&&MousePositionDetection())
+        {
+            if (clone != null)
             {
-                clone = (GameObject)Instantiate(obs, obs.transform.position, transform.rotation);//克隆一个带有LineRender的物体   
-                line = clone.GetComponent<LineRenderer>();//获得该物体上的LineRender组件  
-                line.SetColors(Color.blue, Color.red);//设置颜色  
-                line.SetWidth(lineWidth, lineWidth);//设置宽度  
-                i = 0;
-                posList.Clear();
-                isPortalOpen = false;
-                isBlackHoleOpen = false;
-                timer = 0f;
-            }
-            if (Input.GetMouseButton(0) && isPortalOpen == false/*&&Mouse()*/)
-            {
-                timer = 0f;
                 i++;
                 Vector3 pos = new Vector3();
                 line.positionCount = i;//设置顶点数  
                 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15));
-                line.SetPosition(i - 1, pos);//设置顶点位置
+                line.SetPosition(i - 1, pos);//设置顶点位置 
                 if (posList.Count > 10)
                 {
                     for (int n = 0; n < posList.Count - 10; n++)
@@ -76,9 +71,11 @@ public class LineMark : MonoBehaviour
                     posList.Add(pos);
                 }
             }
-            if (Input.GetMouseButtonUp(0))
+        }
+        if (Input.GetMouseButtonUp(0)&&MousePositionDetection())
+        {
+            if (clone != null)
             {
-                IsBHOpen(posList);
                 List<Vector3> changeList = new List<Vector3>();
                 changeList = posList;
                 Vector3 topPoint = new Vector3();
@@ -102,82 +99,43 @@ public class LineMark : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("传送门");
+                        Debug.Log("传送门" + centerPoint);
                         portalList.Add(centerPoint);
                     }
-
-                }
-                else if (isBlackHoleOpen)
-                {
-                    Debug.Log("黑洞门");
-                    bHList.Add(centerPoint);
                 }
                 else
                 {
                     Destroy(clone);
-
                 }
-
-                if (!isPortalOpen && !isBlackHoleOpen)
-                    Destroy(clone);
             }
         }
         if (portalList.Count == 2)
+        {
             Portal(portalList[0], portalList[1]);
-        
+        }
+
     }
     private bool IsClose(Vector3 v1, Vector3 v2)
     {
-        if ((v1-v2).sqrMagnitude<precision)
+        if ((v1 - v2).sqrMagnitude < precision)
             return true;
         else
             return false;
     }
-    private void IsBHOpen(List<Vector3> list)
-    {
-        int xChangeCount = 0;
-        int yChangeCount = 0;
-        for(int n = 1; n < list.Count - 1; n++)
-        {
-            int q = n;
-            while ((q < list.Count - 1) && ((list[q].y - list[q + 1].y) == 0)  )
-            {
-                q++;
-            }
-            if (q == list.Count - 1)
-                ;
-            else if ((list[n - 1].y - list[n].y) * (list[q].y - list[q + 1].y) < 0)
-            {
-                yChangeCount++;
-            }
-            q = n;
-            while ((q < list.Count - 1) && ((list[q].x - list[q + 1].x) == 0) )
-            {
-                q++;
-            }
-            if (q == list.Count - 1)
-                ;
-            else if ((list[n - 1].x - list[n].x) * (list[q].x - list[q + 1].x) < 0)
-                xChangeCount++; 
-        }
-        if (xChangeCount >= 2 && yChangeCount >= 2)
-            isBlackHoleOpen = true;
-    }
-
-    private Vector3 GetPoint(List<Vector3> list,vec3 vec)
+    private Vector3 GetPoint(List<Vector3> list, vec3 vec)
     {
 
         if (vec.ToString() == "top")
         {
             for (int m = 0; m < list.Count - 1; m++)
             {
-                 if (list[m].y > list[m + 1].y)
-                 {
-                      Vector3 q = new Vector3();
-                      q =list[m];
-                      list[m] = list[m + 1];
-                      list[m + 1] = q;
-                 }
+                if (list[m].y > list[m + 1].y)
+                {
+                    Vector3 q = new Vector3();
+                    q = list[m];
+                    list[m] = list[m + 1];
+                    list[m + 1] = q;
+                }
             }
         }
         if (vec.ToString() == "bottom")
@@ -235,39 +193,32 @@ public class LineMark : MonoBehaviour
             return new Vector3(x, y, 0f);
         }
         return list[list.Count - 1];
-        
+
     }
 
-    private void Portal(Vector3 from,Vector3 to)
+    private void Portal(Vector3 from, Vector3 to)
     {
-        if ((player.transform.position - from).sqrMagnitude <0.1f)
+        if (((player.transform.position - from).sqrMagnitude < 0.5f) && Input.GetKeyDown(protalKey))
         {
             player.transform.position = to;
         }
-    }
-    private bool Mouse()
-    {
-        Vector3 mousePos = Input.mousePosition;//获取鼠标位置//
-        mousePos.z = 1f;//因为鼠标只有X，Y轴，所以要赋予给鼠标Z轴//
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);//把鼠标的屏幕坐标转换成世界坐标//
-        Ray ray = new Ray();
-        ray.direction = new Vector3(0, 0, -1);
-        ray.origin = worldPos;
-        RaycastHit hit = new RaycastHit();
-        if (Physics.Raycast(ray, out hit))
+        else if (((player.transform.position - to).sqrMagnitude < 0.5f)&&Input.GetKeyDown(protalKey))
         {
-            Debug.Log(hit.collider.tag);
+            player.transform.position = from;
+        }
+    }
+    private bool MousePositionDetection()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
+        if (hit)
+        {
             if (hit.collider.tag == "Canvas")
                 return true;
             else
                 return false;
         }
         else
-        {
-            Debug.Log(0);
             return false;
-        }
-
-
     }
 }

@@ -171,7 +171,6 @@ public class controller : MonoBehaviour
             }
             else if(downHit[i].collider.tag=="Canvas")
             {
-                print("进入特殊平台");
                 downHitStatus[i] = 3;
             }
             q += downHitStatus[i];
@@ -281,10 +280,4 @@ public class controller : MonoBehaviour
         if (collision.tag == "specialPlace")
             Debug.Log(0);
     }
-
-    //private Action<Collider2D> SpecialEvent(Action<Collider2D> col)
-    //{
-    //    print("进入特殊平台");
-    //    return col;
-    //}
 }

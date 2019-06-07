@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3358907773464817318
+--- !u!1 &3386493350023049895
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3358907773464817368}
-  - component: {fileID: 3358907773464817319}
+  - component: {fileID: 4649528627067157617}
+  - component: {fileID: 377983062206588263}
   m_Layer: 0
-  m_Name: Pen
+  m_Name: BlackHoldPen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3358907773464817368
+--- !u!4 &4649528627067157617
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3358907773464817318}
+  m_GameObject: {fileID: 3386493350023049895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7216121, y: -0.6020428, z: -5}
+  m_LocalPosition: {x: 3.5787992, y: -3.6189833, z: 7.85543}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3358907773464817319
+--- !u!114 &377983062206588263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3358907773464817318}
+  m_GameObject: {fileID: 3386493350023049895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c70e763d080fb4525b8323dfedd4e6df, type: 3}
+  m_Script: {fileID: 11500000, guid: f56b358f64feb564b92fc88f8a2314da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  line: {fileID: 0}
-  obs: {fileID: 4589602747460776477, guid: 1757ed511c7c95242b7ee0c5a89e4337, type: 3}
-  precision: 0.01
+  obs: {fileID: 3567970610388832631, guid: c70b7387e65bfad46bf4359bd00e413c, type: 3}
   lineWidth: 0.05
-  drawCount: 2
