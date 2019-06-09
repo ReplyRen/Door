@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obs: {fileID: 1577260111425243454, guid: 635ac2b7f7ccd0341be756eca3b3f7b3, type: 3}
-  lineWidth: 0.05
+  lineWidth: 0.04
   precision: 0.05
   protalKey: 113

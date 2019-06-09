@@ -7,6 +7,7 @@ TagManager:
   - Door
   - Canvas
   - floor
+  - cloud
   layers:
   - Default
   - TransparentFX
