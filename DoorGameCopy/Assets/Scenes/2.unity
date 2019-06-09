@@ -1929,6 +1929,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4616058132575039655, guid: d2881599c8e04744cacedf8a3405cd5f,
+        type: 3}
+      propertyPath: minDoorHeight
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616058132575039655, guid: d2881599c8e04744cacedf8a3405cd5f,
+        type: 3}
+      propertyPath: minDoorWidth
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2881599c8e04744cacedf8a3405cd5f, type: 3}
 --- !u!1001 &4828908149411434598
