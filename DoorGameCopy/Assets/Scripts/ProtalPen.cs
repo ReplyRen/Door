@@ -13,6 +13,8 @@ public class ProtalPen : MonoBehaviour
     private List<Vector3> posList = new List<Vector3>();
     private List<Vector3> portalList = new List<Vector3>();
     private bool isPortalOpen = false;
+    public float minDoorHeight = 0.1f;
+    public float minDoorWidth = 0.1f;
     private float characterHeight;
     private float characterWidth;
     private GameObject player;
@@ -91,7 +93,7 @@ public class ProtalPen : MonoBehaviour
 
                 if (isPortalOpen)
                 {
-                    if ((topPoint.y - bottomPoint.y) < characterHeight || (rightPoint.x - leftPoint.x) < characterWidth)
+                    if ((topPoint.y - bottomPoint.y) <minDoorHeight || (rightPoint.x - leftPoint.x) < minDoorWidth)
                     {
                         Debug.Log("太小了");
                         Destroy(clone);
