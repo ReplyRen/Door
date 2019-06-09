@@ -14,7 +14,12 @@ public class BlackHoldPen : MonoBehaviour
     private float characterHeight;
     private float characterWidth;
     private GameObject player;
-    private List<Vector3> bHList = new List<Vector3>();
+    public List<Vector3> bHPosList = new List<Vector3>();
+    private List<GameObject> bHList = new List<GameObject>();
+    public bool isAttracting = false;
+    private float timer = 0f;
+    public float attractTime = 5f;
+    private float angle = 0f;
 
     private enum vec3 { top, bottom, left, right, center }
     private void Start()
@@ -22,7 +27,10 @@ public class BlackHoldPen : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         characterWidth = player.GetComponent<BoxCollider2D>().size.x;
         characterHeight = player.GetComponent<BoxCollider2D>().size.y;
+        bHPosList.Clear();
         bHList.Clear();
+        isAttracting = false;
+        angle = 0f;
     }
     private void FixedUpdate()
     {
@@ -62,7 +70,6 @@ public class BlackHoldPen : MonoBehaviour
         {
             if (clone != null)
             {
-
                 IsBHOpen(posList);
                 List<Vector3> changeList = new List<Vector3>();
                 changeList = posList;
@@ -79,13 +86,35 @@ public class BlackHoldPen : MonoBehaviour
                 if (isBlackHoleOpen)
                 {
                     Debug.Log("黑洞门");
-                    bHList.Add(centerPoint);
+                    bHPosList.Add(centerPoint);
+                    bHList.Add(clone);
                 }
                 else
                 {
                     Destroy(clone);
                 }
             }
+
+        }
+        if (bHPosList.Count == 2)
+        {
+            timer += Time.deltaTime;
+            if (timer < attractTime)
+            {
+                bHList[0].transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                angle++;
+                isAttracting = true;
+            }
+            else
+            {
+                isAttracting = false;
+                bHPosList.Clear();
+                Destroy(bHList[0]);
+                Destroy(bHList[1]);
+                bHList.Clear();
+                timer = 0f;
+            }
+
         }
 
     }

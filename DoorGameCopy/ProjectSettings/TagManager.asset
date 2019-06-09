@@ -4,10 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Door
-  - Canvas
-  - floor
   - cloud
+  - Canvas
   layers:
   - Default
   - TransparentFX
@@ -17,8 +15,8 @@ TagManager:
   - UI
   - 
   - 
-  - Ground
-  - Canvas
+  - 
+  - 
   - 
   - 
   - 
@@ -44,16 +42,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: BackLayer
-    uniqueID: 931971889
-    locked: 0
-  - name: DrawLayer
-    uniqueID: 593568169
-    locked: 0
-  - name: MidLayer
-    uniqueID: 272556941
-    locked: 0
-  - name: ForeLayer
-    uniqueID: 958117361
     locked: 0
