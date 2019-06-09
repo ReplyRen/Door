@@ -34,6 +34,8 @@ public class controller : MonoBehaviour
     Ray2D[] upRay;
     Ray2D[] rightRay;
     Ray2D[] leftRay;
+    private float upMarigin;
+    private float downMargin;
 
     public event Action<Collider2D> onTriggerEnterEvent;
 
@@ -50,6 +52,9 @@ public class controller : MonoBehaviour
         maxUpPos = 100f;
         isSpaceDown = false;
         timer = 0f;
+
+        upMarigin = 10;
+        downMargin = -30;
     }
 
     public void FixedUpdate()
@@ -64,6 +69,18 @@ public class controller : MonoBehaviour
         Vector2 movement = new Vector2(h, 0);
         Move(movement);
         startPos = newPos;
+
+        Animator anim = this.GetComponent<Animator>();
+        if (Input.GetAxis("Horizontal") != 0)
+            anim.SetBool("IsWalking", true);
+        else anim.SetBool("IsWalking", false);
+
+        if (verticalSpeed > upMarigin && anim.GetInteger("State") != 1)
+            anim.SetInteger("State", 1);
+        else if (verticalSpeed < downMargin && anim.GetInteger("State") != 2)
+            anim.SetInteger("State", 2);
+        else if (verticalSpeed >= downMargin && verticalSpeed <= upMarigin && anim.GetInteger("State") != 0)
+            anim.SetInteger("State", 0);
     }
     public void Move(Vector2 deltaPos)
     {

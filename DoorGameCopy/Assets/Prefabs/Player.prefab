@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4828908150184863781}
   - component: {fileID: 4828908150184863780}
   - component: {fileID: 4828908150184863783}
+  - component: {fileID: 921753487}
+  - component: {fileID: 921753491}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -67,10 +69,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -8907630598626749113, guid: 16b5cf90b9244704e8e044b8f5acf590,
+  m_SortingLayerID: 85659689
+  m_SortingLayer: 3
+  m_SortingOrder: 5
+  m_Sprite: {fileID: 4589224676202209169, guid: ad89fac1ce36b124dbe9f5ce0ca61d1b,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -95,18 +97,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.63640356, y: 0.17626762}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.8399997, y: 9.421008}
+    oldSize: {x: 4.02, y: 10.0810795}
     newSize: {x: 5.8399997, y: 9.421008}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.8399997, y: 9.421008}
+  m_Size: {x: 4.1944757, y: 9.068472}
   m_EdgeRadius: 0
 --- !u!114 &4828908150184863783
 MonoBehaviour:
@@ -131,3 +133,35 @@ MonoBehaviour:
   verticalSpeed: 0
   density: 0.1
   Jump: 0
+--- !u!95 &921753487
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4828908150184863782}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e8e15535856f66c43b0dbcc99740faf0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &921753491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4828908150184863782}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a41b64902335443bcb10ad4d8fb70c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5

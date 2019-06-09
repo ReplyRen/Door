@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Attract : MonoBehaviour
 {
-    private float speed = 1f;
+    public float speed = 1f;
     private float timer = 0f;
     private float attractTime = 5f;
     private GameObject player;
