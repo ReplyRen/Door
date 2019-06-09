@@ -555,7 +555,7 @@ PrefabInstance:
     - target: {fileID: 3386493350023049895, guid: 2bb8bd08574d78c4a883d41a59ae47b2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4649528627067157617, guid: 2bb8bd08574d78c4a883d41a59ae47b2,
         type: 3}
@@ -923,7 +923,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1131797547}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.874, y: -1.47, z: -10}
+  m_LocalPosition: {x: 7.874, y: -1.37, z: -10}
   m_LocalScale: {x: 0.933, y: 1.232, z: 1}
   m_Children: []
   m_Father: {fileID: 698672724}
@@ -1862,6 +1862,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1357813, y: 11.662452}
   m_EdgeRadius: 0
+--- !u!1 &2010148810 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4828908150184863782, guid: 57f401f3a5a88af48b0100d1661961a1,
+    type: 3}
+  m_PrefabInstance: {fileID: 4828908149411434598}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2010148815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010148810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a41b64902335443bcb10ad4d8fb70c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2048283123
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1873,6 +1891,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ProtalPen
+      objectReference: {fileID: 0}
+    - target: {fileID: 724845544900673957, guid: d2881599c8e04744cacedf8a3405cd5f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5440658563324871546, guid: d2881599c8e04744cacedf8a3405cd5f,
         type: 3}
@@ -2006,6 +2029,11 @@ PrefabInstance:
     - target: {fileID: 4828908150184863778, guid: 57f401f3a5a88af48b0100d1661961a1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4828908150184863783, guid: 57f401f3a5a88af48b0100d1661961a1,
+        type: 3}
+      propertyPath: Jump
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

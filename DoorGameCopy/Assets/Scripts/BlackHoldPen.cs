@@ -14,12 +14,19 @@ public class BlackHoldPen : MonoBehaviour
     private float characterHeight;
     private float characterWidth;
     private GameObject player;
+    [HideInInspector]
     public List<Vector3> bHPosList = new List<Vector3>();
+    private float DoorHeight;
+    private  float DoorWidth;
+    [HideInInspector]
+    public float R;
     private List<GameObject> bHList = new List<GameObject>();
+    [HideInInspector]
     public bool isAttracting = false;
     private float timer = 0f;
     public float attractTime = 5f;
     private float angle = 0f;
+    private bool open = false;
 
     private enum vec3 { top, bottom, left, right, center }
     private void Start()
@@ -43,6 +50,7 @@ public class BlackHoldPen : MonoBehaviour
             i = 0;
             posList.Clear();
             isBlackHoleOpen = false;
+            open = false;
         }
         if (Input.GetMouseButton(0) && !MousePositionDetection())
         {
@@ -66,7 +74,7 @@ public class BlackHoldPen : MonoBehaviour
                 }
             }
         }
-        if (Input.GetMouseButtonUp(0) && MousePositionDetection())
+        else if (Input.GetMouseButtonUp(0) && MousePositionDetection())
         {
             if (clone != null)
             {
@@ -84,10 +92,17 @@ public class BlackHoldPen : MonoBehaviour
                 leftPoint = GetPoint(changeList, vec3.left);
                 centerPoint = GetPoint(changeList, vec3.center);
                 if (isBlackHoleOpen)
-                {
+                { 
                     Debug.Log("黑洞门");
+                    if (bHList.Count == 0)
+                    {
+                        DoorHeight = topPoint.y - bottomPoint.y;
+                        DoorWidth = rightPoint.x - leftPoint.x;
+                        R = (DoorHeight + DoorWidth) / 2;
+                    }
                     bHPosList.Add(centerPoint);
                     bHList.Add(clone);
+                    open = true;
                 }
                 else
                 {
@@ -96,6 +111,8 @@ public class BlackHoldPen : MonoBehaviour
             }
 
         }
+        else if (!open)
+            Destroy(clone);
         if (bHPosList.Count == 2)
         {
             timer += Time.deltaTime;

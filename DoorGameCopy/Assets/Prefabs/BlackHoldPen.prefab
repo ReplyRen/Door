@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 377983062206588263}
   m_Layer: 0
   m_Name: BlackHoldPen
-  m_TagString: Untagged
+  m_TagString: bHPen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,3 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obs: {fileID: 3567970610388832631, guid: c70b7387e65bfad46bf4359bd00e413c, type: 3}
   lineWidth: 0.04
+  bHPosList: []
+  isAttracting: 0
+  attractTime: 5
