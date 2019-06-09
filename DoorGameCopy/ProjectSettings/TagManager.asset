@@ -6,6 +6,8 @@ TagManager:
   tags:
   - cloud
   - Canvas
+  - floor
+  - bHPen
   layers:
   - Default
   - TransparentFX

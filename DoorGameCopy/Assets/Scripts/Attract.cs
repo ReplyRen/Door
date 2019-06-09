@@ -10,37 +10,48 @@ public class Attract : MonoBehaviour
     private GameObject player;
     private GameObject bHPen;
     private bool selfAttract = false;
-    private bool haveAttract = false;
+    private bool haveProtal = false;
+    private float multiple = 2.5f;
     private void Start()
     {
         timer = 0f;
         player = GameObject.FindWithTag("Player");
         bHPen = GameObject.FindWithTag("bHPen");
+        haveProtal = false;
     }
     private void FixedUpdate()
     {
-        if (bHPen.GetComponent<BlackHoldPen>().isAttracting == true)
+        if (bHPen != null)
         {
-            selfAttract = true;
-        }
-        else if(haveAttract==true|| bHPen.GetComponent<BlackHoldPen>().isAttracting == false)
-            selfAttract = false;
-        if (selfAttract)
-        {
-            Vector3 targetPos = new Vector3();
-            Vector3 protalPos = new Vector3();
-            targetPos = bHPen.GetComponent<BlackHoldPen>().bHPosList[0];
-            protalPos = bHPen.GetComponent<BlackHoldPen>().bHPosList[1];
-            timer += Time.deltaTime;
-            if (gameObject.tag == "Player")
+            if (bHPen.GetComponent<BlackHoldPen>().isAttracting == true)
             {
-                player.GetComponent<GravitationalController>().enabled = false;
-                Move(targetPos, targetPos, protalPos);
-                player.GetComponent<GravitationalController>().enabled = true;
+                selfAttract = true;
             }
-            else
-                Move(targetPos, targetPos, protalPos);
+            else if (bHPen.GetComponent<BlackHoldPen>().isAttracting == false)
+            {
+                selfAttract = false;
+                haveProtal = false;
+            }
 
+            if (selfAttract && !haveProtal)
+            {
+                Vector3 targetPos = new Vector3();
+                Vector3 protalPos = new Vector3();
+                targetPos = bHPen.GetComponent<BlackHoldPen>().bHPosList[0];
+                protalPos = bHPen.GetComponent<BlackHoldPen>().bHPosList[1];
+                timer += Time.deltaTime;
+                if (IsDisClose(targetPos))
+                {
+                    if (gameObject.tag == "Player")
+                    {
+                        player.GetComponent<GravitationalController>().enabled = false;
+                        Move(targetPos, targetPos, protalPos);
+                        player.GetComponent<GravitationalController>().enabled = true;
+                    }
+                    else
+                        Move(targetPos, targetPos, protalPos);
+                }
+            }
         }
 
     }
@@ -48,17 +59,21 @@ public class Attract : MonoBehaviour
     {
         Vector3 dir = new Vector3();
         dir = (targetPos - transform.position) / (targetPos - transform.position).magnitude;
-        if(transform.position!=to)
+        if(transform.position!=to&&haveProtal==false)
             transform.Translate(dir * speed * Time.deltaTime);
-        if ((transform.position-from).magnitude<0.05)
-            player.transform.position = to;
-        
-    }
-    private void Portal(Vector3 from, Vector3 to)
-    {
-        if (((player.transform.position - from).sqrMagnitude < 0.1f))
+        if ((transform.position - from).magnitude < 0.05)
         {
             player.transform.position = to;
+            haveProtal = true;
         }
+
+
+    }
+    private bool IsDisClose(Vector3 targetPos)
+    {
+        if ((transform.position - targetPos).magnitude < multiple * bHPen.GetComponent<BlackHoldPen>().R)
+            return true;
+        else
+            return false;
     }
 }

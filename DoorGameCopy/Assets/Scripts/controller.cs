@@ -29,6 +29,7 @@ public class controller : MonoBehaviour
     public float density=0.1f;//射线密度
     private bool isSpaceDown = false;
     private  float timer = 0f;
+    [HideInInspector]
     public bool Jump = false;
     Ray2D[] downRay;
     Ray2D[] upRay;

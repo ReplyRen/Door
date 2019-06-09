@@ -19,6 +19,7 @@ public class ProtalPen : MonoBehaviour
     private float characterWidth;
     private GameObject player;
     public KeyCode protalKey = KeyCode.Q;
+    private bool open = false;
 
     private enum vec3 { top, bottom, left, right, center }
 
@@ -41,13 +42,14 @@ public class ProtalPen : MonoBehaviour
             i = 0;
             posList.Clear();
             isPortalOpen = false;
+            open = false;
         }
         if (Input.GetMouseButton(0)&&!MousePositionDetection())
         {
             if (clone != null)
                 Destroy(clone);
         }
-        if (Input.GetMouseButton(0)&&MousePositionDetection())
+        if (Input.GetMouseButton(0) && MousePositionDetection())
         {
             if (clone != null)
             {
@@ -74,7 +76,7 @@ public class ProtalPen : MonoBehaviour
                 }
             }
         }
-        if (Input.GetMouseButtonUp(0)&&MousePositionDetection())
+        else if (Input.GetMouseButtonUp(0) && MousePositionDetection())
         {
             if (clone != null)
             {
@@ -93,7 +95,7 @@ public class ProtalPen : MonoBehaviour
 
                 if (isPortalOpen)
                 {
-                    if ((topPoint.y - bottomPoint.y) <minDoorHeight || (rightPoint.x - leftPoint.x) < minDoorWidth)
+                    if ((topPoint.y - bottomPoint.y) < minDoorHeight || (rightPoint.x - leftPoint.x) < minDoorWidth)
                     {
                         Debug.Log("太小了");
                         Destroy(clone);
@@ -103,6 +105,7 @@ public class ProtalPen : MonoBehaviour
                     {
                         Debug.Log("传送门" + centerPoint);
                         portalList.Add(centerPoint);
+                        open = true;
                     }
                 }
                 else
@@ -111,6 +114,8 @@ public class ProtalPen : MonoBehaviour
                 }
             }
         }
+        else if(!open)
+            Destroy(clone);
         if (portalList.Count == 2)
         {
             Portal(portalList[0], portalList[1]);
