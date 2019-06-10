@@ -11,9 +11,6 @@ public class BlackHoldPen : MonoBehaviour
     private List<Vector3> posList = new List<Vector3>();
     private bool isBlackHoleOpen = false;
     public float lineWidth = 0.05f;
-    private float characterHeight;
-    private float characterWidth;
-    private GameObject player;
     [HideInInspector]
     public List<Vector3> bHPosList = new List<Vector3>();
     private float DoorHeight;
@@ -31,9 +28,6 @@ public class BlackHoldPen : MonoBehaviour
     private enum vec3 { top, bottom, left, right, center }
     private void Start()
     {
-        player = GameObject.FindWithTag("Player");
-        characterWidth = player.GetComponent<BoxCollider2D>().size.x;
-        characterHeight = player.GetComponent<BoxCollider2D>().size.y;
         bHPosList.Clear();
         bHList.Clear();
         isAttracting = false;

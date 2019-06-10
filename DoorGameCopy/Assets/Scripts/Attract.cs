@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Attract : MonoBehaviour
 {
-    public float speed = 1f;
+    public float speed = 5f;
     private float timer = 0f;
     private float attractTime = 5f;
     private GameObject player;
     private GameObject bHPen;
     private bool selfAttract = false;
     private bool haveProtal = false;
-    private float multiple = 2.5f;
+    private float multiple = 5.5f;
     private void Start()
     {
         timer = 0f;
@@ -48,8 +48,25 @@ public class Attract : MonoBehaviour
                         Move(targetPos, targetPos, protalPos);
                         player.GetComponent<GravitationalController>().enabled = true;
                     }
-                    else
+                    else if (gameObject.tag == "Store")
+                    {
+                        gameObject.GetComponent<Store>().enabled = false;
                         Move(targetPos, targetPos, protalPos);
+                        gameObject.GetComponent<Store>().enabled = true;
+                    }
+                    else if (gameObject.tag == "Box")
+                    {
+                        gameObject.GetComponent<Box>().enabled = false;
+                        Move(targetPos, targetPos, protalPos);
+                        gameObject.GetComponent<Box>().enabled = true;
+                    }
+                    else if (gameObject.tag == "Pig")
+                    {
+                        gameObject.GetComponent<Pig>().enabled = false;
+                        Move(targetPos, targetPos, protalPos);
+                        gameObject.GetComponent<Pig>().enabled = true;
+                    }
+
                 }
             }
         }
@@ -60,10 +77,10 @@ public class Attract : MonoBehaviour
         Vector3 dir = new Vector3();
         dir = (targetPos - transform.position) / (targetPos - transform.position).magnitude;
         if(transform.position!=to&&haveProtal==false)
-            transform.Translate(dir * speed * Time.deltaTime);
+            transform.Translate(dir * speed * Time.deltaTime,Space.World);
         if ((transform.position - from).magnitude < 0.05)
         {
-            player.transform.position = to;
+            gameObject.transform.position = to;
             haveProtal = true;
         }
 

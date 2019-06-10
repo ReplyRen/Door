@@ -37,7 +37,8 @@ public class controller : MonoBehaviour
     Ray2D[] leftRay;
     private float upMarigin;
     private float downMargin;
-
+    private bool onMashroom = false;
+    public float mashroomSpeed = 300f;
     public event Action<Collider2D> onTriggerEnterEvent;
 
     private void Start()
@@ -68,6 +69,7 @@ public class controller : MonoBehaviour
         if (h > 0)
             transform.eulerAngles = new Vector3(0, 0, 0);//旋转
         Vector2 movement = new Vector2(h, 0);
+        onMashroom = false;
         Move(movement);
         startPos = newPos;
 
@@ -114,7 +116,7 @@ public class controller : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(deltaPos.x * Mathf.Cos(Mathf.PI * angle / 180), -Mathf.Abs(deltaPos.x) * Mathf.Sin(Mathf.PI * angle / 180), 0f), speed * Time.deltaTime);
         }
 
-        else if (status == 1)//起跳的移动
+        else if (status == 1||status==4)//起跳的移动
         {
             transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(deltaPos.x,verticalPos, 0f), 4f * Time.deltaTime);
         }
@@ -184,7 +186,7 @@ public class controller : MonoBehaviour
             {
                 downHitStatus[i] = 3;
             }
-            else if (downHit[i].collider.tag == "Platform"|| downHit[i].collider.tag == "floor"||downHit[i].collider.tag=="Water")
+            else if (downHit[i].collider.tag == "Platform" || downHit[i].collider.tag == "floor" || downHit[i].collider.tag == "Water")
             {
                 downHitStatus[i] = 0;
                 ang[i] = Vector2.Angle(downHit[i].normal, Vector2.up);
@@ -197,6 +199,8 @@ public class controller : MonoBehaviour
             {
                 downHitStatus[i] = 3;
             }
+            else if (downHit[i].collider.tag == "Mushroom")
+                onMashroom = true;
             q += downHitStatus[i];
             if (q == downHitStatus.Length * 3)
             {
@@ -204,6 +208,8 @@ public class controller : MonoBehaviour
             }
             if (downHitStatus[i] == 0)
                 status = 0;
+            if (onMashroom)
+                status = 4;
         }
         angle = PX(ang);//挑出最大的
     }
@@ -243,7 +249,7 @@ public class controller : MonoBehaviour
                 {
                     leftHitStatus[i] = 0;
                 }
-                else if (leftHit[i].collider.tag == "floor")
+                else if (leftHit[i].collider.tag == "floor"|| leftHit[i].collider.tag =="Mushroom")
                 {
                     leftHitStatus[i] = 1;
                 }
@@ -264,7 +270,7 @@ public class controller : MonoBehaviour
                 {
                     rightHitStatus[i] = 0;
                 }
-                else if (rightHit[i].collider.tag == "floor")
+                else if (rightHit[i].collider.tag == "floor"||rightHit[i].collider.tag=="Mushroom")
                 {
                     rightHitStatus[i] = 1;
                 }

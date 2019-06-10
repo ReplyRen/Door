@@ -23,6 +23,9 @@ public class GravitationalController : controller
             case 3:
                 verticalSpeed -= g;
                 break;
+            case 4:
+                verticalSpeed = mashroomSpeed;
+                break;
 
         }
         if (verticalSpeed < -fallMaxSpeed)
