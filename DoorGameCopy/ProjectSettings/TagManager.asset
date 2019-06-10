@@ -8,6 +8,7 @@ TagManager:
   - Canvas
   - floor
   - bHPen
+  - Water
   layers:
   - Default
   - TransparentFX

@@ -184,12 +184,16 @@ public class controller : MonoBehaviour
             {
                 downHitStatus[i] = 3;
             }
-            else if (downHit[i].collider.tag == "Platform"|| downHit[i].collider.tag == "floor"||downHit[i].collider.tag=="singleFloor")
+            else if (downHit[i].collider.tag == "Platform"|| downHit[i].collider.tag == "floor"||downHit[i].collider.tag=="Water")
             {
                 downHitStatus[i] = 0;
                 ang[i] = Vector2.Angle(downHit[i].normal, Vector2.up);
+                if (downHit[i].collider.tag == "Water")
+                {
+                    isDead();
+                }
             }
-            else if(downHit[i].collider.tag=="Canvas")
+            else if (downHit[i].collider.tag == "Canvas")
             {
                 downHitStatus[i] = 3;
             }
@@ -301,5 +305,10 @@ public class controller : MonoBehaviour
         Debug.Log(0);
         if (collision.tag == "specialPlace")
             Debug.Log(0);
+    }
+
+    public void isDead()
+    {
+        this.gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;
     }
 }
