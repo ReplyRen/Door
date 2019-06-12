@@ -16,7 +16,7 @@ public class controller : MonoBehaviour
     private float lerp;//每帧y方向的位移差
     public float verticalSpeed=0f;//y方向的速度
     private float verticalPos;//y方向的位置
-    private  Vector3 startPos;
+    private Vector3 startPos;
     private Vector3 newPos;//与上一个变量均用于计算每帧位移差
     private float angle;//地面倾角
     private BoxCollider2D playercol;//物体的碰撞器
@@ -27,7 +27,6 @@ public class controller : MonoBehaviour
     private int verticalStatus;//水平方向的状态
     private float maxUpPos;
     public float density=0.1f;//射线密度
-    private bool isSpaceDown = false;
     private  float timer = 0f;
     [HideInInspector]
     public bool Jump = false;
@@ -39,8 +38,6 @@ public class controller : MonoBehaviour
     private float downMargin;
     private bool onMashroom = false;
     public float mashroomSpeed = 300f;
-    public event Action<Collider2D> onTriggerEnterEvent;
-
     private void Start()
     {
         angle = 0f;
@@ -52,7 +49,6 @@ public class controller : MonoBehaviour
         h = (int)(height/ density);
         verticalStatus = 0;
         maxUpPos = 100f;
-        isSpaceDown = false;
         timer = 0f;
 
         upMarigin = 10;
@@ -179,14 +175,14 @@ public class controller : MonoBehaviour
         int q = 0;
         for (int i = 0; i < downHit.Length; i++)
         {
-            downHit[i] = Physics2D.Linecast(downRay[i].origin, downRay[i].origin + new Vector2(0, -0.1f -Mathf.Abs( verticalSpeed / 1000)));
+            downHit[i] = Physics2D.Linecast(downRay[i].origin, downRay[i].origin + new Vector2(0, -0.1f - Mathf.Abs(verticalSpeed / 1000)));
             if (status == 0)
                 downHitStatus[i] = 0;
             if (downHit[i].collider == null)
             {
                 downHitStatus[i] = 3;
             }
-            else if (downHit[i].collider.tag == "Platform" || downHit[i].collider.tag == "floor" || downHit[i].collider.tag == "Water")
+            else if (downHit[i].collider.tag == "Platform" || downHit[i].collider.tag == "floor" || downHit[i].collider.tag == "Water" || downHit[i].collider.tag == "store")
             {
                 downHitStatus[i] = 0;
                 ang[i] = Vector2.Angle(downHit[i].normal, Vector2.up);
@@ -249,9 +245,17 @@ public class controller : MonoBehaviour
                 {
                     leftHitStatus[i] = 0;
                 }
-                else if (leftHit[i].collider.tag == "floor"|| leftHit[i].collider.tag =="Mushroom")
+                else if (leftHit[i].collider.tag == "floor"|| leftHit[i].collider.tag =="Mushroom"||
+                     leftHit[i].collider.tag == "Store")
                 {
                     leftHitStatus[i] = 1;
+                }
+                else if (leftHit[i].collider.tag == "Box")
+                {
+                    leftHitStatus[i] = 1;
+                    if(status!=3)
+                        leftHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed = -45;
+
                 }
                 q += leftHitStatus[i];
             }
@@ -270,10 +274,18 @@ public class controller : MonoBehaviour
                 {
                     rightHitStatus[i] = 0;
                 }
-                else if (rightHit[i].collider.tag == "floor"||rightHit[i].collider.tag=="Mushroom")
+                else if (rightHit[i].collider.tag == "floor" || rightHit[i].collider.tag == "Mushroom"|| rightHit[i].collider.tag=="Store")
                 {
                     rightHitStatus[i] = 1;
                 }
+                else if (rightHit[i].collider.tag == "Box")
+                {
+                    rightHitStatus[i] = 1;
+                    if(status!=3)
+                        rightHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed = 45;
+
+                }
+
                 p += rightHitStatus[i];
             }
             if (p == 0)
@@ -296,7 +308,7 @@ public class controller : MonoBehaviour
             Debug.DrawRay(ray[i].origin, ray[i].direction, color);
         }
     }
-    private float PX(float[] arry)
+    private float PX(float[] arry) 
     {
         for(int i=0; i < arry.Length-1; i++)
         {
@@ -304,13 +316,6 @@ public class controller : MonoBehaviour
                 arry[i + 1] = arry[i];
         }
         return arry[arry.Length-1];
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        Debug.Log(0);
-        if (collision.tag == "specialPlace")
-            Debug.Log(0);
     }
 
     public void isDead()

@@ -12,6 +12,10 @@ TagManager:
   - Mushroom
   - Store
   - Pig
+  - Box
+  - LiftManager
+  - LeftLift
+  - RightLift
   layers:
   - Default
   - TransparentFX

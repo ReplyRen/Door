@@ -13,17 +13,28 @@ public class Bullet : MonoBehaviour
     public float density = 0.1f;//射线密度
     private float verticalForce = 100f;
     private float horizontalForce = 100f;
+    private float lastPosX;
+    private float newPosX;
     private void Start()
     {
         playercol = gameObject.GetComponent<BoxCollider2D>();
         height = playercol.bounds.size.y;
         h = (int)(height / density);
+        newPosX = transform.position.x;
+        lastPosX = newPosX;
     }
     private void FixedUpdate()
     {
+        newPosX = transform.position.x;
         InitRay();//初始化射线 
+        if((newPosX - lastPosX)<0)
+            horizontalForce = -Mathf.Abs(horizontalForce);
+        if ((newPosX - lastPosX) > 0)
+            horizontalForce = Mathf.Abs(horizontalForce);
+
         VerticalRayDetection();
         transform.Translate(Vector3.right * speed * Time.deltaTime);
+        lastPosX = newPosX;
     }
     public void InitRay()
     {

@@ -6,6 +6,8 @@ public class Store : MonoBehaviour
 {
     public int status = 0;
     Ray2D[] downRay;
+    Ray2D[] rightRay;
+    Ray2D[] leftRay;
     private BoxCollider2D playercol;//物体的碰撞器
     private float lenth;//物体的长度
     private float height;//物体的高度
@@ -33,6 +35,7 @@ public class Store : MonoBehaviour
     {
         InitRay();//初始化射线 
         DownRayDetection();
+        VerticalRayDetection();
         if (verticalSpeed < smoothCriticalSpeed && verticalSpeed > -smoothCriticalSpeed)//接近最高点时平滑的速度
             g = gSmooth;
         else
@@ -49,9 +52,11 @@ public class Store : MonoBehaviour
     public void InitRay()
     {
         downRay = new Ray2D[l];
-
+        rightRay = new Ray2D[h];
+        leftRay = new Ray2D[h];
         InitRayDir(downRay, Vector2.down);
-
+        InitRayDir(rightRay, Vector2.right);
+        InitRayDir(leftRay, Vector2.left);
         downRay[0].origin = transform.position + new Vector3(-lenth / 2, -height / 2+playercol.offset.y, 0f) + new Vector3(0f, -0.01f, 0f);
         downRay[downRay.Length - 1].origin = transform.position + new Vector3(lenth / 2, -height / 2+ playercol.offset.y, 0f) + new Vector3(0f, -0.01f, 0f);
         float interval = lenth / (downRay.Length - 1);
@@ -59,7 +64,22 @@ public class Store : MonoBehaviour
         {
             downRay[i].origin = downRay[i - 1].origin + new Vector2(interval, 0f);
         }
+        leftRay[0].origin = transform.position + new Vector3(-lenth / 2, -height / 2, 0f) + new Vector3(-0.01f, 0f, 0f);
+        leftRay[leftRay.Length - 1].origin = transform.position + new Vector3(-lenth / 2, height / 2, 0f) + new Vector3(-0.01f, 0f, 0f);
+        interval = height / (leftRay.Length - 1);
+        for (int i = 1; i < leftRay.Length - 1; i++)
+        {
+            leftRay[i].origin = leftRay[i - 1].origin + new Vector2(0f, interval);
+        }
+        rightRay[0].origin = transform.position + new Vector3(lenth / 2, -height / 2, 0f) + new Vector3(0.01f, 0f, 0f);
+        rightRay[rightRay.Length - 1].origin = transform.position + new Vector3(lenth / 2, height / 2, 0f) + new Vector3(0.01f, 0f, 0f);
+        for (int i = 1; i < rightRay.Length - 1; i++)
+        {
+            rightRay[i].origin = rightRay[i - 1].origin + new Vector2(0f, interval);
+        }
         DrawRay(downRay, Color.red);
+        DrawRay(leftRay, Color.red);
+        DrawRay(rightRay, Color.red);
 
     }
     private void InitRayDir(Ray2D[] ray, Vector2 dir)
@@ -90,7 +110,8 @@ public class Store : MonoBehaviour
             {
                 downHitStatus[i] = 3;
             }
-            else if (downHit[i].collider.tag == "Platform" || downHit[i].collider.tag == "floor" || downHit[i].collider.tag == "singleFloor")
+            else if (downHit[i].collider.tag == "Box" || downHit[i].collider.tag == "floor" || downHit[i].collider.tag == "Pig"||downHit[i].collider.tag == "Store"||
+                downHit[i].collider.tag == "LeftLift")
             {
                 downHitStatus[i] = 0;
             }
@@ -105,6 +126,30 @@ public class Store : MonoBehaviour
             }
             if (downHitStatus[i] == 0)
                 status = 0;
+        }
+    }
+    private void VerticalRayDetection()
+    {
+        RaycastHit2D[] leftHit = new RaycastHit2D[h];
+        RaycastHit2D[] rightHit = new RaycastHit2D[h];
+        for (int i = 0; i < leftHit.Length; i++)
+        {
+            leftHit[i] = Physics2D.Linecast(leftRay[i].origin, leftRay[i].origin + new Vector2(-0.1f, 0f));
+            rightHit[i] = Physics2D.Linecast(rightRay[i].origin, rightRay[i].origin + new Vector2(0.1f, 0f));
+            if (leftHit[i].collider != null)
+            {
+                if (leftHit[i].collider.tag == "floor")
+                {
+                    gameObject.GetComponent<Force>().horizontalSpeed = 0;
+                }
+            }
+            if (rightHit[i].collider != null)
+            {
+                if (rightHit[i].collider.tag == "floor")
+                {
+                    gameObject.GetComponent<Force>().horizontalSpeed = 0;
+                }
+            }
         }
     }
 }

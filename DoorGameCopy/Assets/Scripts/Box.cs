@@ -24,7 +24,7 @@ public class Box : MonoBehaviour
     public float fallMaxSpeed = 150f;
     private bool move = false;
     private bool nextToWall = false;
-    private Vector3 lastDelPos;
+    private Vector3 distance = new Vector3();
 
     private void Start()
     { 
@@ -46,6 +46,7 @@ public class Box : MonoBehaviour
             g = gSmooth;
         else
             g = gNormal;
+        VerticalRayDetection();
         if (status == 3)
             verticalSpeed -= g;
         verticalPos = verticalSpeed * Time.deltaTime;//通过速度计算下一个竖直方向的位置
@@ -53,18 +54,8 @@ public class Box : MonoBehaviour
             verticalSpeed = -fallMaxSpeed;
         if (status == 3)//悬空的移动
             transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(0, verticalPos, 0f), 4f * Time.deltaTime);
-        VerticalRayDetection();
-        if (nextToWall)
-            move = false;
-        if (nextToWall||!move)
-        {
-
-        }
-        else if (move)
-        {
-            transform.position = player.transform.position + transform.position - lastDelPos;
-        }
-        lastDelPos = player.transform.position;
+        
+        
     }
     public void InitRay()
     {
@@ -127,7 +118,7 @@ public class Box : MonoBehaviour
             {
                 downHitStatus[i] = 3;
             }
-            else if (downHit[i].collider.tag == "Platform" || downHit[i].collider.tag == "floor" || downHit[i].collider.tag == "singleFloor")
+            else if (downHit[i].collider.tag == "Box" || downHit[i].collider.tag == "floor" || downHit[i].collider.tag == "Store" || downHit[i].collider.tag == "LeftLift")
             {
                 downHitStatus[i] = 0;
             }
@@ -148,25 +139,23 @@ public class Box : MonoBehaviour
     {
         RaycastHit2D[] leftHit = new RaycastHit2D[h];
         RaycastHit2D[] rightHit = new RaycastHit2D[h];
-        bool move1 = false;
-        bool ntw1 = false;
         for (int i = 0; i < leftHit.Length; i++)
         {
             leftHit[i] = Physics2D.Linecast(leftRay[i].origin, leftRay[i].origin + new Vector2(-0.1f, 0f));
             rightHit[i] = Physics2D.Linecast(rightRay[i].origin, rightRay[i].origin + new Vector2(0.1f, 0f));
             if (leftHit[i].collider != null)
             {
-                if (leftHit[i].collider.tag == "Player")
-                    move = true;
-                else if (leftHit[i].collider.tag == "floor")
-                    nextToWall = true;
+                if(leftHit[i].collider.tag=="floor")
+                {
+                    gameObject.GetComponent<Force>().horizontalSpeed = 0;
+                }
             }
             if (rightHit[i].collider != null)
             {
-                if (leftHit[i].collider.tag == "Player")
-                    move = true;
-                else if (rightHit[i].collider)
-                    ;
+                if (rightHit[i].collider.tag == "floor")
+                {
+                    gameObject.GetComponent<Force>().horizontalSpeed = 0;
+                }
             }
         }
     }
