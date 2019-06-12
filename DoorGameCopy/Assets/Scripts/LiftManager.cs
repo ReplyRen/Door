@@ -13,22 +13,29 @@ public class LiftManager : MonoBehaviour
     public float leftWeight = 0f;
     public  float rightWeight = 0f;
     public float liftSpeed = 1f;
+    public GameObject[] stone;
+    public GameObject[] box;
+    private GameObject player;
     private void Start()
     {
+        player = GameObject.FindWithTag("Player");
     }
     private void FixedUpdate()
     {
         if (rightWeight > leftWeight)
         {
-            rightLift.transform.position = Vector3.Lerp(rightLift.transform.position, rightDownPos, liftSpeed * Time.deltaTime);
-            leftLift.transform.position = Vector3.Lerp(leftLift.transform.position, leftUpPos, liftSpeed * Time.deltaTime);
+            leftLift.transform.position = Vector3.MoveTowards(leftLift.transform.position, leftUpPos, liftSpeed * Time.deltaTime);
+            rightLift.transform.position = Vector3.MoveTowards(rightLift.transform.position, rightDownPos, liftSpeed * Time.deltaTime);
         }
         else
         {
-            rightLift.transform.position = Vector3.Lerp(rightLift.transform.position, rightUpPos, liftSpeed * Time.deltaTime);
-            leftLift.transform.position = Vector3.Lerp(leftLift.transform.position, leftDownPos, liftSpeed * Time.deltaTime);
+            rightLift.transform.position = Vector3.MoveTowards(rightLift.transform.position, rightUpPos, liftSpeed * Time.deltaTime);
+            leftLift.transform.position = Vector3.MoveTowards(leftLift.transform.position, leftDownPos, liftSpeed * Time.deltaTime);
         }
 
     }
    
+    private void OnLeftLift(GameObject gameObject,float halfX)
+    {
+    }
 }

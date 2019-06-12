@@ -29,6 +29,8 @@ public class Lift : MonoBehaviour
         InitRay();
         if(gameObject.tag=="LeftLift")
             LeftUpRayDetection();
+        if (gameObject.tag == "RightLift")
+            RightUpRayDetection();
     }
     public void InitRay()
     {
@@ -45,6 +47,32 @@ public class Lift : MonoBehaviour
     }
     private void LeftUpRayDetection()
     {
+        List<RaycastHit2D>[] upHitList = new List<RaycastHit2D>[l];
+        RaycastHit2D[] upHit;
+        int upStatus = 0;
+
+        for (int i = 0; i < upRay.Length; i++)
+        {
+            upHit = Physics2D.RaycastAll(upRay[i].origin, upRay[i].origin + new Vector2(0f, 0.1f));
+            Debug.Log(upHit.Length);
+            //if (upHit[i].collider == null)
+            //    upStatus++;
+            //else
+            //{
+            //    if (upHit[i].collider.tag=="Player")
+            //        upHit[i].collider.transform.position= new Vector3(upHit[i].collider.transform.position.x, transform.position.y, 0f) + new Vector3(0, 0.7f, 0);
+            //    if(upHit[i].collider.tag == "Store")
+            //        upHit[i].collider.transform.position = new Vector3(upHit[i].collider.transform.position.x, transform.position.y, 0f) + new Vector3(0, 0.5f, 0);
+            //    if (upHit[i].collider.tag == "Box")
+            //        upHit[i].collider.transform.position = new Vector3(upHit[i].collider.transform.position.x, transform.position.y, 0f) + new Vector3(0, 0.5f, 0);
+            //}
+        }
+        //if (upStatus == upHit.Length)
+        //    liftManager.leftWeight = 0;
+
+    }
+    private void RightUpRayDetection()
+    {
         RaycastHit2D[] upHit = new RaycastHit2D[l];
         int upStatus = 0;
         for (int i = 0; i < upHit.Length; i++)
@@ -55,9 +83,9 @@ public class Lift : MonoBehaviour
                 upStatus++;
             else
             {
-                if (upHit[i].collider.tag=="Player")
-                    upHit[i].collider.transform.position= new Vector3(upHit[i].collider.transform.position.x, transform.position.y, 0f) + new Vector3(0, 0.7f, 0);
-                if(upHit[i].collider.tag == "Store")
+                if (upHit[i].collider.tag == "Player")
+                    upHit[i].collider.transform.position = new Vector3(upHit[i].collider.transform.position.x, transform.position.y, 0f) + new Vector3(0, 0.7f, 0);
+                if (upHit[i].collider.tag == "Store")
                     upHit[i].collider.transform.position = new Vector3(upHit[i].collider.transform.position.x, transform.position.y, 0f) + new Vector3(0, 0.5f, 0);
                 if (upHit[i].collider.tag == "Box")
                     upHit[i].collider.transform.position = new Vector3(upHit[i].collider.transform.position.x, transform.position.y, 0f) + new Vector3(0, 0.5f, 0);
@@ -65,7 +93,6 @@ public class Lift : MonoBehaviour
         }
         if (upStatus == upHit.Length)
             liftManager.leftWeight = 0;
-
     }
     private void InitRayDir(Ray2D[] ray, Vector2 dir)
     {
