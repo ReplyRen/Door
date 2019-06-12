@@ -54,7 +54,8 @@ public class Box : MonoBehaviour
             verticalSpeed = -fallMaxSpeed;
         if (status == 3)//悬空的移动
             transform.position = Vector3.Lerp(transform.position, transform.position + new Vector3(0, verticalPos, 0f), 4f * Time.deltaTime);
-        
+        if (status == 0)
+            verticalSpeed = 0f;
         
     }
     public void InitRay()
@@ -118,7 +119,7 @@ public class Box : MonoBehaviour
             {
                 downHitStatus[i] = 3;
             }
-            else if (downHit[i].collider.tag == "Box" || downHit[i].collider.tag == "floor" || downHit[i].collider.tag == "Store" || downHit[i].collider.tag == "LeftLift")
+            else if (downHit[i].collider.tag == "Box" || downHit[i].collider.tag == "floor" || downHit[i].collider.tag == "Store" || downHit[i].collider.tag == "LeftLift"||downHit[i].collider.tag=="RightLift")
             {
                 downHitStatus[i] = 0;
             }

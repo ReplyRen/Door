@@ -19,6 +19,8 @@ public class Force : MonoBehaviour
             horizontalSpeed -= reduce;
         if (horizontalSpeed < 0)
             horizontalSpeed += reduce;
+        else
+            horizontalSpeed = 0;
 
     }
 }

@@ -182,7 +182,7 @@ public class controller : MonoBehaviour
             {
                 downHitStatus[i] = 3;
             }
-            else if (downHit[i].collider.tag == "Platform" || downHit[i].collider.tag == "floor" || downHit[i].collider.tag == "Water" || downHit[i].collider.tag == "store")
+            else if (downHit[i].collider.tag == "LeftLift" || downHit[i].collider.tag == "floor" || downHit[i].collider.tag == "Water" || downHit[i].collider.tag == "store" || downHit[i].collider.tag == "RightLift")
             {
                 downHitStatus[i] = 0;
                 ang[i] = Vector2.Angle(downHit[i].normal, Vector2.up);

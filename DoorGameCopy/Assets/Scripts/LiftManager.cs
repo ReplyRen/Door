@@ -6,13 +6,13 @@ public class LiftManager : MonoBehaviour
 {
     public GameObject leftLift;
     public  GameObject rightLift;
-    private Vector3 leftUpPos = new Vector3(-0.58f, 0.7064452f, 0f);
-    private  Vector3 leftDownPos = new Vector3(-0.58f, -2.613555f, 0f);
-    private  Vector3 rightUpPos = new Vector3(2.06f, 0.7064452f, 0f);
-    private  Vector3 rightDownPos = new Vector3(2.06f, -2.613555f, 0f);
+    public Vector3 leftUpPos = new Vector3(-0.58f, 0.7064452f, 0f);
+    public Vector3 leftDownPos = new Vector3(-0.58f, -2.613555f, 0f);
+    public Vector3 rightUpPos = new Vector3(2.06f, 0.7064452f, 0f);
+    public Vector3 rightDownPos = new Vector3(2.06f, -2.613555f, 0f);
     public float leftWeight = 0f;
-    public  float rightWeight = 0f;
-    public float liftSpeed = 1f;
+    public float rightWeight = 0f;
+    public float liftSpeed = 2f;
     public GameObject[] stone;
     public GameObject[] box;
     private GameObject player;
@@ -35,7 +35,4 @@ public class LiftManager : MonoBehaviour
 
     }
    
-    private void OnLeftLift(GameObject gameObject,float halfX)
-    {
-    }
 }

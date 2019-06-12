@@ -47,52 +47,66 @@ public class Lift : MonoBehaviour
     }
     private void LeftUpRayDetection()
     {
-        List<RaycastHit2D>[] upHitList = new List<RaycastHit2D>[l];
+        List<GameObject> leftList = new List<GameObject>();
         RaycastHit2D[] upHit;
-        int upStatus = 0;
-
+        leftList.Clear();
         for (int i = 0; i < upRay.Length; i++)
         {
-            upHit = Physics2D.RaycastAll(upRay[i].origin, upRay[i].origin + new Vector2(0f, 0.1f));
-            Debug.Log(upHit.Length);
-            //if (upHit[i].collider == null)
-            //    upStatus++;
-            //else
-            //{
-            //    if (upHit[i].collider.tag=="Player")
-            //        upHit[i].collider.transform.position= new Vector3(upHit[i].collider.transform.position.x, transform.position.y, 0f) + new Vector3(0, 0.7f, 0);
-            //    if(upHit[i].collider.tag == "Store")
-            //        upHit[i].collider.transform.position = new Vector3(upHit[i].collider.transform.position.x, transform.position.y, 0f) + new Vector3(0, 0.5f, 0);
-            //    if (upHit[i].collider.tag == "Box")
-            //        upHit[i].collider.transform.position = new Vector3(upHit[i].collider.transform.position.x, transform.position.y, 0f) + new Vector3(0, 0.5f, 0);
-            //}
+            upHit = Physics2D.RaycastAll(upRay[i].origin, upRay[i].direction,10f);
+            if (upHit.Length > 0)
+            {
+                for(int j=0;j< upHit.Length; j++)
+                {
+                    if (!Exist(leftList, upHit[j].collider.gameObject)&& upHit[j].collider.tag!="LeftLift")
+                        leftList.Add(upHit[j].collider.gameObject);
+                }
+            }
         }
-        //if (upStatus == upHit.Length)
-        //    liftManager.leftWeight = 0;
+        if (leftList.Count == 0)
+            ;
+        else
+        {
 
+            for (int i = 0; i < leftList.Count; i++)
+            {
+                if (transform.position != liftManager.leftUpPos && transform.position != liftManager.leftDownPos)
+                    leftList[i].transform.position = Vector3.MoveTowards(leftList[i].transform.position,
+                        new Vector3(leftList[i].transform.position.x, transform.position.y + 0.5f, 0f), liftManager.liftSpeed * Time.deltaTime);
+
+            }
+        }
+        liftManager.leftWeight = Weight(leftList);
     }
     private void RightUpRayDetection()
     {
-        RaycastHit2D[] upHit = new RaycastHit2D[l];
-        int upStatus = 0;
-        for (int i = 0; i < upHit.Length; i++)
+
+        List<GameObject> rightList = new List<GameObject>();
+        RaycastHit2D[] upHit;
+        rightList.Clear();
+        for (int i = 0; i < upRay.Length; i++)
         {
-            upHit[i] = Physics2D.Linecast(upRay[i].origin, upRay[i].origin + new Vector2(0f, 0.1f));
-            Debug.Log(upHit[i].collider);
-            if (upHit[i].collider == null)
-                upStatus++;
-            else
+            upHit = Physics2D.RaycastAll(upRay[i].origin, upRay[i].direction, 10f);
+            if (upHit.Length > 0)
             {
-                if (upHit[i].collider.tag == "Player")
-                    upHit[i].collider.transform.position = new Vector3(upHit[i].collider.transform.position.x, transform.position.y, 0f) + new Vector3(0, 0.7f, 0);
-                if (upHit[i].collider.tag == "Store")
-                    upHit[i].collider.transform.position = new Vector3(upHit[i].collider.transform.position.x, transform.position.y, 0f) + new Vector3(0, 0.5f, 0);
-                if (upHit[i].collider.tag == "Box")
-                    upHit[i].collider.transform.position = new Vector3(upHit[i].collider.transform.position.x, transform.position.y, 0f) + new Vector3(0, 0.5f, 0);
+                for (int j = 0; j < upHit.Length; j++)
+                {
+                    if (!Exist(rightList, upHit[j].collider.gameObject) && upHit[j].collider.tag != "Canvas" && upHit[j].collider.tag != "RightLift")
+                        rightList.Add(upHit[j].collider.gameObject); 
+                }
             }
         }
-        if (upStatus == upHit.Length)
-            liftManager.leftWeight = 0;
+        if (rightList.Count == 0)
+            ;
+        else
+        {
+            for (int i = 0; i < rightList.Count; i++)
+            {
+                if(transform.position!=liftManager.rightUpPos&& transform.position != liftManager.rightDownPos)
+                     rightList[i].transform.position = Vector3.MoveTowards(rightList[i].transform.position,
+                            new Vector3(rightList[i].transform.position.x, transform.position.y + 0.6f, 0f), liftManager.liftSpeed * Time.deltaTime);
+            }
+        }
+        liftManager.rightWeight = Weight(rightList);
     }
     private void InitRayDir(Ray2D[] ray, Vector2 dir)
     {
@@ -107,5 +121,44 @@ public class Lift : MonoBehaviour
         {
             Debug.DrawRay(ray[i].origin, ray[i].direction, color);
         }
+    }
+    private bool Exist(List<GameObject> list,GameObject game)
+    {
+        if (list.Count == 0)
+            return false;
+        for(int n = 0; n < list.Count; n++)
+        {
+            if (game == list[n])
+                return true;
+        }
+        return false;
+    }
+    private float Weight(List<GameObject> list)
+    {
+        float num = 0f;
+        if (list != null)
+        {
+            for(int n = 0; n < list.Count; n++)
+            {
+                if (list[n].tag == "Player")
+                {
+                    num += list[n].GetComponent<Weight>().weight;
+                }
+
+                else if (list[n].tag == "Box")
+                {
+                    if (list[n].GetComponent<Box>().verticalSpeed == 0)
+                        num += list[n].GetComponent<Weight>().weight;
+                }
+                else if (list[n].tag == "Store")
+                {
+                    if (list[n].GetComponent<Store>().verticalSpeed == 0)
+                        num += list[n].GetComponent<Weight>().weight;
+                }
+
+
+            }
+        }
+        return num;
     }
 }
