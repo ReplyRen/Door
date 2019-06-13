@@ -525,13 +525,12 @@ MonoBehaviour:
   gameBgm: {fileID: 8300000, guid: 7e45a8c77efcdae4cb68ac28ab439829, type: 3}
   clickSound: {fileID: 8300000, guid: ce009aa9cac2d8c4b93f0863ca6bbfe7, type: 3}
   turnonSound: {fileID: 8300000, guid: 77ece1e769be69342849cdec72dfa474, type: 3}
-  deadSound: {fileID: 0}
   crashSound: {fileID: 8300000, guid: c4467dd1223e3b74183aabe5c624d5f4, type: 3}
   flowSound: {fileID: 8300000, guid: 1ec875c9650694d45809244057bcbb62, type: 3}
-  walkSound: {fileID: 0}
   liftSound: {fileID: 8300000, guid: 6ae3bff3c83187b42a62009c1e1ef421, type: 3}
   unlockSound: {fileID: 8300000, guid: efa3cfd6686f84245b5d583a8d785bed, type: 3}
   springSound: {fileID: 8300000, guid: de20dfea7d14d2c46b65d1c0ebb13d71, type: 3}
+  anotherliftSound: {fileID: 8300000, guid: 8f52ad95a2632804b939eb27343aedac, type: 3}
 --- !u!4 &1107479457
 Transform:
   m_ObjectHideFlags: 0

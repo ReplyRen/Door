@@ -22,17 +22,34 @@ public class LiftManager : MonoBehaviour
     }
     private void FixedUpdate()
     {
+
+        AudioSource audioSource = this.GetComponent<AudioSource>();
         if (rightWeight > leftWeight)
         {
             leftLift.transform.position = Vector3.MoveTowards(leftLift.transform.position, leftUpPos, liftSpeed * Time.deltaTime);
             rightLift.transform.position = Vector3.MoveTowards(rightLift.transform.position, rightDownPos, liftSpeed * Time.deltaTime);
+
+            float distance = (leftLift.transform.position - leftUpPos).magnitude;
+            if (audioSource.isPlaying == false)
+                audioSource.Play();
+            if (distance < 0.2)
+                audioSource.Pause();
         }
-        else if(rightWeight < leftWeight)
+        else if (rightWeight < leftWeight)
         {
             rightLift.transform.position = Vector3.MoveTowards(rightLift.transform.position, rightUpPos, liftSpeed * Time.deltaTime);
             leftLift.transform.position = Vector3.MoveTowards(leftLift.transform.position, leftDownPos, liftSpeed * Time.deltaTime);
-        }
 
+            float distance = (leftLift.transform.position - leftDownPos).magnitude;
+            if (audioSource.isPlaying == false)
+                audioSource.Play();
+            if (distance < 0.2)
+                audioSource.Pause();
+        }
+        else
+        {
+            audioSource.Pause();
+        }
     }
    
 }

@@ -15,7 +15,7 @@ public class Button : MonoBehaviour
     public Sprite spriteDown;
     public Sprite spriteUp;
     private bool firstDown;
-    public GameObject connectedMachine;
+    public bool isDown;
 
     private void Start()
     {
@@ -80,6 +80,7 @@ public class Button : MonoBehaviour
             {
                 if (leftHit[i].collider.tag != "floor")
                 {
+                    isDown = true;
                     Debug.Log("按下");
                     gameObject.GetComponent<SpriteRenderer>().sprite = spriteDown;
                     q++;
@@ -96,6 +97,7 @@ public class Button : MonoBehaviour
             {
                 if (rightHit[i].collider.tag != "floor")
                 {
+                    isDown = true;
                     Debug.Log("按下");
                     gameObject.GetComponent<SpriteRenderer>().sprite = spriteDown;
                     q++;
@@ -110,6 +112,7 @@ public class Button : MonoBehaviour
             }
             if(q==0)
             {
+                isDown = false;
                 Debug.Log("抬起");
                 gameObject.GetComponent<SpriteRenderer>().sprite = spriteUp;
                 firstDown = false;

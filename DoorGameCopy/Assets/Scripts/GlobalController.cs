@@ -8,13 +8,12 @@ public class GlobalController : MonoBehaviour
     public AudioClip gameBgm;
     public AudioClip clickSound;
     public AudioClip turnonSound;
-    public AudioClip deadSound;
     public AudioClip crashSound;
     public AudioClip flowSound;
-    public AudioClip walkSound;
     public AudioClip liftSound;
     public AudioClip unlockSound;
     public AudioClip springSound;
+    public AudioClip anotherliftSound;
 
     private void Awake()
     {

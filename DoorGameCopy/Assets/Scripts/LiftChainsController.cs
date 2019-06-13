@@ -12,6 +12,7 @@ public class LiftChainsController : MonoBehaviour
     public float topMargin;
     public bool isTriggered;
     private int chainNum;
+    public GameObject connectedButton;
 
     void Start()
     {
@@ -21,6 +22,8 @@ public class LiftChainsController : MonoBehaviour
 
     void FixedUpdate()
     {
+        isTriggered = connectedButton.GetComponent<Button>().isDown;
+
         if (isTriggered && this.transform.position.y > bottomMargin)
         {
             float Pos_y = this.transform.position.y;
