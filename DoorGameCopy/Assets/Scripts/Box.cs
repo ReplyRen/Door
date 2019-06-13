@@ -126,7 +126,7 @@ public class Box : MonoBehaviour
                 if (downHit[i].collider.tag == "Lift8")
                 {
                     transform.position = Vector3.MoveTowards(transform.position,
-                        new Vector3(transform.position.x, downHit[i].collider.transform.position.y + 3.5f), 2 * Time.deltaTime);
+                        new Vector3(transform.position.x, downHit[i].collider.transform.position.y + 3.3f), 2 * Time.deltaTime);
                 }
             }
             else if (downHit[i].collider.tag == "Canvas")

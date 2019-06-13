@@ -187,7 +187,6 @@ public class controller : MonoBehaviour
                 || downHit[i].collider.tag == "RightLift"|| downHit[i].collider.tag == "Lift"
                 || downHit[i].collider.tag=="Lift8")
             {
-                Debug.Log(downHit[i].collider.tag);
                 downHitStatus[i] = 0;
                 ang[i] = Vector2.Angle(downHit[i].normal, Vector2.up);
                 if (downHit[i].collider.tag == "Water")
