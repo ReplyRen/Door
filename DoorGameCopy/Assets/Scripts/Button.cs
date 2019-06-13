@@ -14,6 +14,9 @@ public class Button : MonoBehaviour
     public float density = 0.1f;//射线密度
     public Sprite spriteDown;
     public Sprite spriteUp;
+    private bool firstDown;
+    public GameObject connectedMachine;
+
     private void Start()
     {
         playercol = gameObject.GetComponent<BoxCollider2D>();
@@ -80,6 +83,13 @@ public class Button : MonoBehaviour
                     Debug.Log("按下");
                     gameObject.GetComponent<SpriteRenderer>().sprite = spriteDown;
                     q++;
+
+                    if (firstDown == false)
+                    {
+                        AudioClip turndown = GlobalController._instance.turnonSound;
+                        AudioSource.PlayClipAtPoint(turndown, new Vector3(0, 0, 0));
+                        firstDown = true;
+                    }
                 }
             }
             if (rightHit[i].collider != null)
@@ -89,12 +99,20 @@ public class Button : MonoBehaviour
                     Debug.Log("按下");
                     gameObject.GetComponent<SpriteRenderer>().sprite = spriteDown;
                     q++;
+
+                    if (firstDown == false)
+                    {
+                        AudioClip turndown = GlobalController._instance.turnonSound;
+                        AudioSource.PlayClipAtPoint(turndown, new Vector3(0, 0, 0));
+                        firstDown = true;
+                    }
                 }
             }
             if(q==0)
             {
                 Debug.Log("抬起");
                 gameObject.GetComponent<SpriteRenderer>().sprite = spriteUp;
+                firstDown = false;
             }
         }
     }

@@ -474,6 +474,7 @@ GameObject:
   - component: {fileID: 410516312}
   - component: {fileID: 410516314}
   - component: {fileID: 410516313}
+  - component: {fileID: 410516315}
   m_Layer: 0
   m_Name: Water
   m_TagString: Water
@@ -624,6 +625,18 @@ EdgeCollider2D:
   - {x: 3.7641788, y: 0.02660633}
   - {x: 4.098286, y: -0.5049269}
   - {x: -7.7977223, y: -0.51341206}
+--- !u!114 &410516315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410516309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271fec040be0cb544973e928cc17d2b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &441022198
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,21 +1503,12 @@ PrefabInstance:
     - target: {fileID: 4828908150184863778, guid: 57f401f3a5a88af48b0100d1661961a1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.62
+      value: -4.72
       objectReference: {fileID: 0}
     - target: {fileID: 4828908150184863778, guid: 57f401f3a5a88af48b0100d1661961a1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.68
-      objectReference: {fileID: 0}
-    - target: {fileID: 921753491, guid: 57f401f3a5a88af48b0100d1661961a1, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4828908150184863783, guid: 57f401f3a5a88af48b0100d1661961a1,
-        type: 3}
-      propertyPath: mashroomSpeed
-      value: 250
+      value: -2.42
       objectReference: {fileID: 0}
     - target: {fileID: 8823878248973938026, guid: 57f401f3a5a88af48b0100d1661961a1,
         type: 3}
@@ -1565,6 +1569,15 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4828908150184863783, guid: 57f401f3a5a88af48b0100d1661961a1,
+        type: 3}
+      propertyPath: mashroomSpeed
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 921753491, guid: 57f401f3a5a88af48b0100d1661961a1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57f401f3a5a88af48b0100d1661961a1, type: 3}

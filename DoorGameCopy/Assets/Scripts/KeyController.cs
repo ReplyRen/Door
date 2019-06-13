@@ -24,6 +24,9 @@ public class KeyController : MonoBehaviour
         float distoPlayer = (Player.transform.position - this.transform.position).magnitude;
         if (isFollowing == false && distoPlayer < minDistance)
         {
+            AudioClip collectSound = GlobalController._instance.turnonSound;
+            AudioSource.PlayClipAtPoint(collectSound, new Vector3(0, 0, 0));
+
             this.transform.localScale = new Vector2(this.transform.localScale.x / 2, this.transform.localScale.y / 2);
             this.transform.eulerAngles = new Vector3(0, 0, -90);
             isFollowing = true;
@@ -49,6 +52,9 @@ public class KeyController : MonoBehaviour
             this.gameObject.GetComponent<SpriteRenderer>().color = newColor;
             if (aTmp < 0.2)
             {
+                AudioClip unlockSound = GlobalController._instance.unlockSound;
+                AudioSource.PlayClipAtPoint(unlockSound, new Vector3(0, 0, 0));
+
                 Lock.SetActive(false);
                 Door.SetActive(false);
                 this.gameObject.SetActive(false);

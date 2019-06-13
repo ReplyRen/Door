@@ -32,6 +32,9 @@ public class LiftChainsController : MonoBehaviour
                 Chains[chainNum].SetActive(true);
                 Counter = 0;
             }
+
+            if (this.GetComponent<AudioSource>().isPlaying == false)
+                this.GetComponent<AudioSource>().Play();
         }
         else if (isTriggered == false && this.transform.position.y < topMargin)
         {
@@ -47,7 +50,15 @@ public class LiftChainsController : MonoBehaviour
                 }
                 Counter = 0;
             }
+
+            if (this.GetComponent<AudioSource>().isPlaying == false)
+                this.GetComponent<AudioSource>().Play();
         }
-        else Counter = 0;
+        else
+        {
+            Counter = 0;
+            if (this.GetComponent<AudioSource>().isPlaying == true)
+                this.GetComponent<AudioSource>().Pause();
+        }
     }
 }
