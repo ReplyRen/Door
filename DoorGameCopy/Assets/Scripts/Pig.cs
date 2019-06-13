@@ -54,12 +54,12 @@ public class Pig : MonoBehaviour
         if (nextPos.x > 0)
         {
             transform.eulerAngles = new Vector3(0, 180, 0);
-            horizontalForce = Mathf.Abs(horizontalForce);
+            //horizontalForce = Mathf.Abs(horizontalForce);
         }
         if (nextPos.x < 0)
         {
             transform.eulerAngles = new Vector3(0, 0, 0);//旋转
-            horizontalForce = -Mathf.Abs(horizontalForce);
+            //horizontalForce = -Mathf.Abs(horizontalForce);
         }
 
         if (status == 0)
@@ -74,6 +74,8 @@ public class Pig : MonoBehaviour
     {
         downRay = new Ray2D[l];
         leftRay = new Ray2D[h];
+        rightRay = new Ray2D[h];
+        InitRayDir(rightRay, Vector2.right);
         InitRayDir(downRay, Vector2.down);
         InitRayDir(leftRay, Vector2.left);
         downRay[0].origin = transform.position + new Vector3(-lenth / 2, -height / 2, 0f) + new Vector3(0f, -0.01f, 0f);
@@ -90,9 +92,15 @@ public class Pig : MonoBehaviour
         {
             leftRay[i].origin = leftRay[i - 1].origin + new Vector2(0f, interval);
         }
+        rightRay[0].origin = transform.position + new Vector3(lenth / 2, -height / 2, 0f) + new Vector3(0.01f, 0f, 0f);
+        rightRay[rightRay.Length - 1].origin = transform.position + new Vector3(lenth / 2, height / 2, 0f) + new Vector3(0.01f, 0f, 0f);
+        for (int i = 1; i < rightRay.Length - 1; i++)
+        {
+            rightRay[i].origin = rightRay[i - 1].origin + new Vector2(0f, interval);
+        }
         DrawRay(downRay, Color.red);
         DrawRay(leftRay, Color.red);
-
+        DrawRay(rightRay, Color.red);
     }
     private void InitRayDir(Ray2D[] ray, Vector2 dir)
     {
@@ -154,17 +162,38 @@ public class Pig : MonoBehaviour
             leftHit[i] = Physics2D.Linecast(leftRay[i].origin, leftRay[i].origin + new Vector2(-0.1f, 0f));
             if (leftHit[i].collider != null)
             {
-                if(leftHit[i].collider.tag!="Canvas")
+  
+                if (leftHit[i].collider.tag!="Canvas"&&leftHit[i].collider.gameObject!=gameObject)
                     needTurn = true;
                 if (leftHit[i].collider.tag == "Player")
                 {
-                    leftHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed = horizontalForce;
+                    Debug.Log("left");
+                    leftHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed = -horizontalForce;
+                    Debug.Log(leftHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed);
                     leftHit[i].collider.gameObject.transform.position += new Vector3(0, 0.1f, 0);
                     leftHit[i].collider.gameObject.GetComponent<GravitationalController>().verticalSpeed = verticalForce;
                     leftHit[i].collider.gameObject.GetComponent<GravitationalController>().isDead();
                 }
             }
         }
+        for (int i = 0; i < rightHit.Length; i++)
+        {
+            rightHit[i] = Physics2D.Linecast(rightRay[i].origin, rightRay[i].origin + new Vector2(-0.1f, 0f));
+            if (rightHit[i].collider != null)
+            {
 
+                if (rightHit[i].collider.tag != "Canvas"&& rightHit[i].collider.gameObject!=gameObject)
+                    needTurn = true;
+                if (rightHit[i].collider.tag == "Player")
+                {
+                    Debug.Log("right");
+                    rightHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed = horizontalForce;
+                    Debug.Log(rightHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed);
+                    rightHit[i].collider.gameObject.transform.position += new Vector3(0, 0.1f, 0);
+                    rightHit[i].collider.gameObject.GetComponent<GravitationalController>().verticalSpeed = verticalForce;
+                    rightHit[i].collider.gameObject.GetComponent<GravitationalController>().isDead();
+                }
+            }
         }
     }
+}

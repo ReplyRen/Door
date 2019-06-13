@@ -119,9 +119,15 @@ public class Box : MonoBehaviour
             {
                 downHitStatus[i] = 3;
             }
-            else if (downHit[i].collider.tag == "Box" || downHit[i].collider.tag == "floor" || downHit[i].collider.tag == "Store" || downHit[i].collider.tag == "LeftLift"||downHit[i].collider.tag=="RightLift")
+            else if (downHit[i].collider.tag == "Box" || downHit[i].collider.tag == "floor" || downHit[i].collider.tag == "Store" 
+                || downHit[i].collider.tag == "LeftLift"||downHit[i].collider.tag=="RightLift"|| downHit[i].collider.tag == "Lift8")
             {
                 downHitStatus[i] = 0;
+                if (downHit[i].collider.tag == "Lift8")
+                {
+                    transform.position = Vector3.MoveTowards(transform.position,
+                        new Vector3(transform.position.x, downHit[i].collider.transform.position.y + 3.5f), 2 * Time.deltaTime);
+                }
             }
             else if (downHit[i].collider.tag == "Canvas")
             {

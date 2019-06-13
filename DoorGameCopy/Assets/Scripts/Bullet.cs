@@ -91,6 +91,10 @@ public class Bullet : MonoBehaviour
                     else if (rightHit[i].collider.tag == "Store")
                         rightHit[i].collider.gameObject.GetComponent<Store>().verticalSpeed = verticalForce;
                 }
+                if (rightHit[i].collider.gameObject.name == "Stick")
+                {
+                    rightHit[i].collider.gameObject.GetComponent<Stick>().startRotate = true;
+                }
                     
 
             }
