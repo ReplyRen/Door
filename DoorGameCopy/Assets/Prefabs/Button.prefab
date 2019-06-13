@@ -122,3 +122,4 @@ MonoBehaviour:
   density: 0.1
   spriteDown: {fileID: 21300000, guid: ddf7000a8e6a13a42a5863e7d253e464, type: 3}
   spriteUp: {fileID: 21300000, guid: c45ffe833dfb1bd43913de74ea64511c, type: 3}
+  isDown: 0
