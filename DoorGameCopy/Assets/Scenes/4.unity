@@ -1266,6 +1266,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4616058132575039655, guid: d2881599c8e04744cacedf8a3405cd5f,
+        type: 3}
+      propertyPath: parentCanvas
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616058132575039655, guid: d2881599c8e04744cacedf8a3405cd5f,
+        type: 3}
+      propertyPath: followParent
+      value: 
+      objectReference: {fileID: 162368457}
+    - target: {fileID: 4616058132575039655, guid: d2881599c8e04744cacedf8a3405cd5f,
+        type: 3}
+      propertyPath: isStatic
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2881599c8e04744cacedf8a3405cd5f, type: 3}
 --- !u!1 &959388339
@@ -1497,14 +1512,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -2.68
       objectReference: {fileID: 0}
-    - target: {fileID: 921753491, guid: 57f401f3a5a88af48b0100d1661961a1, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4828908150184863783, guid: 57f401f3a5a88af48b0100d1661961a1,
         type: 3}
       propertyPath: mashroomSpeed
       value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 921753491, guid: 57f401f3a5a88af48b0100d1661961a1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8823878248973938026, guid: 57f401f3a5a88af48b0100d1661961a1,
         type: 3}

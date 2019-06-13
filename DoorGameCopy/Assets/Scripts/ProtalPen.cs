@@ -6,6 +6,8 @@ public class ProtalPen : MonoBehaviour
 {
     private GameObject clone;
     private LineRenderer line;
+    public bool isStatic = true;
+    public GameObject followParent;
     private int i;
     public GameObject obs;
     public float lineWidth = 0.05f;
@@ -17,11 +19,37 @@ public class ProtalPen : MonoBehaviour
     public float minDoorWidth = 0.1f;
     private float characterHeight;
     private float characterWidth;
+    private float closeCanvasDis = 1f;
     private GameObject player;
     public KeyCode protalKey = KeyCode.Q;
     private bool open = false;
 
     private enum vec3 { top, bottom, left, right, center }
+
+    private Vector3 vec3plus (Vector3 A, Vector3 B)
+    {
+        return new Vector3(A.x + B.x, A.y + B.y, A.z + B.z);
+    }
+    private Vector3 vec3plus (Vector3 A, float B)
+    {
+        return new Vector3(A.x + B, A.y + B, A.z + B);
+    }
+
+    private float isCloseCanvas(Vector3[] linePoints, float dis)
+    {
+        linePoints = new Vector3[line.positionCount];
+        if (portalList.Count < 1) return -1;
+        line.GetPositions(linePoints);
+        Vector3 centerPos = new Vector3(0,0,0);
+        for(int i = 0; i < line.positionCount; i++)
+        {
+            centerPos = vec3plus(centerPos,linePoints[i]);
+        }
+        centerPos /= line.positionCount;
+        dis = (centerPos - followParent.transform.position).sqrMagnitude;
+        if (dis < closeCanvasDis) return dis;
+        return -1f;
+    }
 
     private void Start()
     {
@@ -32,13 +60,35 @@ public class ProtalPen : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (!isStatic && posList.Count > 0)
+        {
+            Vector3[] linePoints = new Vector3[line.positionCount];
+            float dis = 0;
+            //Debug.Log(linePoints[0]);
+            if (isCloseCanvas(linePoints, dis) > 0)
+            {
+                Debug.Log(linePoints[0]);
+                for (int i = 0; i < line.positionCount; i++)
+                {
+                    vec3plus(linePoints[i], dis);
+                }
+                line.SetPositions(linePoints);
+            }
+        }
         
         if (Input.GetMouseButtonDown(0))
         {
+            if (portalList.Count >= 2)
+            {
+                foreach (GameObject x in GameObject.FindGameObjectsWithTag("clonedLine"))
+                    Destroy(x);
+                portalList.Clear();
+            }
             clone = (GameObject)Instantiate(obs, obs.transform.position, transform.rotation);//克隆一个带有LineRender的物体   
-            line = clone.GetComponent<LineRenderer>();//获得该物体上的LineRender组件  
+            line = clone.GetComponent<LineRenderer>();//获得该物体上的LineRender组件
+            line.tag = "clonedLine"; 
             line.SetColors(Color.blue, Color.red);//设置颜色  
-            line.SetWidth(lineWidth, lineWidth);//设置宽度  
+            line.SetWidth(lineWidth, lineWidth);//设置宽度
             i = 0;
             posList.Clear();
             isPortalOpen = false;
@@ -114,8 +164,7 @@ public class ProtalPen : MonoBehaviour
                 }
             }
         }
-        else if(!open)
-            Destroy(clone);
+        else if(!open) Destroy(clone);
         if (portalList.Count == 2)
         {
             Portal(portalList[0], portalList[1]);
