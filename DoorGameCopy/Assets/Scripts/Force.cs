@@ -17,8 +17,10 @@ public class Force : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, transform.position+new Vector3(nextx, 0, 0), 4 * Time.deltaTime);
         if (horizontalSpeed > 0)
             horizontalSpeed -= reduce;
-        if (horizontalSpeed < 0)
+        else if (horizontalSpeed < 0)
             horizontalSpeed += reduce;
-
+        if (horizontalSpeed > -reduce && horizontalSpeed < reduce)
+            horizontalSpeed = 0;
     }
+
 }

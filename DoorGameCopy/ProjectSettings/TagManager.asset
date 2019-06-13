@@ -16,6 +16,8 @@ TagManager:
   - LiftManager
   - LeftLift
   - RightLift
+  - Lift
+  - Lift8
   layers:
   - Default
   - TransparentFX

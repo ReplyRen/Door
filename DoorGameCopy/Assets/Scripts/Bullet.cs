@@ -15,25 +15,29 @@ public class Bullet : MonoBehaviour
     private float horizontalForce = 100f;
     private float lastPosX;
     private float newPosX;
+    private float timer = 0f;
     private void Start()
     {
-        playercol = gameObject.GetComponent<BoxCollider2D>();
-        height = playercol.bounds.size.y;
-        h = (int)(height / density);
         newPosX = transform.position.x;
         lastPosX = newPosX;
     }
     private void FixedUpdate()
     {
+        timer += Time.deltaTime;
         newPosX = transform.position.x;
-        InitRay();//初始化射线 
-        if((newPosX - lastPosX)<0)
-            horizontalForce = -Mathf.Abs(horizontalForce);
-        if ((newPosX - lastPosX) > 0)
-            horizontalForce = Mathf.Abs(horizontalForce);
 
-        VerticalRayDetection();
-        transform.Translate(Vector3.right * speed * Time.deltaTime);
+            playercol = gameObject.GetComponent<BoxCollider2D>();
+            height = playercol.bounds.size.y;
+            h = (int)(height / density);
+            InitRay();//初始化射线 
+
+            if ((newPosX - lastPosX) < 0)
+                horizontalForce = -Mathf.Abs(horizontalForce);
+            if ((newPosX - lastPosX) > 0)
+                horizontalForce = Mathf.Abs(horizontalForce);
+
+            VerticalRayDetection();
+            transform.Translate(Vector3.right * speed * Time.deltaTime);
         lastPosX = newPosX;
     }
     public void InitRay()
@@ -86,6 +90,10 @@ public class Bullet : MonoBehaviour
                         rightHit[i].collider.gameObject.GetComponent<Pig>().verticalSpeed = verticalForce;
                     else if (rightHit[i].collider.tag == "Store")
                         rightHit[i].collider.gameObject.GetComponent<Store>().verticalSpeed = verticalForce;
+                }
+                if (rightHit[i].collider.gameObject.name == "Stick")
+                {
+                    rightHit[i].collider.gameObject.GetComponent<Stick>().startRotate = true;
                 }
                     
 
