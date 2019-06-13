@@ -254,7 +254,7 @@ public class controller : MonoBehaviour
                 {
                     leftHitStatus[i] = 1;
                     if(status!=3)
-                        leftHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed = -45;
+                        leftHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed = -15;
 
                 }
                 q += leftHitStatus[i];
@@ -282,7 +282,7 @@ public class controller : MonoBehaviour
                 {
                     rightHitStatus[i] = 1;
                     if(status!=3)
-                        rightHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed = 45;
+                        rightHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed = 15;
 
                 }
 
@@ -321,5 +321,6 @@ public class controller : MonoBehaviour
     public void isDead()
     {
         this.gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;
+        this.GetComponent<Animator>().SetBool("IsDead", true);
     }
 }

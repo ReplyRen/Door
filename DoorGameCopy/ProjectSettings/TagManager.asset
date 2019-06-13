@@ -53,3 +53,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackLayer
+    uniqueID: 420124959
+    locked: 0
+  - name: DrawLayer
+    uniqueID: 611919731
+    locked: 0
+  - name: MidLayer
+    uniqueID: 3482393153
+    locked: 0
+  - name: ForeLayer
+    uniqueID: 3189686887
+    locked: 0

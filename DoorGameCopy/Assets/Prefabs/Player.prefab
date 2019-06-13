@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 921753487}
   - component: {fileID: 921753491}
   - component: {fileID: 2785111912308491749}
+  - component: {fileID: 496379587363846116}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -30,8 +31,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4828908150184863782}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.28, y: 0.78, z: 0}
-  m_LocalScale: {x: 0.117, y: 0.117, z: 0.117}
+  m_LocalPosition: {x: -6.99, y: 4.49, z: 0}
+  m_LocalScale: {x: 0.12999998, y: 0.12999998, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -70,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 85659689
-  m_SortingLayer: 0
+  m_SortingLayerID: -812574143
+  m_SortingLayer: 3
   m_SortingOrder: 5
   m_Sprite: {fileID: 4589224676202209169, guid: ad89fac1ce36b124dbe9f5ce0ca61d1b,
     type: 3}
@@ -98,7 +99,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.63640356, y: 0.17626762}
+  m_Offset: {x: -0.27420437, y: -0.0683229}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -109,7 +110,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.1944757, y: 9.068472}
+  m_Size: {x: 3.6804006, y: 8.211103}
   m_EdgeRadius: 0
 --- !u!114 &4828908150184863783
 MonoBehaviour:
@@ -118,7 +119,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4828908150184863782}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: edc9e3a2fbae2df41a23eda3bc9aeac9, type: 3}
   m_Name: 
@@ -161,7 +162,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4828908150184863782}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62a41b64902335443bcb10ad4d8fb70c, type: 3}
   m_Name: 
@@ -180,3 +181,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 2
+--- !u!114 &496379587363846116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4828908150184863782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601da14c933031545abd27fb24938ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalSpeed: 0
+  reduce: 2

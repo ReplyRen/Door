@@ -23,8 +23,8 @@ public class Pig : MonoBehaviour
     public float fallMaxSpeed = 150f;
     private Vector3 nextPos = new Vector3(-1f,0,0);
     private bool needTurn = false;
-    private float verticalForce = 100f;
-    private float horizontalForce = 100f;
+    public float verticalForce = 100f;
+    public float horizontalForce = 100f;
 
     private void Start()
     { 

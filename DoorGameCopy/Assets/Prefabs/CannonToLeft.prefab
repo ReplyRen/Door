@@ -65,12 +65,12 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 85659689
-  m_SortingLayer: 0
+  m_SortingLayerID: -812574143
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: b8151aeb9ec13e5498abbdaee6101875, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 2.12, y: 1.33}
@@ -104,7 +104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6104863661417359329}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.02, y: -0.427, z: 0}
+  m_LocalPosition: {x: 0.05, y: -0.427, z: 0}
   m_LocalScale: {x: 1.153505, y: 1.153505, z: 1.153505}
   m_Children: []
   m_Father: {fileID: 6104863661612838447}
@@ -144,12 +144,12 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 85659689
-  m_SortingLayer: 0
+  m_SortingLayerID: -812574143
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3fb100f5cb4d17a49b0cc3dec7d20699, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.83, y: 0.8}
@@ -229,7 +229,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.042238355, y: -0.08442247}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -240,7 +240,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.54, y: 1.91}
+  m_Size: {x: 2.2865708, y: 1.2346194}
   m_EdgeRadius: 0
 --- !u!114 &6104863661612838442
 MonoBehaviour:
@@ -306,7 +306,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6104863661796007568}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.574, y: -0.492, z: 0}
+  m_LocalPosition: {x: 0.5, y: -0.47, z: 0}
   m_LocalScale: {x: 1.405, y: 1.405, z: 1.405}
   m_Children: []
   m_Father: {fileID: 6104863661612838447}
@@ -346,12 +346,12 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 85659689
-  m_SortingLayer: 0
+  m_SortingLayerID: -812574143
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 3fb100f5cb4d17a49b0cc3dec7d20699, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.83, y: 0.8}
