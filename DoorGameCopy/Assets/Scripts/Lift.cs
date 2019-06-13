@@ -71,7 +71,7 @@ public class Lift : MonoBehaviour
             {
                 if (transform.position != liftManager.leftUpPos && transform.position != liftManager.leftDownPos)
                     leftList[i].transform.position = Vector3.MoveTowards(leftList[i].transform.position,
-                        new Vector3(leftList[i].transform.position.x, transform.position.y + 0.5f, 0f), liftManager.liftSpeed * Time.deltaTime);
+                        new Vector3(leftList[i].transform.position.x, transform.position.y + 0.4f, 0f), liftManager.liftSpeed * Time.deltaTime);
 
             }
         }
@@ -103,7 +103,7 @@ public class Lift : MonoBehaviour
             {
                 if(transform.position!=liftManager.rightUpPos&& transform.position != liftManager.rightDownPos)
                      rightList[i].transform.position = Vector3.MoveTowards(rightList[i].transform.position,
-                            new Vector3(rightList[i].transform.position.x, transform.position.y + 0.6f, 0f), liftManager.liftSpeed * Time.deltaTime);
+                            new Vector3(rightList[i].transform.position.x, transform.position.y + 0.4f, 0f), liftManager.liftSpeed * Time.deltaTime);
             }
         }
         liftManager.rightWeight = Weight(rightList);

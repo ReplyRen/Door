@@ -27,7 +27,7 @@ public class LiftManager : MonoBehaviour
             leftLift.transform.position = Vector3.MoveTowards(leftLift.transform.position, leftUpPos, liftSpeed * Time.deltaTime);
             rightLift.transform.position = Vector3.MoveTowards(rightLift.transform.position, rightDownPos, liftSpeed * Time.deltaTime);
         }
-        else
+        else if(rightWeight < leftWeight)
         {
             rightLift.transform.position = Vector3.MoveTowards(rightLift.transform.position, rightUpPos, liftSpeed * Time.deltaTime);
             leftLift.transform.position = Vector3.MoveTowards(leftLift.transform.position, leftDownPos, liftSpeed * Time.deltaTime);

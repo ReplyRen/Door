@@ -18,6 +18,7 @@ TagManager:
   - RightLift
   - Lift
   - Lift8
+  - Bullet
   layers:
   - Default
   - TransparentFX

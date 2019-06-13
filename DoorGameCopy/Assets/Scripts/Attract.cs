@@ -40,6 +40,7 @@ public class Attract : MonoBehaviour
                 targetPos = bHPen.GetComponent<BlackHoldPen>().bHPosList[0];
                 protalPos = bHPen.GetComponent<BlackHoldPen>().bHPosList[1];
                 timer += Time.deltaTime;
+                Debug.Log(IsDisClose(targetPos));
                 if (IsDisClose(targetPos))
                 {
                     if (gameObject.tag == "Player")
@@ -65,6 +66,12 @@ public class Attract : MonoBehaviour
                         gameObject.GetComponent<Pig>().enabled = false;
                         Move(targetPos, targetPos, protalPos);
                         gameObject.GetComponent<Pig>().enabled = true;
+                    }
+                    else if (gameObject.tag == "Bullet")
+                    {
+                        gameObject.GetComponent<Bullet>().enabled = false;
+                        Move(targetPos, targetPos, protalPos);
+                        gameObject.GetComponent<Bullet>().enabled = true;
                     }
 
                 }
