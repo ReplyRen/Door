@@ -107,9 +107,9 @@ public class BlackHoldPen : MonoBehaviour
                 }
 
             }
+            else if (!open)
+                Destroy(clone);
         }
-        else if (!open)
-            Destroy(clone);
         if (bHPosList.Count == 2)
         {
             timer += Time.deltaTime;
