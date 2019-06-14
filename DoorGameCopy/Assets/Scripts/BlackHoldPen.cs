@@ -24,6 +24,8 @@ public class BlackHoldPen : MonoBehaviour
     public float attractTime = 5f;
     private float angle = 0f;
     private bool open = false;
+    public int limitCount = 0;
+    private int usageCount = 0;
 
     private enum vec3 { top, bottom, left, right, center }
     private void Start()
@@ -32,10 +34,12 @@ public class BlackHoldPen : MonoBehaviour
         bHList.Clear();
         isAttracting = false;
         angle = 0f;
+        usageCount = 0;
     }
     private void FixedUpdate()
     {
-        if (bHPosList.Count < 2)
+        Debug.Log(usageCount);
+        if (bHPosList.Count < 2&&usageCount<=limitCount)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -127,6 +131,7 @@ public class BlackHoldPen : MonoBehaviour
                 Destroy(bHList[1]);
                 bHList.Clear();
                 timer = 0f;
+                usageCount++;
             }
 
         }
