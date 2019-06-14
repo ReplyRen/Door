@@ -94,7 +94,7 @@ MonoBehaviour:
   m_MinSize: {x: 715, y: 494}
   m_MaxSize: {x: 18010, y: 14044}
   vertical: 0
-  controlID: 100
+  controlID: 74
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 494}
   m_MaxSize: {x: 10004, y: 14044}
   vertical: 1
-  controlID: 32
+  controlID: 96
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -320,34 +320,34 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: F:\unity\DoorGame\Door\DoorGameCopy
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 5e2d0000
-    m_LastClickedID: 11614
-    m_ExpandedIDs: 00000000562a0000
+    m_SelectedIDs: ce2e0000
+    m_LastClickedID: 11982
+    m_ExpandedIDs: 00000000142a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Others
+      m_OriginalName: Others
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 11326
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_SearchString: 
@@ -361,7 +361,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000562a0000
+    m_ExpandedIDs: 00000000142a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -413,7 +413,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 60}
+    m_ScrollPosition: {x: 0, y: 1800}
     m_GridSize: 64
   m_DirectoriesAreaWidth: 112
 --- !u!114 &13
@@ -465,7 +465,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -570,7 +570,7 @@ MonoBehaviour:
   m_Size:
     m_Target: 12.273483
     speed: 2
-    m_Value: 12.851815
+    m_Value: 12.273483
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -624,23 +624,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 42b1ffff
-      m_LastClickedID: -20158
-      m_ExpandedIDs: d4b2ffffc2b5ffff56b7ffff14b8ffff86b8ffff14b9ffff14baffffb4bcffff42bdffffd4bdffffa6beffffd0beffffd6beffff72bfffff02c0ffffa6c0fffffec0ffff72c1ffffe6c1ffff26c2ffff6cc2ffff74c2ffff7cc2ffffecc3ffffa2c4ffff4cc5ffffb6c6ffff86c7fffffec7fffffac8ffff6ec9ffff5acafffff6caffff20cbfffffeccffff02cdffff94cdffff34ceffff88ceffff0ccfffff7ecfffffbacffffffecfffff04d0ffff0ad0ffff4ed1ffffdcd3ffff9ad4ffff38d5ffffaad5fffffcd6ffffc8d7ffff84d8ffff72d9ffffe8d9ffff8edaffff32dbffffa4dbffffe0e0ffffbae4ffff5ce5ffff86e5ffff86e6ffff1ee7ffffa4e7ffff44e8ffff98e8ffff18e9ffff88e9ffff8ce9ffffcee9ffffd2e9ffffd6e9ffffbeeaffff66ebffff90ebffff6eedffff0aeeffff96eeffff38efffff8eefffff14f0ffff18f0ffff54f0ffff98f0ffff9ef0ffffa4f0ffffc8f1ffff8cf3ffffb2f8ffff2af9ffffc6f9ffff30faffff8afaffff0efbffff4c370000104f00007a5b0000b25f0000a4710000c6710000e4740000a4850000ba880000749b0000169d00006e9d000030a100009ca30000c8a50000
+      m_SelectedIDs: 32280000
+      m_LastClickedID: 0
+      m_ExpandedIDs: eef7ffff60f8ffffeef8ffff7cf9ffff72fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: ProtalPen
-        m_OriginalName: ProtalPen
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -17906
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 9}
       m_SearchString: 
