@@ -76,8 +76,13 @@ public class Bullet : MonoBehaviour
             rightHit[i] = Physics2D.Linecast(rightRay[i].origin, rightRay[i].origin + new Vector2(0.1f, 0f));
             if (rightHit[i].collider != null)
             {
-                if(rightHit[i].collider.tag!="Canvas")
+                if (rightHit[i].collider.tag != "Canvas")
+                {
+                    AudioClip crashSound = GlobalController._instance.crashSound;
+                    AudioSource.PlayClipAtPoint(crashSound, new Vector3(0, 0, 0));
+
                     Destroy(gameObject);
+                }
                 if(rightHit[i].collider.tag ==  "Player" || rightHit[i].collider.tag == "Box" || rightHit[i].collider.tag == "Pig" || rightHit[i].collider.tag == "Store")
                 {
                     rightHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed = horizontalForce;

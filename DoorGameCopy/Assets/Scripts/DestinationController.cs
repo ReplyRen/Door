@@ -11,6 +11,7 @@ public class DestinationController : MonoBehaviour
     public float disappearSpeed;
     public GameObject origin;
     private float originRotationSpeed;
+    private bool soundControl;
 
     void Start()
     {
@@ -32,6 +33,13 @@ public class DestinationController : MonoBehaviour
         float distance = (this.transform.position - player.transform.position).magnitude;
         if(distance < 0.5)
         {
+            if (soundControl == false)
+            {
+                AudioClip portalSound = GlobalController._instance.translateSound;
+                AudioSource.PlayClipAtPoint(portalSound, new Vector3(0, 0, 0));
+                soundControl = true;
+            }
+
             player.GetComponent<GravitationalController>().enabled = false;
             Vector3 tmpScale = player.transform.localScale;
             player.transform.localScale = tmpScale - changeSpeed;

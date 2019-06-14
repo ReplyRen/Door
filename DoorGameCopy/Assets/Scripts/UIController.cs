@@ -79,6 +79,7 @@ public class UIController : MonoBehaviour
     public void ReStart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        AudioSource.PlayClipAtPoint(clickSound, new Vector3(0, 0, 0));
     }
 
     public void PlayFlowSound()

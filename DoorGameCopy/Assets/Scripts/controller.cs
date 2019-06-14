@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class controller : MonoBehaviour
 {
@@ -340,5 +341,7 @@ public class controller : MonoBehaviour
     {
         this.gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;
         this.GetComponent<Animator>().SetBool("IsDead", true);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
