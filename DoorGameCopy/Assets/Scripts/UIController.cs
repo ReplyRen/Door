@@ -78,13 +78,20 @@ public class UIController : MonoBehaviour
 
     public void ReStart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         AudioSource.PlayClipAtPoint(clickSound, new Vector3(0, 0, 0));
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void PlayFlowSound()
     {
         AudioClip flowSound = GlobalController._instance.flowSound;
         AudioSource.PlayClipAtPoint(flowSound, new Vector3(0, 0, 0));
+    }
+
+    public void BackMenu()
+    {
+        AudioSource.PlayClipAtPoint(clickSound, new Vector3(0, 0, 0));
+        GlobalController._instance.GetComponent<AudioSource>().Play();
+        SceneManager.LoadScene(1);
     }
 }

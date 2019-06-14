@@ -54,7 +54,13 @@ public class DestinationController : MonoBehaviour
                 if (aTmp < 0.2)
                 {
                     this.gameObject.SetActive(false);
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                    if (SceneManager.GetActiveScene().buildIndex + 1 <= 10)
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                    else
+                    {
+                        SceneManager.LoadScene(1);
+                        GlobalController._instance.GetComponent<AudioSource>().Play();
+                    }
                     player.transform.localScale = new Vector3(0, 0, 0);
                 }
             }
