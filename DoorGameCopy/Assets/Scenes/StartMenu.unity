@@ -372,6 +372,8 @@ MonoBehaviour:
   unlockSound: {fileID: 8300000, guid: efa3cfd6686f84245b5d583a8d785bed, type: 3}
   springSound: {fileID: 8300000, guid: de20dfea7d14d2c46b65d1c0ebb13d71, type: 3}
   translateSound: {fileID: 8300000, guid: 80f16e67ae6624f498bd9bbd7fdd5171, type: 3}
+  jumpSound: {fileID: 8300000, guid: 4cb26b08f3f08ea43b4a5bc6aa2d7528, type: 3}
+  deadSound: {fileID: 8300000, guid: 92a342fe63a270f4fadb305145079874, type: 3}
 --- !u!4 &1107479457
 Transform:
   m_ObjectHideFlags: 0
@@ -398,7 +400,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2d1d9ae3d24f6c64ca4a7c1fca85087f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -667,8 +669,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1459452413}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.038, y: -0.08, z: 0}
-  m_LocalScale: {x: 0.5063153, y: 0.44541562, z: 0.66}
+  m_LocalPosition: {x: -0.017, y: -0.08, z: 0}
+  m_LocalScale: {x: 0.5073279, y: 0.44541562, z: 0.66}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4

@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class GravitationalController : controller
 {
-    private int walk_Hash;
-
     private void Awake()
     {
         //arriveMaxHeight = false;
-        walk_Hash = Animator.StringToHash("Player_walk");
     }
     void FixedUpdate()
     {
@@ -32,11 +29,11 @@ public class GravitationalController : controller
         }
         if (verticalSpeed < -fallMaxSpeed)
             verticalSpeed = -fallMaxSpeed;
-
-        if (this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).GetHashCode() == walk_Hash && this.GetComponent<AudioSource>().isPlaying == false)
-            this.GetComponent<AudioSource>().Play();
-        else if (this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).GetHashCode() != walk_Hash)
-            this.GetComponent<AudioSource>().Pause();
     }
-  
+
+    public void Playjumpsound()
+    {
+        AudioClip jumpSound = GlobalController._instance.jumpSound;
+        AudioSource.PlayClipAtPoint(jumpSound, new Vector3(0, 0, 0));
+    }
 }

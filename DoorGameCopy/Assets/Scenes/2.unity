@@ -636,6 +636,10 @@ PrefabInstance:
       propertyPath: horizontalForce
       value: 75
       objectReference: {fileID: 0}
+    - target: {fileID: 2100495734, guid: 18f91fd00036dab4bb64caa6624217af, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18f91fd00036dab4bb64caa6624217af, type: 3}
 --- !u!1 &1004853112
@@ -692,7 +696,7 @@ EdgeCollider2D:
   - {x: -1.0328536, y: -0.1786809}
   - {x: -1.3271441, y: 0.25386167}
   - {x: -1.3273883, y: 0.4691205}
-  - {x: -1.0397406, y: 0.58708024}
+  - {x: -1.045044, y: 0.5897317}
   - {x: -0.20071983, y: 0.12948537}
   - {x: 0.8434968, y: 0.5889802}
   - {x: 1.1509643, y: 0.4683454}
@@ -1948,8 +1952,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 420124959
-  m_SortingOrder: 3
+  m_SortingLayerID: -1105280409
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1632196060
 RectTransform:
@@ -2197,12 +2201,12 @@ PrefabInstance:
     - target: {fileID: 3012319947048606686, guid: 79f9c74100d76ba4dbbd98901112a8a3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.434576
+      value: -6.41
       objectReference: {fileID: 0}
     - target: {fileID: 3012319947048606686, guid: 79f9c74100d76ba4dbbd98901112a8a3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.43432
+      value: 7.94
       objectReference: {fileID: 0}
     - target: {fileID: 3012319947048606686, guid: 79f9c74100d76ba4dbbd98901112a8a3,
         type: 3}

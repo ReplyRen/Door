@@ -39,6 +39,8 @@ public class controller : MonoBehaviour
     private float downMargin;
     private bool onMashroom = false;
     public float mashroomSpeed = 300f;
+    private bool dead;
+    private float deadtimer;
     private void Start()
     {
         angle = 0f;
@@ -54,13 +56,31 @@ public class controller : MonoBehaviour
 
         upMarigin = 10;
         downMargin = -30;
+        dead = false;
+    }
+
+    public void Update()
+    {
+        if (dead)
+        {
+
+            float timeTmp = deadtimer;
+            deadtimer = timeTmp + Time.deltaTime;
+            if(deadtimer > 2)
+            {
+                deadtimer = 0;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
     }
 
     public void FixedUpdate()
     {
         InitRay();//初始化射线
         newPos = transform.position;
-        float h = Input.GetAxis("Horizontal");//获得水平键入
+        float h = 0;
+        if(!dead)
+            h = Input.GetAxis("Horizontal");//获得水平键入
         if (h < 0)
             transform.eulerAngles = new Vector3(0, 180, 0);
         if (h > 0)
@@ -71,9 +91,19 @@ public class controller : MonoBehaviour
         startPos = newPos;
 
         Animator anim = this.GetComponent<Animator>();
-        if (Input.GetAxis("Horizontal") != 0)
+        if (h != 0)
+        {
             anim.SetBool("IsWalking", true);
-        else anim.SetBool("IsWalking", false);
+            if (this.GetComponent<AudioSource>().isPlaying == false && verticalSpeed > -10 && verticalSpeed < 10)
+                this.GetComponent<AudioSource>().Play();
+            else if(verticalSpeed > 10 || verticalSpeed < -10)
+                this.GetComponent<AudioSource>().Pause();
+        }
+        else
+        {
+            anim.SetBool("IsWalking", false);
+            this.GetComponent<AudioSource>().Pause();
+        }
 
         if (verticalSpeed > upMarigin && anim.GetInteger("State") != 1)
             anim.SetInteger("State", 1);
@@ -342,6 +372,10 @@ public class controller : MonoBehaviour
         this.gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;
         this.GetComponent<Animator>().SetBool("IsDead", true);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (!dead)
+        {
+            AudioSource.PlayClipAtPoint(GlobalController._instance.deadSound, new Vector3(0, 0, 0));
+            dead = true;
+        }
     }
 }

@@ -99,3 +99,4 @@ MonoBehaviour:
   smooth: 2
   Door: {fileID: 0}
   Lock: {fileID: 0}
+  deltaPos: {x: 0, y: 1, z: 0}

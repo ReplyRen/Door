@@ -13,6 +13,8 @@ public class GlobalController : MonoBehaviour
     public AudioClip unlockSound;
     public AudioClip springSound;
     public AudioClip translateSound;
+    public AudioClip jumpSound;
+    public AudioClip deadSound;
 
     private void Awake()
     {

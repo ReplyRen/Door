@@ -25,7 +25,7 @@ public class BlackHoldPen : MonoBehaviour
     private float angle = 0f;
     private bool open = false;
     public int limitCount = 0;
-    private int usageCount = 0;
+    public int usageCount = 0;
 
     private enum vec3 { top, bottom, left, right, center }
     private void Start()

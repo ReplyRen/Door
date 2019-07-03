@@ -25,6 +25,7 @@ public class Pig : MonoBehaviour
     private bool needTurn = false;
     public float verticalForce = 100f;
     public float horizontalForce = 100f;
+    private bool dead;
 
     private void Start()
     { 
@@ -195,5 +196,10 @@ public class Pig : MonoBehaviour
                 }
             }
         }
+    }
+    public void isDead()
+    {
+        this.GetComponent<Animator>().SetBool("IsDead", true);
+        dead = true;
     }
 }

@@ -13,6 +13,8 @@ public class KeyController : MonoBehaviour
     public GameObject Door;
     public GameObject Lock;
     private bool isUnlocking;
+    private float resttimer;
+    private Vector3 randomPos;
 
     void Start()
     {
@@ -34,6 +36,25 @@ public class KeyController : MonoBehaviour
         else if(isFollowing && distoPlayer > disMargin && isUnlocking == false)
         {
             this.transform.position = Vector2.Lerp(this.transform.position, Player.transform.position, smooth * Time.fixedDeltaTime);
+            resttimer = 0;
+            randomPos = new Vector3(0, 0, 0);
+        }
+        else if(isFollowing && distoPlayer <= disMargin && isUnlocking == false)
+        {
+            float timeTmp = resttimer;
+            resttimer = timeTmp + Time.deltaTime;
+            if(randomPos == new Vector3(0, 0, 0))
+                randomPos = new Vector3(Player.transform.position.x + Random.Range(-2f, 2f), Player.transform.position.y + Random.Range(-2f, 2f), Player.transform.position.z);
+            if(resttimer > 1)
+            {
+                this.transform.position = Vector2.Lerp(this.transform.position, randomPos, smooth * Time.fixedDeltaTime);
+                if ((this.transform.position - randomPos).magnitude < 0.05)
+                {
+                    resttimer = 0;
+                    randomPos = new Vector3(0, 0, 0);
+                }
+                Debug.Log(randomPos);
+            }
         }
 
         float distoLock = (Lock.transform.position - this.transform.position).magnitude;

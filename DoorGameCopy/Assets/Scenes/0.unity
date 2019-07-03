@@ -277,7 +277,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: -812574143
+  m_SortingLayerID: 420124959
   m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!224 &300373407
@@ -1254,9 +1254,9 @@ EdgeCollider2D:
   - {x: -1.0633106, y: -0.697822}
   - {x: -1.2773623, y: -0.20095813}
   - {x: -1.2761631, y: 0.28045034}
-  - {x: -1.0717695, y: 0.38014102}
+  - {x: -1.0743494, y: 0.38616157}
   - {x: -0.053884387, y: 0.17453742}
-  - {x: 1.036962, y: 0.3772297}
+  - {x: 1.032526, y: 0.38654375}
   - {x: 1.432179, y: 0.281646}
   - {x: 1.4263041, y: -0.22001374}
 --- !u!61 &1173431097
@@ -1522,6 +1522,11 @@ PrefabInstance:
     - target: {fileID: 4649528627067157617, guid: 2bb8bd08574d78c4a883d41a59ae47b2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 377983062206588263, guid: 2bb8bd08574d78c4a883d41a59ae47b2,
+        type: 3}
+      propertyPath: limitCount
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2738,12 +2743,12 @@ PrefabInstance:
     - target: {fileID: 7385418838135181573, guid: 6cb0b812e3e1c2b49a1105ea571dabdb,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 355
+      value: 357
       objectReference: {fileID: 0}
     - target: {fileID: 7385418838135181573, guid: 6cb0b812e3e1c2b49a1105ea571dabdb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 190
+      value: 186
       objectReference: {fileID: 0}
     - target: {fileID: 7385418838135181573, guid: 6cb0b812e3e1c2b49a1105ea571dabdb,
         type: 3}
@@ -2947,6 +2952,11 @@ PrefabInstance:
     - target: {fileID: 4828908150184863778, guid: 57f401f3a5a88af48b0100d1661961a1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416241305790099594, guid: 57f401f3a5a88af48b0100d1661961a1,
+        type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

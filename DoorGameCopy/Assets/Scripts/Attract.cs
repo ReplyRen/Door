@@ -89,6 +89,8 @@ public class Attract : MonoBehaviour
         {
             gameObject.transform.position = to;
             haveProtal = true;
+            if (this.tag == "Pig")
+                this.GetComponent<Pig>().isDead();
         }
 
 
