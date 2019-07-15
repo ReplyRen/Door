@@ -116,7 +116,7 @@ public class Store : MonoBehaviour
             {
                 downHitStatus[i] = 0;
             }
-            else if (downHit[i].collider.tag == "Canvas")
+            else if (downHit[i].collider.tag == "Canvas"|| downHit[i].collider.tag =="Water" )
             {
                 downHitStatus[i] = 3;
             }
