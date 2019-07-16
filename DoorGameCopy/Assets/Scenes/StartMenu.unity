@@ -364,7 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1595a91e23e6ff1478c061b0fde26a96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameBgm: {fileID: 8300000, guid: 7e45a8c77efcdae4cb68ac28ab439829, type: 3}
+  gameBgm: {fileID: 8300000, guid: 89802a4d6cfefce4ca8e3c9633f82f5c, type: 3}
   clickSound: {fileID: 8300000, guid: ce009aa9cac2d8c4b93f0863ca6bbfe7, type: 3}
   turnonSound: {fileID: 8300000, guid: 77ece1e769be69342849cdec72dfa474, type: 3}
   crashSound: {fileID: 8300000, guid: c4467dd1223e3b74183aabe5c624d5f4, type: 3}
@@ -398,7 +398,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2d1d9ae3d24f6c64ca4a7c1fca85087f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 89802a4d6cfefce4ca8e3c9633f82f5c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
