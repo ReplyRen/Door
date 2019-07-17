@@ -201,5 +201,7 @@ public class Pig : MonoBehaviour
     {
         this.GetComponent<Animator>().SetBool("IsDead", true);
         dead = true;
+        gameObject.AddComponent<Store>();
+        gameObject.GetComponent<Pig>().enabled = false;
     }
 }

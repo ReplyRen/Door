@@ -22,12 +22,12 @@ public class Lift : MonoBehaviour
         height = playercol.bounds.size.y;
         l = (int)(lenth / density);
         h = (int)(height / density);
-        
+
     }
     private void FixedUpdate()
     {
         InitRay();
-        if(gameObject.tag=="LeftLift")
+        if (gameObject.tag == "LeftLift")
             LeftUpRayDetection();
         if (gameObject.tag == "RightLift")
             RightUpRayDetection();
@@ -52,12 +52,12 @@ public class Lift : MonoBehaviour
         leftList.Clear();
         for (int i = 0; i < upRay.Length; i++)
         {
-            upHit = Physics2D.RaycastAll(upRay[i].origin, upRay[i].direction,10f);
+            upHit = Physics2D.RaycastAll(upRay[i].origin, upRay[i].direction, 10f);
             if (upHit.Length > 0)
             {
-                for(int j=0;j< upHit.Length; j++)
+                for (int j = 0; j < upHit.Length; j++)
                 {
-                    if (!Exist(leftList, upHit[j].collider.gameObject)&& upHit[j].collider.tag!="LeftLift")
+                    if (!Exist(leftList, upHit[j].collider.gameObject) && upHit[j].collider.tag != "LeftLift")
                         leftList.Add(upHit[j].collider.gameObject);
                 }
             }
@@ -66,13 +66,19 @@ public class Lift : MonoBehaviour
             ;
         else
         {
-
             for (int i = 0; i < leftList.Count; i++)
             {
                 if (transform.position != liftManager.leftUpPos && transform.position != liftManager.leftDownPos)
-                    leftList[i].transform.position = Vector3.MoveTowards(leftList[i].transform.position,
-                        new Vector3(leftList[i].transform.position.x, transform.position.y + 0.4f, 0f), liftManager.liftSpeed * Time.deltaTime);
-
+                {
+                    if (leftList[i].transform.parent == null)
+                    {
+                        leftList[i].transform.parent = gameObject.transform;
+                    }
+                }
+                else
+                {
+                    leftList[i].transform.parent = null;
+                }
             }
         }
         liftManager.leftWeight = Weight(leftList);
@@ -91,7 +97,7 @@ public class Lift : MonoBehaviour
                 for (int j = 0; j < upHit.Length; j++)
                 {
                     if (!Exist(rightList, upHit[j].collider.gameObject) && upHit[j].collider.tag != "Canvas" && upHit[j].collider.tag != "RightLift")
-                        rightList.Add(upHit[j].collider.gameObject); 
+                        rightList.Add(upHit[j].collider.gameObject);
                 }
             }
         }
@@ -101,9 +107,17 @@ public class Lift : MonoBehaviour
         {
             for (int i = 0; i < rightList.Count; i++)
             {
-                if(transform.position!=liftManager.rightUpPos&& transform.position != liftManager.rightDownPos)
-                     rightList[i].transform.position = Vector3.MoveTowards(rightList[i].transform.position,
-                            new Vector3(rightList[i].transform.position.x, transform.position.y + 0.4f, 0f), liftManager.liftSpeed * Time.deltaTime);
+                if (transform.position != liftManager.rightUpPos && transform.position != liftManager.rightDownPos)
+                {
+                    if (rightList[i].transform.parent == null)
+                    {
+                        rightList[i].transform.parent = gameObject.transform;
+                    }
+                }
+                else
+                {
+                    rightList[i].transform.parent = null;
+                }
             }
         }
         liftManager.rightWeight = Weight(rightList);
@@ -122,11 +136,11 @@ public class Lift : MonoBehaviour
             Debug.DrawRay(ray[i].origin, ray[i].direction, color);
         }
     }
-    private bool Exist(List<GameObject> list,GameObject game)
+    private bool Exist(List<GameObject> list, GameObject game)
     {
         if (list.Count == 0)
             return false;
-        for(int n = 0; n < list.Count; n++)
+        for (int n = 0; n < list.Count; n++)
         {
             if (game == list[n])
                 return true;
@@ -138,7 +152,7 @@ public class Lift : MonoBehaviour
         float num = 0f;
         if (list != null)
         {
-            for(int n = 0; n < list.Count; n++)
+            for (int n = 0; n < list.Count; n++)
             {
                 if (list[n].tag == "Player")
                 {

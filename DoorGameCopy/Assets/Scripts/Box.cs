@@ -154,16 +154,18 @@ public class Box : MonoBehaviour
             {
                 if(leftHit[i].collider.tag=="floor")
                 {
-                    gameObject.GetComponent<Force>().horizontalSpeed = 0;
+                    gameObject.GetComponent<Force>().enabled = false;
                 }
             }
             if (rightHit[i].collider != null)
             {
                 if (rightHit[i].collider.tag == "floor")
                 {
-                    gameObject.GetComponent<Force>().horizontalSpeed = 0;
+                    gameObject.GetComponent<Force>().enabled = false;
                 }
             }
+            if(leftHit[i].collider == null&&rightHit[i].collider == null)
+                gameObject.GetComponent<Force>().enabled = false;
         }
     }
 }

@@ -216,7 +216,7 @@ public class controller : MonoBehaviour
             else if (downHit[i].collider.tag == "LeftLift" || downHit[i].collider.tag == "floor"
                 || downHit[i].collider.tag == "Water" || downHit[i].collider.tag == "store"
                 || downHit[i].collider.tag == "RightLift" || downHit[i].collider.tag == "Lift"
-                || downHit[i].collider.tag == "Lift8")
+                || downHit[i].collider.tag == "Lift8"||downHit[i].collider.tag=="Pig")
             {
                 downHitStatus[i] = 0;
                 ang[i] = Vector2.Angle(downHit[i].normal, Vector2.up);
@@ -224,17 +224,19 @@ public class controller : MonoBehaviour
                 {
                     isDead();
                 }
-                if (downHit[i].collider.tag == "Lift")
+                else if (downHit[i].collider.tag == "Lift")
                 {
 
                     transform.position = Vector3.MoveTowards(transform.position,
                         new Vector3(transform.position.x, downHit[i].collider.transform.position.y), 2 * Time.deltaTime);
                 }
-                if (downHit[i].collider.tag == "Lift8")
+                else if (downHit[i].collider.tag == "Lift8")
                 {
                     transform.position = Vector3.MoveTowards(transform.position,
                         new Vector3(transform.position.x, downHit[i].collider.transform.position.y + 3.5f), 2 * Time.deltaTime);
                 }
+                else if (downHit[i].collider.tag == "Pig")
+                    isDead();
             }
             else if (downHit[i].collider.tag == "Canvas")
             {
