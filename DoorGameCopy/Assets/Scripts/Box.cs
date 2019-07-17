@@ -165,7 +165,7 @@ public class Box : MonoBehaviour
                 }
             }
             if(leftHit[i].collider == null&&rightHit[i].collider == null)
-                gameObject.GetComponent<Force>().enabled = false;
+                gameObject.GetComponent<Force>().enabled = true;
         }
     }
 }
