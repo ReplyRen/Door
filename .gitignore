@@ -41,3 +41,6 @@ DoorGameCopy/*.unitypackage
 
 # Crashlytics generated file
 DoorGameCopy/Assets/StreamingAssets/crashlytics-build.properties
+
+# MAC OS X
+.DS_Store

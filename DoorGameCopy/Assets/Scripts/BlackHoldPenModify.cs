@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackHoldPen : MonoBehaviour
+public class BlackHoldPenModify : MonoBehaviour
 {
     private int isCableCar;
     private GameObject clone;
@@ -16,7 +16,7 @@ public class BlackHoldPen : MonoBehaviour
     [HideInInspector]
     public List<Vector3> bHPosList = new List<Vector3>();
     private float DoorHeight;
-    private float DoorWidth;
+    private  float DoorWidth;
     [HideInInspector]
     public float R;
     private List<GameObject> bHList = new List<GameObject>();
@@ -30,10 +30,6 @@ public class BlackHoldPen : MonoBehaviour
     public int usageCount = 0;
 
     private enum vec3 { top, bottom, left, right, center }
-    int sign(float x)
-    {
-        return (x < 0) ? (-1) : (1);
-    }
     private void Start()
     {
         bHPosList.Clear();
@@ -46,17 +42,15 @@ public class BlackHoldPen : MonoBehaviour
     {
         if (cableline == null) return;
         int cntPoints = cableline.positionCount;
-        Vector3 middlePoint = new Vector3(0, 0, 0);
-        for (int j = 0; j < cntPoints; j++)
-        {
+        Vector3 middlePoint = new Vector3(0,0,0);
+        for (int j = 0; j < cntPoints; j++) {
             middlePoint += cableline.GetPosition(j);
         }
         middlePoint /= cntPoints;
         var cablecar = GameObject.FindWithTag("CableCar");
         var cablecarfa = cablecar.transform.parent.gameObject;
-        var cablecarpos = cablecarfa.transform.TransformPoint(cablecar.transform.localPosition);
-        Vector3 disVec = cablecarpos - middlePoint;  disVec.z = 0;
-        Debug.Log(cablecarpos + " " + disVec);
+        var cablecarpos = cablecarfa.transform.TransformPoint(cablecar.transform.position);
+        Vector3 disVec = cablecarpos - middlePoint;
         for (int j = 0; j < cntPoints; j++)
         {
             cableline.SetPosition(j, cableline.GetPosition(j) + disVec);
@@ -64,15 +58,14 @@ public class BlackHoldPen : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (bHPosList.Count < 2 && usageCount <= limitCount)
+        //Debug.Log(usageCount);
+        if (bHPosList.Count < 2&&usageCount<=limitCount)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 clone = (GameObject)Instantiate(obs, obs.transform.position, transform.rotation);//克隆一个带有LineRender的物体   
                 line = clone.GetComponent<LineRenderer>();//获得该物体上的LineRender组件  
-                //line.SetColors(Color.blue, Color.blue);//设置颜色
-                line.startColor = Color.blue;
-                line.endColor = Color.green;
+                line.SetColors(Color.blue, Color.blue);//设置颜色  
                 line.SetWidth(lineWidth, lineWidth);//设置宽度  
                 i = 0;
                 posList.Clear();
@@ -80,12 +73,12 @@ public class BlackHoldPen : MonoBehaviour
                 open = false;
                 isCableCar = 0;
             }
-            if (Input.GetMouseButton(0) && MousePositionDetection() == 0)
+            if (Input.GetMouseButton(0) && MousePositionDetection()!=0)
             {
                 if (clone != null)
                     Destroy(clone);
             }
-            if (Input.GetMouseButton(0) && MousePositionDetection() != 0)
+            if (Input.GetMouseButton(0) && MousePositionDetection()!=0)
             {
                 if (clone != null)
                 {
@@ -102,7 +95,7 @@ public class BlackHoldPen : MonoBehaviour
                     }
                 }
             }
-            else if (Input.GetMouseButtonUp(0) && (isCableCar = MousePositionDetection()) != 0)
+            else if (Input.GetMouseButtonUp(0) && (isCableCar = MousePositionDetection() ) !=0 )
             {
                 if (clone != null)
                 {
