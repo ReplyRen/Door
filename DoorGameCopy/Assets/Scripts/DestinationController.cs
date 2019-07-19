@@ -54,7 +54,7 @@ public class DestinationController : MonoBehaviour
                 if (aTmp < 0.2)
                 {
                     this.gameObject.SetActive(false);
-                    if (SceneManager.GetActiveScene().buildIndex + 1 <= 10)
+                    if (SceneManager.GetActiveScene().buildIndex + 1 <= 14)
                         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                     else
                     {

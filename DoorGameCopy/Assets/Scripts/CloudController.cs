@@ -12,13 +12,13 @@ public class CloudController : MonoBehaviour
     private float topMargin; //最上端
     private float bottomMargin; //最下端
 
-    public float minSpeed; //最小速度
-    public float maxSpeed; //最大速度
+    private float minSpeed; //最小速度
+    private float maxSpeed; //最大速度
 
     void Start()
     {
-        minSpeed = Screen.width / 600;
-        maxSpeed = Screen.width / 300;
+        minSpeed = Screen.width / 900f;
+        maxSpeed = Screen.width / 600f;
         //初始化最小与最大速度为合适的数值
 
         leftMargin = Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x;

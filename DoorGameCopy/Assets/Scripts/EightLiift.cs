@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EightLiift : MonoBehaviour
 {
-    private Vector3 bottomPos = new Vector3(7.03f, -6.5f, 0f);
+    public Vector3 bottomPos = new Vector3(7.03f, -6.5f, 0f);
     public Vector3 topPos = new Vector3(7.03f, -3.02f, 0f);
     public bool buttonDown = false;
     public GameObject connecterButton;
