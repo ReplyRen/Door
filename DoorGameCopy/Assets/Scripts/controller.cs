@@ -236,7 +236,13 @@ public class controller : MonoBehaviour
                         new Vector3(transform.position.x, downHit[i].collider.transform.position.y + 3.5f), 2 * Time.deltaTime);
                 }
                 else if (downHit[i].collider.tag == "Pig")
+                {
+                    gameObject.GetComponent<Force>().horizontalSpeed = -75f;
+                    gameObject.transform.position += new Vector3(0, 0.1f, 0);
+                    gameObject.GetComponent<GravitationalController>().verticalSpeed = 75f;
                     isDead();
+                }
+
             }
             else if (downHit[i].collider.tag == "Canvas")
             {

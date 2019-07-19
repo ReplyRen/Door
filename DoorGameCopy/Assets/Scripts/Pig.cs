@@ -137,6 +137,11 @@ public class Pig : MonoBehaviour
             {
                 downHitStatus[i] = 0;
             }
+            else if(downHit[i].collider.tag == "Water")
+            {
+                downHitStatus[i] = 0;
+                isDead();
+            }
             else if (downHit[i].collider.tag == "Canvas")
             {
                 downHitStatus[i] = 3;
@@ -168,13 +173,13 @@ public class Pig : MonoBehaviour
                     needTurn = true;
                 if (leftHit[i].collider.tag == "Player")
                 {
-                    Debug.Log("left");
                     leftHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed = -horizontalForce;
-                    Debug.Log(leftHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed);
                     leftHit[i].collider.gameObject.transform.position += new Vector3(0, 0.1f, 0);
                     leftHit[i].collider.gameObject.GetComponent<GravitationalController>().verticalSpeed = verticalForce;
                     leftHit[i].collider.gameObject.GetComponent<GravitationalController>().isDead();
                 }
+                if (leftHit[i].collider.tag == "Bullet")
+                    isDead();
             }
         }
         for (int i = 0; i < rightHit.Length; i++)
@@ -194,6 +199,8 @@ public class Pig : MonoBehaviour
                     rightHit[i].collider.gameObject.GetComponent<GravitationalController>().verticalSpeed = verticalForce;
                     rightHit[i].collider.gameObject.GetComponent<GravitationalController>().isDead();
                 }
+                if (rightHit[i].collider.tag == "Bullet")
+                    isDead();
             }
         }
     }
@@ -202,6 +209,7 @@ public class Pig : MonoBehaviour
         this.GetComponent<Animator>().SetBool("IsDead", true);
         dead = true;
         gameObject.AddComponent<Store>();
-        gameObject.GetComponent<Pig>().enabled = false;
+        gameObject.tag = "Store";
+        Destroy(GetComponent<Pig>());
     }
 }

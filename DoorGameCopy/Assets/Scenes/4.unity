@@ -2517,7 +2517,7 @@ GameObject:
   - component: {fileID: 1859899212}
   m_Layer: 0
   m_Name: Canvas
-  m_TagString: Canvas
+  m_TagString: CableCar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2717,7 +2717,7 @@ Transform:
   - {fileID: 1006622665}
   - {fileID: 162368459}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1918245247
 MonoBehaviour:

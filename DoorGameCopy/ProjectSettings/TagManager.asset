@@ -20,6 +20,8 @@ TagManager:
   - Lift8
   - Bullet
   - clonedLine
+  - CableCar
+  - CableCarClone
   layers:
   - Default
   - TransparentFX

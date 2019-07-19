@@ -112,9 +112,11 @@ public class Store : MonoBehaviour
                 downHitStatus[i] = 3;
             }
             else if (downHit[i].collider.tag == "Box" || downHit[i].collider.tag == "floor" || downHit[i].collider.tag == "Pig"||downHit[i].collider.tag == "Store"||
-                downHit[i].collider.tag == "LeftLift" || downHit[i].collider.tag == "RightLift")
+                downHit[i].collider.tag == "LeftLift" || downHit[i].collider.tag == "RightLift" || downHit[i].collider.tag == "Water")
             {
                 downHitStatus[i] = 0;
+                if(downHit[i].collider.tag == "Water")
+                    gameObject.transform.parent = downHit[i].collider.transform;
             }
             else if (downHit[i].collider.tag == "Canvas"|| downHit[i].collider.tag =="Water" )
             {

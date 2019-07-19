@@ -120,7 +120,8 @@ public class Box : MonoBehaviour
                 downHitStatus[i] = 3;
             }
             else if (downHit[i].collider.tag == "Box" || downHit[i].collider.tag == "floor" || downHit[i].collider.tag == "Store" 
-                || downHit[i].collider.tag == "LeftLift"||downHit[i].collider.tag=="RightLift"|| downHit[i].collider.tag == "Lift8")
+                || downHit[i].collider.tag == "LeftLift"||downHit[i].collider.tag=="RightLift"|| downHit[i].collider.tag == "Lift8"
+                || downHit[i].collider.tag == "Water")
             {
                 downHitStatus[i] = 0;
                 if (downHit[i].collider.tag == "Lift8")
@@ -128,6 +129,8 @@ public class Box : MonoBehaviour
                     transform.position = Vector3.MoveTowards(transform.position,
                         new Vector3(transform.position.x, downHit[i].collider.transform.position.y + 3.3f), 2 * Time.deltaTime);
                 }
+                else if (downHit[i].collider.tag == "Water")
+                    gameObject.transform.parent = downHit[i].collider.transform;
             }
             else if (downHit[i].collider.tag == "Canvas")
             {
