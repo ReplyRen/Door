@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ProtalPen : MonoBehaviour
 {
+    private int isCableCar;
     private GameObject clone;
     private LineRenderer line;
-    //public bool isStatic = true;
-    //public GameObject followParent;
+    private LineRenderer cableline;
     private int i;
     public GameObject obs;
     public float lineWidth = 0.05f;
@@ -24,6 +24,32 @@ public class ProtalPen : MonoBehaviour
     public KeyCode protalKey = KeyCode.Q;
     private bool open = false;
 
+    int sign(float x)
+    {
+        return (x < 0) ? (-1) : (1);
+    }
+
+    private void LateUpdate()
+    {
+        if (cableline == null) return;
+        int cntPoints = cableline.positionCount;
+        Vector3 middlePoint = new Vector3(0, 0, 0);
+        for (int j = 0; j < cntPoints; j++)
+        {
+            middlePoint += cableline.GetPosition(j);
+        }
+        middlePoint /= cntPoints;
+        var cablecar = GameObject.FindWithTag("CableCar");
+        var cablecarfa = cablecar.transform.parent.gameObject;
+        var cablecarpos = cablecarfa.transform.TransformPoint(cablecar.transform.localPosition);
+        Vector3 disVec = cablecarpos - middlePoint; disVec.z = 0;
+        Debug.Log(cablecarpos + " " + disVec);
+        for (int j = 0; j < cntPoints; j++)
+        {
+            cableline.SetPosition(j, cableline.GetPosition(j) + disVec);
+        }
+    }
+
     private enum vec3 { top, bottom, left, right, center }
 
     private Vector3 vec3plus (Vector3 A, Vector3 B)
@@ -35,22 +61,6 @@ public class ProtalPen : MonoBehaviour
         return new Vector3(A.x + B, A.y + B, A.z + B);
     }
 
-    //private float isCloseCanvas(Vector3[] linePoints, float dis)
-    //{
-    //    linePoints = new Vector3[line.positionCount];
-    //    if (portalList.Count < 1) return -1;
-    //    line.GetPositions(linePoints);
-    //    Vector3 centerPos = new Vector3(0,0,0);
-    //    for(int i = 0; i < line.positionCount; i++)
-    //    {
-    //        centerPos = vec3plus(centerPos,linePoints[i]);
-    //    }
-    //    centerPos /= line.positionCount;
-    //    dis = (centerPos - followParent.transform.position).sqrMagnitude;
-    //    if (dis < closeCanvasDis) return dis;
-    //    return -1f;
-    //}
-
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
@@ -60,22 +70,6 @@ public class ProtalPen : MonoBehaviour
     }
     void FixedUpdate()
     {
-        //if (!isStatic && posList.Count > 0)
-        //{
-        //    Vector3[] linePoints = new Vector3[line.positionCount];
-        //    float dis = 0;
-        //    //Debug.Log(linePoints[0]);
-        //    if (isCloseCanvas(linePoints, dis) > 0)
-        //    {
-        //        Debug.Log(linePoints[0]);
-        //        for (int i = 0; i < line.positionCount; i++)
-        //        {
-        //            vec3plus(linePoints[i], dis);
-        //        }
-        //        line.SetPositions(linePoints);
-        //    }
-        //}
-        
         if (Input.GetMouseButtonDown(0))
         {
             if (portalList.Count >= 2)
@@ -93,13 +87,14 @@ public class ProtalPen : MonoBehaviour
             posList.Clear();
             isPortalOpen = false;
             open = false;
+            isCableCar = 0;
         }
-        if (Input.GetMouseButton(0)&&!MousePositionDetection())
+        if (Input.GetMouseButton(0)&& MousePositionDetection() == 0)
         {
             if (clone != null)
                 Destroy(clone);
         }
-        if (Input.GetMouseButton(0) && MousePositionDetection())
+        if (Input.GetMouseButton(0) && MousePositionDetection() != 0)
         {
             if (clone != null)
             {
@@ -126,7 +121,7 @@ public class ProtalPen : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetMouseButtonUp(0) && MousePositionDetection())
+        else if (Input.GetMouseButtonUp(0) && (isCableCar = MousePositionDetection()) != 0)
         {
             if (clone != null)
             {
@@ -153,6 +148,11 @@ public class ProtalPen : MonoBehaviour
                     }
                     else
                     {
+                        if (isCableCar == 2)
+                        {
+                            clone.tag = "CableCarClone";
+                            cableline = line;
+                        }
                         Debug.Log("传送门" + centerPoint);
                         portalList.Add(centerPoint);
                         open = true;
@@ -263,18 +263,20 @@ public class ProtalPen : MonoBehaviour
             player.transform.position = from;
         }
     }
-    private bool MousePositionDetection()
+    private int MousePositionDetection()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
         if (hit)
         {
-            if (hit.collider.tag == "Canvas")
-                return true;
+            if (hit.collider.tag == "CableCar")
+                return 2;
+            else if (hit.collider.tag == "Canvas")
+                return 1;
             else
-                return false;
+                return 0;
         }
         else
-            return false;
+            return 0;
     }
 }
