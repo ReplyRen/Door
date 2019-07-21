@@ -103,16 +103,6 @@ public class ProtalPen : MonoBehaviour
                 line.positionCount = i;//设置顶点数  
                 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15));
                 line.SetPosition(i - 1, pos);//设置顶点位置 
-                if (posList.Count > 10)
-                {
-                    for (int n = 0; n < posList.Count - 10; n++)
-                    {
-                        if (IsClose(pos, posList[n]))
-                        {
-                            isPortalOpen = true;
-                        }
-                    }
-                }
                 if (posList.Count == 0)
                     posList.Add(pos);
                 else if (pos != posList[posList.Count - 1])
@@ -137,7 +127,7 @@ public class ProtalPen : MonoBehaviour
                 rightPoint = GetPoint(changeList, vec3.right);
                 leftPoint = GetPoint(changeList, vec3.left);
                 centerPoint = GetPoint(changeList, vec3.center);
-
+                IsOpen(posList);
                 if (isPortalOpen)
                 {
                     if ((topPoint.y - bottomPoint.y) < minDoorHeight || (rightPoint.x - leftPoint.x) < minDoorWidth)
@@ -170,13 +160,6 @@ public class ProtalPen : MonoBehaviour
             Portal(portalList[0], portalList[1]);
         }
 
-    }
-    private bool IsClose(Vector3 v1, Vector3 v2)
-    {
-        if ((v1 - v2).sqrMagnitude < precision)
-            return true;
-        else
-            return false;
     }
     private Vector3 GetPoint(List<Vector3> list, vec3 vec)
     {
@@ -251,7 +234,36 @@ public class ProtalPen : MonoBehaviour
         return list[list.Count - 1];
 
     }
-
+    private void IsOpen(List<Vector3> list)
+    {
+        int xChangeCount = 0;
+        int yChangeCount = 0;
+        for (int n = 1; n < list.Count - 1; n++)
+        {
+            int q = n;
+            while ((q < list.Count - 1) && ((list[q].y - list[q + 1].y) == 0))
+            {
+                q++;
+            }
+            if (q == list.Count - 1)
+                ;
+            else if ((list[n - 1].y - list[n].y) * (list[q].y - list[q + 1].y) < 0)
+            {
+                yChangeCount++;
+            }
+            q = n;
+            while ((q < list.Count - 1) && ((list[q].x - list[q + 1].x) == 0))
+            {
+                q++;
+            }
+            if (q == list.Count - 1)
+                ;
+            else if ((list[n - 1].x - list[n].x) * (list[q].x - list[q + 1].x) < 0)
+                xChangeCount++;
+        }
+        if (xChangeCount >= 2 && yChangeCount >= 2)
+            isPortalOpen = true;
+    }
     private void Portal(Vector3 from, Vector3 to)
     {
         if (((player.transform.position - from).sqrMagnitude < 0.5f) && Input.GetKeyDown(protalKey))

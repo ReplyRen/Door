@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackHoldPen : MonoBehaviour
+public class Pen : MonoBehaviour
 {
     private int isCableCar;
     private GameObject clone;
@@ -11,7 +11,6 @@ public class BlackHoldPen : MonoBehaviour
     private int i;
     public GameObject obs;
     private List<Vector3> posList = new List<Vector3>();
-    private bool isBlackHoleOpen = false;
     public float lineWidth = 0.05f;
     [HideInInspector]
     public List<Vector3> bHPosList = new List<Vector3>();
@@ -28,7 +27,8 @@ public class BlackHoldPen : MonoBehaviour
     private bool open = false;
     public int limitCount = 0;
     public int usageCount = 0;
-    public bool count = false;
+    public bool isOpen = false;
+
     private enum vec3 { top, bottom, left, right, center }
     int sign(float x)
     {
@@ -55,7 +55,7 @@ public class BlackHoldPen : MonoBehaviour
         var cablecar = GameObject.FindWithTag("CableCar");
         var cablecarfa = cablecar.transform.parent.gameObject;
         var cablecarpos = cablecarfa.transform.TransformPoint(cablecar.transform.localPosition);
-        Vector3 disVec = cablecarpos - middlePoint;  disVec.z = 0;
+        Vector3 disVec = cablecarpos - middlePoint; disVec.z = 0;
         Debug.Log(cablecarpos + " " + disVec);
         for (int j = 0; j < cntPoints; j++)
         {
@@ -64,104 +64,91 @@ public class BlackHoldPen : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (bHPosList.Count < 2 && usageCount < limitCount)
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                clone = (GameObject)Instantiate(obs, obs.transform.position, transform.rotation);//克隆一个带有LineRender的物体   
-                line = clone.GetComponent<LineRenderer>();//获得该物体上的LineRender组件  
-                //line.SetColors(Color.blue, Color.blue);//设置颜色
-                line.startColor = Color.white;
-                line.endColor = Color.white;
-                line.SetWidth(lineWidth, lineWidth);//设置宽度  
-                i = 0;
-                posList.Clear();
-                isBlackHoleOpen = false;
-                open = false;
-                count = false;
-                isCableCar = 0;
-            }
-            if (Input.GetMouseButton(0) && MousePositionDetection() == 0)
-            {
-                if (clone != null)
-                    Destroy(clone);
-            }
-            if (Input.GetMouseButton(0) && MousePositionDetection() != 0)
-            {
-                if (clone != null)
-                {
-                    i++;
-                    Vector3 pos = new Vector3();
-                    line.positionCount = i;//设置顶点数  
-                    pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15));
-                    line.SetPosition(i - 1, pos);//设置顶点位置
-                    if (posList.Count == 0)
-                        posList.Add(pos);
-                    else if (pos != posList[posList.Count - 1])
-                    {
-                        posList.Add(pos);
-                    }
-                }
-            }
-            else if (Input.GetMouseButtonUp(0) && (isCableCar = MousePositionDetection()) != 0)
-            {
-                if (clone != null)
-                {
-                    IsBHOpen(posList);
-                    List<Vector3> changeList = new List<Vector3>();
-                    changeList = posList;
-                    Vector3 topPoint = new Vector3();
-                    Vector3 bottomPoint = new Vector3();
-                    Vector3 leftPoint = new Vector3();
-                    Vector3 rightPoint = new Vector3();
-                    Vector3 centerPoint = new Vector3();
-                    topPoint = posList[posList.Count - 1];
-                    bottomPoint = GetPoint(changeList, vec3.bottom);
-                    rightPoint = GetPoint(changeList, vec3.right);
-                    leftPoint = GetPoint(changeList, vec3.left);
-                    centerPoint = GetPoint(changeList, vec3.center);
-                    if (isBlackHoleOpen)
-                    {
-                        Debug.Log("黑洞门");
-                        if (isCableCar == 2)
-                        {
-                            clone.tag = "CableCarClone";
-                            cableline = line;
-                        }
-                        if (bHList.Count == 0)
-                        {
-                            DoorHeight = topPoint.y - bottomPoint.y;
-                            DoorWidth = rightPoint.x - leftPoint.x;
-                            R = (DoorHeight + DoorWidth) / 2;
-                        }
-                        bHPosList.Add(centerPoint);
-                        bHList.Add(clone);
-                        open = true;
-                    }
-                    else
-                    {
-                        Destroy(clone);
-                    }
-                }
-
-            }
-            else if (!open)
-                Destroy(clone);
+            clone = (GameObject)Instantiate(obs, obs.transform.position, transform.rotation);//克隆一个带有LineRender的物体   
+            line = clone.GetComponent<LineRenderer>();//获得该物体上的LineRender组件  
+            line.startColor = Color.blue;
+            line.endColor = Color.green;
+            line.SetWidth(lineWidth, lineWidth);//设置宽度  
+            i = 0;
+            posList.Clear();
+            open = false;
+            isCableCar = 0;
         }
+        if (Input.GetMouseButton(0) && MousePositionDetection() == 0)
+        {
+            if (clone != null)
+                Destroy(clone);
+            }
+        if (Input.GetMouseButton(0) && MousePositionDetection() != 0)
+        {
+            if (clone != null)
+            {
+                i++;
+                Vector3 pos = new Vector3();
+                line.positionCount = i;//设置顶点数  
+                pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15));
+                line.SetPosition(i - 1, pos);//设置顶点位置
+                if (posList.Count == 0)
+                    posList.Add(pos);
+                else if (pos != posList[posList.Count - 1])
+                {
+                    posList.Add(pos);
+                }
+            }
+        }
+        else if (Input.GetMouseButtonUp(0) && (isCableCar = MousePositionDetection()) != 0)
+        {
+            if (clone != null)
+            {
+                IsOpen(posList);
+                List<Vector3> changeList = new List<Vector3>();
+                changeList = posList;
+                Vector3 topPoint = new Vector3();
+                Vector3 bottomPoint = new Vector3();
+                Vector3 leftPoint = new Vector3();
+                Vector3 rightPoint = new Vector3();
+                Vector3 centerPoint = new Vector3();
+                topPoint = posList[posList.Count - 1];
+                bottomPoint = GetPoint(changeList, vec3.bottom);
+                rightPoint = GetPoint(changeList, vec3.right);
+                leftPoint = GetPoint(changeList, vec3.left);
+                centerPoint = GetPoint(changeList, vec3.center);
+                if (isOpen)
+                {
+                    Debug.Log("黑洞门");
+                    if (isCableCar == 2)
+                    {
+                        clone.tag = "CableCarClone";
+                        cableline = line;
+                    }
+                    if (bHList.Count == 0)
+                    {
+                        DoorHeight = topPoint.y - bottomPoint.y;
+                        DoorWidth = rightPoint.x - leftPoint.x;
+                        R = (DoorHeight + DoorWidth) / 2;
+                    }
+                    bHPosList.Add(centerPoint);
+                    bHList.Add(clone);
+                    open = true;
+                }
+                else
+                {
+                    Destroy(clone);
+                }
+            }
+        }
+        else if (!open)
+            Destroy(clone);
         if (bHPosList.Count == 2)
         {
             timer += Time.deltaTime;
-            if(!count)
-            {
-                usageCount++;
-                count = true;
-            }
             if (timer < attractTime)
             {
                 bHList[0].transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 angle++;
                 isAttracting = true;
-
             }
             else
             {
@@ -171,13 +158,13 @@ public class BlackHoldPen : MonoBehaviour
                 Destroy(bHList[1]);
                 bHList.Clear();
                 timer = 0f;
-
+                usageCount++;
             }
-
         }
-
     }
-    private void IsBHOpen(List<Vector3> list)
+
+
+    private void IsOpen(List<Vector3> list)
     {
         int xChangeCount = 0;
         int yChangeCount = 0;
@@ -205,7 +192,7 @@ public class BlackHoldPen : MonoBehaviour
                 xChangeCount++;
         }
         if (xChangeCount >= 2 && yChangeCount >= 2)
-            isBlackHoleOpen = true;
+            isOpen = true;
     }
     private Vector3 GetPoint(List<Vector3> list, vec3 vec)
     {

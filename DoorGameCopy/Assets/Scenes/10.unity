@@ -193,6 +193,54 @@ MonoBehaviour:
   - {fileID: 6164333068613375176, guid: 38197f0d1243a7c4d9522723f6fd8ff5, type: 3}
   - {fileID: 2461353617713950005, guid: b47222bdf7274de45b85b996b2abeac3, type: 3}
   - {fileID: 500752842169570546, guid: a53b2782bf87dcf4eac8baefcf153016, type: 3}
+--- !u!1 &190792000 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1183476464488770514, guid: 4c68e9a9286f5fa46b8cfa1a44e29a4a,
+    type: 3}
+  m_PrefabInstance: {fileID: 614646088696863629}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &190792001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190792000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8286fbd4520745447a623e3a3b5f65cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  density: 0.1
+  verticalSpeed: 0
+  verticalForce: 100
+  horizontalForce: 100
+--- !u!61 &190792004
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190792000}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.21, y: 7.3}
+    newSize: {x: 1.21, y: 7.3}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.21, y: 7.3}
+  m_EdgeRadius: 0
 --- !u!1 &202487895
 GameObject:
   m_ObjectHideFlags: 0
@@ -2680,6 +2728,11 @@ PrefabInstance:
     - target: {fileID: 3310767389354307621, guid: 4c68e9a9286f5fa46b8cfa1a44e29a4a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6900070871911051319, guid: 4c68e9a9286f5fa46b8cfa1a44e29a4a,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
