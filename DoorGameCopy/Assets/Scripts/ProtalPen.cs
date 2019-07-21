@@ -81,7 +81,7 @@ public class ProtalPen : MonoBehaviour
             clone = (GameObject)Instantiate(obs, obs.transform.position, transform.rotation);//克隆一个带有LineRender的物体   
             line = clone.GetComponent<LineRenderer>();//获得该物体上的LineRender组件
             line.tag = "clonedLine"; 
-            line.SetColors(Color.red, Color.red);//设置颜色  
+            line.SetColors(Color.white, Color.white);//设置颜色  
             line.SetWidth(lineWidth, lineWidth);//设置宽度
             i = 0;
             posList.Clear();
