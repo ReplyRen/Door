@@ -28,7 +28,7 @@ public class BlackHoldPen : MonoBehaviour
     private bool open = false;
     public int limitCount = 0;
     public int usageCount = 0;
-
+    public bool count = false;
     private enum vec3 { top, bottom, left, right, center }
     int sign(float x)
     {
@@ -64,7 +64,7 @@ public class BlackHoldPen : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (bHPosList.Count < 2 && usageCount <= limitCount)
+        if (bHPosList.Count < 2 && usageCount < limitCount)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -78,6 +78,7 @@ public class BlackHoldPen : MonoBehaviour
                 posList.Clear();
                 isBlackHoleOpen = false;
                 open = false;
+                count = false;
                 isCableCar = 0;
             }
             if (Input.GetMouseButton(0) && MousePositionDetection() == 0)
@@ -150,11 +151,17 @@ public class BlackHoldPen : MonoBehaviour
         if (bHPosList.Count == 2)
         {
             timer += Time.deltaTime;
+            if(!count)
+            {
+                usageCount++;
+                count = true;
+            }
             if (timer < attractTime)
             {
                 bHList[0].transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 angle++;
                 isAttracting = true;
+
             }
             else
             {
@@ -164,7 +171,7 @@ public class BlackHoldPen : MonoBehaviour
                 Destroy(bHList[1]);
                 bHList.Clear();
                 timer = 0f;
-                usageCount++;
+
             }
 
         }

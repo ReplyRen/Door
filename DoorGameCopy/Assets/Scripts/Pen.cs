@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProtalPen : MonoBehaviour
+public class Pen : MonoBehaviour
 {
     private int isCableCar;
     private GameObject clone;
@@ -10,25 +10,38 @@ public class ProtalPen : MonoBehaviour
     private LineRenderer cableline;
     private int i;
     public GameObject obs;
-    public float lineWidth = 0.05f;
-    public float precision = 0.05f;
     private List<Vector3> posList = new List<Vector3>();
-    private List<Vector3> portalList = new List<Vector3>();
-    private bool isPortalOpen = false;
-    public float minDoorHeight = 0.1f;
-    public float minDoorWidth = 0.1f;
-    private float characterHeight;
-    private float characterWidth;
-    private float closeCanvasDis = 1f;
-    private GameObject player;
-    public KeyCode protalKey = KeyCode.Q;
+    public float lineWidth = 0.05f;
+    [HideInInspector]
+    public List<Vector3> bHPosList = new List<Vector3>();
+    private float DoorHeight;
+    private float DoorWidth;
+    [HideInInspector]
+    public float R;
+    private List<GameObject> bHList = new List<GameObject>();
+    [HideInInspector]
+    public bool isAttracting = false;
+    private float timer = 0f;
+    public float attractTime = 5f;
+    private float angle = 0f;
     private bool open = false;
+    public int limitCount = 0;
+    public int usageCount = 0;
+    public bool isOpen = false;
 
+    private enum vec3 { top, bottom, left, right, center }
     int sign(float x)
     {
         return (x < 0) ? (-1) : (1);
     }
-
+    private void Start()
+    {
+        bHPosList.Clear();
+        bHList.Clear();
+        isAttracting = false;
+        angle = 0f;
+        usageCount = 0;
+    }
     private void LateUpdate()
     {
         if (cableline == null) return;
@@ -49,51 +62,25 @@ public class ProtalPen : MonoBehaviour
             cableline.SetPosition(j, cableline.GetPosition(j) + disVec);
         }
     }
-
-    private enum vec3 { top, bottom, left, right, center }
-
-    private Vector3 vec3plus (Vector3 A, Vector3 B)
-    {
-        return new Vector3(A.x + B.x, A.y + B.y, A.z + B.z);
-    }
-    private Vector3 vec3plus (Vector3 A, float B)
-    {
-        return new Vector3(A.x + B, A.y + B, A.z + B);
-    }
-
-    private void Start()
-    {
-        player = GameObject.FindWithTag("Player");
-        characterWidth = player.GetComponent<BoxCollider2D>().size.x;
-        characterHeight = player.GetComponent<BoxCollider2D>().size.y;
-        portalList.Clear();
-    }
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (portalList.Count >= 2)
-            {
-                foreach (GameObject x in GameObject.FindGameObjectsWithTag("clonedLine"))
-                    Destroy(x);
-                portalList.Clear();
-            }
             clone = (GameObject)Instantiate(obs, obs.transform.position, transform.rotation);//克隆一个带有LineRender的物体   
-            line = clone.GetComponent<LineRenderer>();//获得该物体上的LineRender组件
-            line.tag = "clonedLine"; 
-            line.SetColors(Color.red, Color.red);//设置颜色  
-            line.SetWidth(lineWidth, lineWidth);//设置宽度
+            line = clone.GetComponent<LineRenderer>();//获得该物体上的LineRender组件  
+            line.startColor = Color.blue;
+            line.endColor = Color.green;
+            line.SetWidth(lineWidth, lineWidth);//设置宽度  
             i = 0;
             posList.Clear();
-            isPortalOpen = false;
             open = false;
             isCableCar = 0;
         }
-        if (Input.GetMouseButton(0)&& MousePositionDetection() == 0)
+        if (Input.GetMouseButton(0) && MousePositionDetection() == 0)
         {
             if (clone != null)
                 Destroy(clone);
-        }
+            }
         if (Input.GetMouseButton(0) && MousePositionDetection() != 0)
         {
             if (clone != null)
@@ -102,7 +89,7 @@ public class ProtalPen : MonoBehaviour
                 Vector3 pos = new Vector3();
                 line.positionCount = i;//设置顶点数  
                 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15));
-                line.SetPosition(i - 1, pos);//设置顶点位置 
+                line.SetPosition(i - 1, pos);//设置顶点位置
                 if (posList.Count == 0)
                     posList.Add(pos);
                 else if (pos != posList[posList.Count - 1])
@@ -115,6 +102,7 @@ public class ProtalPen : MonoBehaviour
         {
             if (clone != null)
             {
+                IsOpen(posList);
                 List<Vector3> changeList = new List<Vector3>();
                 changeList = posList;
                 Vector3 topPoint = new Vector3();
@@ -127,26 +115,23 @@ public class ProtalPen : MonoBehaviour
                 rightPoint = GetPoint(changeList, vec3.right);
                 leftPoint = GetPoint(changeList, vec3.left);
                 centerPoint = GetPoint(changeList, vec3.center);
-                IsOpen(posList);
-                if (isPortalOpen)
+                if (isOpen)
                 {
-                    if ((topPoint.y - bottomPoint.y) < minDoorHeight || (rightPoint.x - leftPoint.x) < minDoorWidth)
+                    Debug.Log("黑洞门");
+                    if (isCableCar == 2)
                     {
-                        Debug.Log("太小了");
-                        Destroy(clone);
-
+                        clone.tag = "CableCarClone";
+                        cableline = line;
                     }
-                    else
+                    if (bHList.Count == 0)
                     {
-                        if (isCableCar == 2)
-                        {
-                            clone.tag = "CableCarClone";
-                            cableline = line;
-                        }
-                        Debug.Log("传送门" + centerPoint);
-                        portalList.Add(centerPoint);
-                        open = true;
+                        DoorHeight = topPoint.y - bottomPoint.y;
+                        DoorWidth = rightPoint.x - leftPoint.x;
+                        R = (DoorHeight + DoorWidth) / 2;
                     }
+                    bHPosList.Add(centerPoint);
+                    bHList.Add(clone);
+                    open = true;
                 }
                 else
                 {
@@ -154,12 +139,60 @@ public class ProtalPen : MonoBehaviour
                 }
             }
         }
-        else if(!open) Destroy(clone);
-        if (portalList.Count == 2)
+        else if (!open)
+            Destroy(clone);
+        if (bHPosList.Count == 2)
         {
-            Portal(portalList[0], portalList[1]);
+            timer += Time.deltaTime;
+            if (timer < attractTime)
+            {
+                bHList[0].transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                angle++;
+                isAttracting = true;
+            }
+            else
+            {
+                isAttracting = false;
+                bHPosList.Clear();
+                Destroy(bHList[0]);
+                Destroy(bHList[1]);
+                bHList.Clear();
+                timer = 0f;
+                usageCount++;
+            }
         }
+    }
 
+
+    private void IsOpen(List<Vector3> list)
+    {
+        int xChangeCount = 0;
+        int yChangeCount = 0;
+        for (int n = 1; n < list.Count - 1; n++)
+        {
+            int q = n;
+            while ((q < list.Count - 1) && ((list[q].y - list[q + 1].y) == 0))
+            {
+                q++;
+            }
+            if (q == list.Count - 1)
+                ;
+            else if ((list[n - 1].y - list[n].y) * (list[q].y - list[q + 1].y) < 0)
+            {
+                yChangeCount++;
+            }
+            q = n;
+            while ((q < list.Count - 1) && ((list[q].x - list[q + 1].x) == 0))
+            {
+                q++;
+            }
+            if (q == list.Count - 1)
+                ;
+            else if ((list[n - 1].x - list[n].x) * (list[q].x - list[q + 1].x) < 0)
+                xChangeCount++;
+        }
+        if (xChangeCount >= 2 && yChangeCount >= 2)
+            isOpen = true;
     }
     private Vector3 GetPoint(List<Vector3> list, vec3 vec)
     {
@@ -234,47 +267,6 @@ public class ProtalPen : MonoBehaviour
         return list[list.Count - 1];
 
     }
-    private void IsOpen(List<Vector3> list)
-    {
-        int xChangeCount = 0;
-        int yChangeCount = 0;
-        for (int n = 1; n < list.Count - 1; n++)
-        {
-            int q = n;
-            while ((q < list.Count - 1) && ((list[q].y - list[q + 1].y) == 0))
-            {
-                q++;
-            }
-            if (q == list.Count - 1)
-                ;
-            else if ((list[n - 1].y - list[n].y) * (list[q].y - list[q + 1].y) < 0)
-            {
-                yChangeCount++;
-            }
-            q = n;
-            while ((q < list.Count - 1) && ((list[q].x - list[q + 1].x) == 0))
-            {
-                q++;
-            }
-            if (q == list.Count - 1)
-                ;
-            else if ((list[n - 1].x - list[n].x) * (list[q].x - list[q + 1].x) < 0)
-                xChangeCount++;
-        }
-        if (xChangeCount >= 2 && yChangeCount >= 2)
-            isPortalOpen = true;
-    }
-    private void Portal(Vector3 from, Vector3 to)
-    {
-        if (((player.transform.position - from).sqrMagnitude < 0.5f) && Input.GetKeyDown(protalKey))
-        {
-            player.transform.position = to;
-        }
-        else if (((player.transform.position - to).sqrMagnitude < 0.5f)&&Input.GetKeyDown(protalKey))
-        {
-            player.transform.position = from;
-        }
-    }
     private int MousePositionDetection()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -291,4 +283,5 @@ public class ProtalPen : MonoBehaviour
         else
             return 0;
     }
+
 }

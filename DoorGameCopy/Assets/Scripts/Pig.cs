@@ -192,9 +192,7 @@ public class Pig : MonoBehaviour
                     needTurn = true;
                 if (rightHit[i].collider.tag == "Player")
                 {
-                    Debug.Log("right");
                     rightHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed = horizontalForce;
-                    Debug.Log(rightHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed);
                     rightHit[i].collider.gameObject.transform.position += new Vector3(0, 0.1f, 0);
                     rightHit[i].collider.gameObject.GetComponent<GravitationalController>().verticalSpeed = verticalForce;
                     rightHit[i].collider.gameObject.GetComponent<GravitationalController>().isDead();

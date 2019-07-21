@@ -1569,8 +1569,6 @@ MonoBehaviour:
   - {fileID: 6164333068613375176, guid: 38197f0d1243a7c4d9522723f6fd8ff5, type: 3}
   - {fileID: 2461353617713950005, guid: b47222bdf7274de45b85b996b2abeac3, type: 3}
   - {fileID: 500752842169570546, guid: a53b2782bf87dcf4eac8baefcf153016, type: 3}
-  minSpeed: 0
-  maxSpeed: 0
 --- !u!1 &701125734
 GameObject:
   m_ObjectHideFlags: 0
