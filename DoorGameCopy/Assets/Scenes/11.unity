@@ -1970,6 +1970,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lightning
       objectReference: {fileID: 0}
+    - target: {fileID: 5120640790280199770, guid: 4c68e9a9286f5fa46b8cfa1a44e29a4a,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 3310767389354307621, guid: 4c68e9a9286f5fa46b8cfa1a44e29a4a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2034,11 +2039,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.8241097
-      objectReference: {fileID: 0}
-    - target: {fileID: 5120640790280199770, guid: 4c68e9a9286f5fa46b8cfa1a44e29a4a,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: -2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c68e9a9286f5fa46b8cfa1a44e29a4a, type: 3}
@@ -3124,6 +3124,11 @@ PrefabInstance:
         type: 3}
       propertyPath: MarginRight
       value: 8.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7653621190597086673, guid: 378242cb6038f1f408815fe7b62f4e8c,
+        type: 3}
+      propertyPath: isDark
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 378242cb6038f1f408815fe7b62f4e8c, type: 3}

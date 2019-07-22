@@ -3064,5 +3064,10 @@ PrefabInstance:
       propertyPath: Lightning
       value: 
       objectReference: {fileID: 1412812216}
+    - target: {fileID: 7653621190597086673, guid: 378242cb6038f1f408815fe7b62f4e8c,
+        type: 3}
+      propertyPath: isDark
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 378242cb6038f1f408815fe7b62f4e8c, type: 3}

@@ -171,7 +171,7 @@ public class UIController : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(clickSound, new Vector3(0, 0, 0));
         GlobalController._instance.GetComponent<AudioSource>().Play();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Choose");
 
         audio.clip = GlobalController._instance.gameBgm;
         audio.pitch = 0.7f;
@@ -187,7 +187,7 @@ public class UIController : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             timer += Time.deltaTime;
             if (timer >= 5 && GameOn)

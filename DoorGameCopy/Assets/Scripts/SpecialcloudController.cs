@@ -17,6 +17,7 @@ public class SpecialcloudController : MonoBehaviour
     public float MarginRight;
     private float moveSpeed;
     private bool isForwardRight;
+    public bool isDark;
 
     private void Start()
     {
@@ -39,7 +40,8 @@ public class SpecialcloudController : MonoBehaviour
             if (this.transform.localScale.x <= targetScale.x)
             {
                 isLarge = false;
-                AudioSource.PlayClipAtPoint(GlobalController._instance.lightningSound, new Vector3(0, 0, 0));
+                if(isDark)
+                    AudioSource.PlayClipAtPoint(GlobalController._instance.lightningSound, new Vector3(0, 0, 0));
             }
         }
         else

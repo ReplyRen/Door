@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
+    path: Assets/Scenes/BeginComic.unity
+    guid: a28021693cc336f4da90e2be3ddfd306
+  - enabled: 1
     path: Assets/Scenes/StartMenu.unity
     guid: cf147d4b553e1b14e88b6794c24a1967
   - enabled: 1
