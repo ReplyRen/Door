@@ -39,15 +39,15 @@ public class Lightning : MonoBehaviour
         rightRay = new Ray2D[h];
         InitRayDir(rightRay, Vector2.right);
         InitRayDir(leftRay, Vector2.left);
-        leftRay[0].origin = transform.position + new Vector3(-lenth / 2, -height / 2, 0f) + new Vector3(-0.01f, 0f, 0f);
-        leftRay[leftRay.Length - 1].origin = transform.position + new Vector3(-lenth / 2, height / 2, 0f) + new Vector3(-0.01f, 0f, 0f);
+        leftRay[0].origin = transform.position + new Vector3(-lenth / 2, -height / 2, 0f) + new Vector3(-0.2f, 0f, 0f);
+        leftRay[leftRay.Length - 1].origin = transform.position + new Vector3(-lenth / 2, height / 2, 0f) + new Vector3(-0.2f, 0f, 0f);
         float interval = height / (leftRay.Length - 1);
         for (int i = 1; i < leftRay.Length - 1; i++)
         {
             leftRay[i].origin = leftRay[i - 1].origin + new Vector2(0f, interval);
         }
-        rightRay[0].origin = transform.position + new Vector3(lenth / 2, -height / 2, 0f) + new Vector3(0.01f, 0f, 0f);
-        rightRay[rightRay.Length - 1].origin = transform.position + new Vector3(lenth / 2, height / 2, 0f) + new Vector3(0.01f, 0f, 0f);
+        rightRay[0].origin = transform.position + new Vector3(lenth / 2, -height / 2, 0f) + new Vector3(0.2f, 0f, 0f);
+        rightRay[rightRay.Length - 1].origin = transform.position + new Vector3(lenth / 2, height / 2, 0f) + new Vector3(0.2f, 0f, 0f);
         for (int i = 1; i < rightRay.Length - 1; i++)
         {
             rightRay[i].origin = rightRay[i - 1].origin + new Vector2(0f, interval);
@@ -80,10 +80,10 @@ public class Lightning : MonoBehaviour
             {
                 if (leftHit[i].collider.tag == "Player")
                 {
-                    leftHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed = -horizontalForce;
-                    leftHit[i].collider.gameObject.transform.position += new Vector3(0, 0.1f, 0);
-                    leftHit[i].collider.gameObject.GetComponent<GravitationalController>().verticalSpeed = verticalForce;
+                    Debug.Log(1);
                     leftHit[i].collider.gameObject.GetComponent<GravitationalController>().isDead();
+                    leftHit[i].collider.gameObject.GetComponent<GravitationalController>().verticalSpeed = 10f;
+                    leftHit[i].collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 }
             }
         }
@@ -92,13 +92,13 @@ public class Lightning : MonoBehaviour
             rightHit[i] = Physics2D.Linecast(rightRay[i].origin, rightRay[i].origin + new Vector2(-0.1f, 0f));
             if (rightHit[i].collider != null)
             {
-
                 if (rightHit[i].collider.tag == "Player")
                 {
-                    rightHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed = horizontalForce;
-                    rightHit[i].collider.gameObject.transform.position += new Vector3(0, 0.1f, 0);
-                    rightHit[i].collider.gameObject.GetComponent<GravitationalController>().verticalSpeed = verticalForce;
-                    rightHit[i].collider.gameObject.GetComponent<GravitationalController>().isDead();                }
+                    Debug.Log(0);
+                    rightHit[i].collider.gameObject.GetComponent<GravitationalController>().isDead();
+                    rightHit[i].collider.gameObject.transform.position += new Vector3(0, 1f, 0);
+                    rightHit[i].collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                }
             }
         }
     }

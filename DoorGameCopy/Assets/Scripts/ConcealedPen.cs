@@ -26,6 +26,10 @@ public class ConcealedPen : MonoBehaviour
     private Vector3 targetPos;
     public float concealedTime = 3f;
     private bool moved = false;
+    public int limitCount = 0;
+    public int usageCount = 0;
+    private GameObject player;
+    public float remainTime;
     private enum vec3 { top, bottom, left, right, center }
     private void Start()
     {
@@ -34,12 +38,13 @@ public class ConcealedPen : MonoBehaviour
         stores = GameObject.FindGameObjectsWithTag("Store");
         boxes = GameObject.FindGameObjectsWithTag("Box");
         pigs = GameObject.FindGameObjectsWithTag("Pig");
-
+        player = GameObject.FindWithTag("Player");
+        remainTime = concealedTime;
     }
     private void FixedUpdate()
     {
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)&&usageCount<limitCount)
         {
 
             clone = (GameObject)Instantiate(obs, obs.transform.position, transform.rotation);//克隆一个带有LineRender的物体   
@@ -96,9 +101,10 @@ public class ConcealedPen : MonoBehaviour
                 {
                     Debug.Log("YX门");
                     open = true;
-                    targetObject = GetClosestObejct(stores, boxes, pigs, centerPoint);
+                    targetObject = GetClosestObejct(stores, boxes, pigs, centerPoint, player) ;
                     targetPos = centerPoint;
                     Debug.Log(targetObject.tag);
+                    usageCount++;
                     timer = 0f;
                 }
                 else
@@ -235,7 +241,7 @@ public class ConcealedPen : MonoBehaviour
         else
             return 0;
     }
-    private GameObject GetClosestObejct(GameObject[] a, GameObject[] b, GameObject[] c, Vector3 self)
+    private GameObject GetClosestObejct(GameObject[] a, GameObject[] b, GameObject[] c, Vector3 self,GameObject player)
     {
         GameObject game = new GameObject();
         float distance = 100f;
@@ -292,6 +298,11 @@ public class ConcealedPen : MonoBehaviour
                 }
             }
         }
+        if (Vector3.Distance(self, player.transform.position) < distance)
+        {
+            distance = Vector3.Distance(self, player.transform.position);
+            game = player;
+        }
         return game;
     }
     private void Attract(GameObject from, Vector3 to)
@@ -306,6 +317,10 @@ public class ConcealedPen : MonoBehaviour
                 break;
             case "Box":
                 from.GetComponent<Box>().enabled = false;
+                from.transform.parent = null;
+                break;
+            case "Player":
+                from.GetComponent<GravitationalController>().enabled = false;
                 break;
             default:
                 Debug.Log("ERROR");
@@ -320,6 +335,7 @@ public class ConcealedPen : MonoBehaviour
         if (moved)
         {
             timer += Time.deltaTime;
+            remainTime = concealedTime - timer;
             if (timer <= concealedTime)
             {
                 from.transform.position = new Vector3(100f, 100f);
@@ -338,12 +354,16 @@ public class ConcealedPen : MonoBehaviour
                     case "Box":
                         from.GetComponent<Box>().enabled = true;
                         break;
+                    case "Player":
+                        from.GetComponent<GravitationalController>().enabled = true;
+                        break;
                     default:
                         Debug.Log("ERROR");
                         break;
                 }
                 isConcealedOpen = false;
                 moved = false;
+                remainTime = concealedTime;
                 timer = 0f;
                 Destroy(clone);
             }
