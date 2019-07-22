@@ -26,6 +26,10 @@ public class ConcealedPen : MonoBehaviour
     private Vector3 targetPos;
     public float concealedTime = 3f;
     private bool moved = false;
+    private GameObject player;
+    public float remainTime;
+    public int limitCount = 0;
+    public int usageCount = 0;
     private enum vec3 { top, bottom, left, right, center }
     private void Start()
     {
@@ -34,87 +38,87 @@ public class ConcealedPen : MonoBehaviour
         stores = GameObject.FindGameObjectsWithTag("Store");
         boxes = GameObject.FindGameObjectsWithTag("Box");
         pigs = GameObject.FindGameObjectsWithTag("Pig");
-
+        player = GameObject.FindWithTag("Player");
     }
     private void FixedUpdate()
     {
-
-        if (Input.GetMouseButtonDown(0))
-        {
-
-            clone = (GameObject)Instantiate(obs, obs.transform.position, transform.rotation);//克隆一个带有LineRender的物体   
-            line = clone.GetComponent<LineRenderer>();//获得该物体上的LineRender组件  
-            line.startColor = Color.blue;
-            line.endColor = Color.green;
-            line.SetWidth(lineWidth, lineWidth);//设置宽度  
-            i = 0;
-            posList.Clear();
-            isConcealedOpen = false;
-            open = false;
-            moved = false;
-        }
-        if (Input.GetMouseButton(0) && MousePositionDetection() == 0)
-        {
-            if (clone != null)
-                Destroy(clone);
-        }
-        if (Input.GetMouseButton(0) && MousePositionDetection() != 0)
-        {
-            if (clone != null)
+            if (Input.GetMouseButtonDown(0)&& usageCount < limitCount)
             {
-                i++;
-                Vector3 pos = new Vector3();
-                line.positionCount = i;//设置顶点数  
-                pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15));
-                line.SetPosition(i - 1, pos);//设置顶点位置
-                if (posList.Count == 0)
-                    posList.Add(pos);
-                else if (pos != posList[posList.Count - 1])
-                {
-                    posList.Add(pos);
-                }
+
+                clone = (GameObject)Instantiate(obs, obs.transform.position, transform.rotation);//克隆一个带有LineRender的物体   
+                line = clone.GetComponent<LineRenderer>();//获得该物体上的LineRender组件  
+                line.startColor = Color.blue;
+                line.endColor = Color.green;
+                line.SetWidth(lineWidth, lineWidth);//设置宽度  
+                i = 0;
+                posList.Clear();
+                isConcealedOpen = false;
+                open = false;
+                moved = false;
             }
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            if (clone != null)
+            if (Input.GetMouseButton(0) && MousePositionDetection() == 0)
             {
-                IsCOpen(posList);
-                List<Vector3> changeList = new List<Vector3>();
-                changeList = posList;
-                Vector3 topPoint = new Vector3();
-                Vector3 bottomPoint = new Vector3();
-                Vector3 leftPoint = new Vector3();
-                Vector3 rightPoint = new Vector3();
-                Vector3 centerPoint = new Vector3();
-                topPoint = posList[posList.Count - 1];
-                bottomPoint = GetPoint(changeList, vec3.bottom);
-                rightPoint = GetPoint(changeList, vec3.right);
-                leftPoint = GetPoint(changeList, vec3.left);
-                centerPoint = GetPoint(changeList, vec3.center);
-                if (isConcealedOpen)
-                {
-                    Debug.Log("YX门");
-                    open = true;
-                    targetObject = GetClosestObejct(stores, boxes, pigs, centerPoint);
-                    targetPos = centerPoint;
-                    Debug.Log(targetObject.tag);
-                    timer = 0f;
-                }
-                else
-                {
+                if (clone != null)
                     Destroy(clone);
+            }
+            if (Input.GetMouseButton(0) && MousePositionDetection() != 0)
+            {
+                if (clone != null)
+                {
+                    i++;
+                    Vector3 pos = new Vector3();
+                    line.positionCount = i;//设置顶点数  
+                    pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 15));
+                    line.SetPosition(i - 1, pos);//设置顶点位置
+                    if (posList.Count == 0)
+                        posList.Add(pos);
+                    else if (pos != posList[posList.Count - 1])
+                    {
+                        posList.Add(pos);
+                    }
                 }
             }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                if (clone != null)
+                {
+                    IsCOpen(posList);
+                    List<Vector3> changeList = new List<Vector3>();
+                    changeList = posList;
+                    Vector3 topPoint = new Vector3();
+                    Vector3 bottomPoint = new Vector3();
+                    Vector3 leftPoint = new Vector3();
+                    Vector3 rightPoint = new Vector3();
+                    Vector3 centerPoint = new Vector3();
+                    topPoint = posList[posList.Count - 1];
+                    bottomPoint = GetPoint(changeList, vec3.bottom);
+                    rightPoint = GetPoint(changeList, vec3.right);
+                    leftPoint = GetPoint(changeList, vec3.left);
+                    centerPoint = GetPoint(changeList, vec3.center);
+                    if (isConcealedOpen)
+                    {
+                        Debug.Log("YX门");
+                        open = true;
+                        targetObject = GetClosestObejct(stores, boxes, pigs, centerPoint, player);
+                        targetPos = centerPoint;
+                        usageCount++;
+                        Debug.Log(targetObject.tag);
+                        timer = 0f;
+                    }
+                    else
+                    {
+                        Destroy(clone);
+                    }
+                }
 
-        }
-        else if (!open)
-            Destroy(clone);
-        if (isConcealedOpen)
-        {
-            Attract(targetObject, targetPos);
-        }
-
+            }
+            else if (!open)
+                Destroy(clone);
+            if (isConcealedOpen)
+            {
+                Attract(targetObject, targetPos);
+            }
+        
     }
     private void IsCOpen(List<Vector3> list)
     {
@@ -235,7 +239,7 @@ public class ConcealedPen : MonoBehaviour
         else
             return 0;
     }
-    private GameObject GetClosestObejct(GameObject[] a, GameObject[] b, GameObject[] c, Vector3 self)
+    private GameObject GetClosestObejct(GameObject[] a, GameObject[] b, GameObject[] c, Vector3 self,GameObject player)
     {
         GameObject game = new GameObject();
         float distance = 100f;
@@ -292,6 +296,11 @@ public class ConcealedPen : MonoBehaviour
                 }
             }
         }
+        if (Vector3.Distance(self, player.transform.position) < distance)
+        {
+            distance = Vector3.Distance(self, player.transform.position);
+            game = player;
+        }
         return game;
     }
     private void Attract(GameObject from, Vector3 to)
@@ -306,6 +315,10 @@ public class ConcealedPen : MonoBehaviour
                 break;
             case "Box":
                 from.GetComponent<Box>().enabled = false;
+                from.transform.parent = null;
+                break;
+            case "Player":
+                from.GetComponent<GravitationalController>().enabled = false;
                 break;
             default:
                 Debug.Log("ERROR");
@@ -320,6 +333,7 @@ public class ConcealedPen : MonoBehaviour
         if (moved)
         {
             timer += Time.deltaTime;
+            remainTime = concealedTime - timer;
             if (timer <= concealedTime)
             {
                 from.transform.position = new Vector3(100f, 100f);
@@ -338,6 +352,9 @@ public class ConcealedPen : MonoBehaviour
                     case "Box":
                         from.GetComponent<Box>().enabled = true;
                         break;
+                    case "Player":
+                        from.GetComponent<GravitationalController>().enabled = true;
+                        break;
                     default:
                         Debug.Log("ERROR");
                         break;
@@ -346,6 +363,7 @@ public class ConcealedPen : MonoBehaviour
                 moved = false;
                 timer = 0f;
                 Destroy(clone);
+                remainTime = 0f;
             }
 
         }

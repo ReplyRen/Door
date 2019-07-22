@@ -10,7 +10,6 @@ public class SpecialcloudController : MonoBehaviour
     private Vector3 step;
     private bool isLarge;
     public SpriteRenderer Lightning;
-    public Transform boxTransform;
     private bool boxFollow;
 
     public float MarginLeft;
@@ -61,11 +60,6 @@ public class SpecialcloudController : MonoBehaviour
             this.transform.position = new Vector3(this.transform.position.x - moveSpeed * Time.deltaTime, this.transform.position.y, this.transform.position.z);
             if (this.transform.position.x <= MarginLeft)
                 isForwardRight = true;
-        }
-
-        if(boxFollow && boxTransform != null)
-        {
-            boxTransform.position = new Vector3(this.transform.position.x, boxTransform.position.y, boxTransform.position.z);
         }
     }
 }

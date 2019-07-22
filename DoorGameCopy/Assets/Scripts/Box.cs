@@ -129,8 +129,6 @@ public class Box : MonoBehaviour
                     transform.position = Vector3.MoveTowards(transform.position,
                         new Vector3(transform.position.x, downHit[i].collider.transform.position.y + 3.3f), 2 * Time.deltaTime);
                 }
-                else if (downHit[i].collider.tag == "Water")
-                    gameObject.transform.parent = downHit[i].collider.transform;
             }
             else if (downHit[i].collider.tag == "Canvas")
             {
