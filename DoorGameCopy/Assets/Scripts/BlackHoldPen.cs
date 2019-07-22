@@ -7,10 +7,10 @@ public class BlackHoldPen : MonoBehaviour
     private int isCableCar;
     private GameObject clone;
     private LineRenderer line;
-    private LineRenderer cableline;
+    public LineRenderer cableline = null;
     private int i;
     public GameObject obs;
-    private List<Vector3> posList = new List<Vector3>();
+    public List<Vector3> posList = new List<Vector3>();
     private bool isBlackHoleOpen = false;
     public float lineWidth = 0.05f;
     [HideInInspector]
@@ -41,40 +41,40 @@ public class BlackHoldPen : MonoBehaviour
         angle = 0f;
         usageCount = 0;
     }
-    private void LateUpdate()
-    {
-        if (cableline == null) return;
-        int cntPoints = cableline.positionCount;
-        Vector3 middlePoint = new Vector3(0, 0, 0);
-        for (int j = 0; j < cntPoints; j++)
-        {
-            middlePoint += cableline.GetPosition(j);
-        }
-        middlePoint /= cntPoints;
-        var cablecar = GameObject.FindWithTag("CableCar");
-        var cablecarfa = cablecar.transform.parent.gameObject;
-        var cablecarpos = cablecarfa.transform.TransformPoint(cablecar.transform.localPosition);
-        Vector3 disVec = cablecarpos - middlePoint;  disVec.z = 0;
-        Debug.Log(cablecarpos + " " + disVec);
-        for (int j = 0; j < cntPoints; j++)
-        {
-            cableline.SetPosition(j, cableline.GetPosition(j) + disVec);
-        }
-        middlePoint = new Vector3(0, 0, 0);
-        for (int j = 0; j < posList.Count; j++)
-            middlePoint += posList[j];
-        middlePoint /= posList.Count;
-        disVec = cablecarpos - middlePoint; disVec.z = 0;
-        for (int j = 0; j < posList.Count; j++)
-            posList[j] += disVec;
-        Vector3 centerPoint = GetPoint(posList, vec3.center);
-        bHPosList[bHPosList.Count - 1] = centerPoint;
-    }
+    //private void LateUpdate()
+    //{
+    //    if (cableline == null) return;
+    //    int cntPoints = cableline.positionCount;
+    //    Vector3 middlePoint = new Vector3(0, 0, 0);
+    //    for (int j = 0; j < cntPoints; j++)
+    //    {
+    //        middlePoint += cableline.GetPosition(j);
+    //    }
+    //    middlePoint /= cntPoints;
+    //    var cablecar = GameObject.FindWithTag("CableCar");
+    //    var cablecarfa = cablecar.transform.parent.gameObject;
+    //    var cablecarpos = cablecarfa.transform.TransformPoint(cablecar.transform.localPosition);
+    //    Vector3 disVec = cablecarpos - middlePoint;  disVec.z = 0;
+    //    Debug.Log(cablecarpos + " " + disVec);
+    //    for (int j = 0; j < cntPoints; j++)
+    //    {
+    //        cableline.SetPosition(j, cableline.GetPosition(j) + disVec);
+    //    }
+    //    middlePoint = new Vector3(0, 0, 0);
+    //    for (int j = 0; j < posList.Count; j++)
+    //        middlePoint += posList[j];
+    //    middlePoint /= posList.Count;
+    //    disVec = cablecarpos - middlePoint; disVec.z = 0;
+    //    for (int j = 0; j < posList.Count; j++)
+    //        posList[j] += disVec;
+    //    Vector3 centerPoint = GetPoint(posList, vec3.center);
+    //    bHPosList[bHPosList.Count - 1] = centerPoint;
+    //}
     private void FixedUpdate()
     {
         if (bHPosList.Count < 2 && usageCount < limitCount)
         {
-            if (Input.GetMouseButtonDown(0) || open)
+            if (Input.GetMouseButtonDown(0))
             {
                 clone = (GameObject)Instantiate(obs, obs.transform.position, transform.rotation);//克隆一个带有LineRender的物体   
                 line = clone.GetComponent<LineRenderer>();//获得该物体上的LineRender组件  
@@ -93,7 +93,7 @@ public class BlackHoldPen : MonoBehaviour
                 if (clone != null)
                     Destroy(clone);
             }
-            else if (Input.GetMouseButton(0) && MousePositionDetection() != 0)
+            else if (Input.GetMouseButton(0) && MousePositionDetection() != 0 && !open)
             {
                 if (clone != null)
                 {
@@ -143,6 +143,8 @@ public class BlackHoldPen : MonoBehaviour
                         }
                         bHPosList.Add(centerPoint);
                         bHList.Add(clone);
+                        if (bHPosList.Count == 2)
+                            usageCount++;
                         open = true;
                     }
                     else

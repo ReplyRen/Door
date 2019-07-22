@@ -7,19 +7,20 @@ public class ProtalPen : MonoBehaviour
     private int isCableCar;
     private GameObject clone;
     private LineRenderer line;
-    private LineRenderer cableline;
+	public LineRenderer cableline = null;
     private int i;
     public GameObject obs;
     public float lineWidth = 0.05f;
     public float precision = 0.05f;
-    private List<Vector3> posList = new List<Vector3>();
-    private List<Vector3> portalList = new List<Vector3>();
+    public List<Vector3> posList = new List<Vector3>();
+    public List<Vector3> portalList = new List<Vector3>();
     private bool isPortalOpen = false;
     public float minDoorHeight = 0.1f;
     public float minDoorWidth = 0.1f;
     private float characterHeight;
     private float characterWidth;
     private float closeCanvasDis = 1f;
+	public int cableProtalID = -1;
     private GameObject player;
     public KeyCode protalKey = KeyCode.Q;
     private bool open = false;
@@ -29,37 +30,7 @@ public class ProtalPen : MonoBehaviour
         return (x < 0) ? (-1) : (1);
     }
 
-    private void LateUpdate()
-    {
-        if (cableline == null) return;
-        int cntPoints = cableline.positionCount;
-        Vector3 middlePoint = new Vector3(0, 0, 0);
-        for (int j = 0; j < cntPoints; j++)
-        {
-            middlePoint += cableline.GetPosition(j);
-        }
-        middlePoint /= cntPoints;
-        var cablecar = GameObject.FindWithTag("CableCar");
-        var cablecarfa = cablecar.transform.parent.gameObject;
-        var cablecarpos = cablecarfa.transform.TransformPoint(cablecar.transform.localPosition);
-        Vector3 disVec = cablecarpos - middlePoint; disVec.z = 0;
-        Debug.Log(cablecarpos + " " + disVec);
-        for (int j = 0; j < cntPoints; j++)
-        {
-            cableline.SetPosition(j, cableline.GetPosition(j) + disVec);
-        }
-    }
-
     private enum vec3 { top, bottom, left, right, center }
-
-    private Vector3 vec3plus (Vector3 A, Vector3 B)
-    {
-        return new Vector3(A.x + B.x, A.y + B.y, A.z + B.z);
-    }
-    private Vector3 vec3plus (Vector3 A, float B)
-    {
-        return new Vector3(A.x + B, A.y + B, A.z + B);
-    }
 
     private void Start()
     {
@@ -142,6 +113,7 @@ public class ProtalPen : MonoBehaviour
                         {
                             clone.tag = "CableCarClone";
                             cableline = line;
+							cableProtalID = portalList.Count;
                         }
                         Debug.Log("传送门" + centerPoint);
                         portalList.Add(centerPoint);
