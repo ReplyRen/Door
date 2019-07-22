@@ -89,12 +89,12 @@ public class ProtalPen : MonoBehaviour
             open = false;
             isCableCar = 0;
         }
-        if (Input.GetMouseButton(0)&& MousePositionDetection() == 0)
+        else if (Input.GetMouseButton(0)&& MousePositionDetection() == 0)
         {
             if (clone != null)
                 Destroy(clone);
         }
-        if (Input.GetMouseButton(0) && MousePositionDetection() != 0)
+        else if (Input.GetMouseButton(0) && MousePositionDetection() != 0)
         {
             if (clone != null)
             {
