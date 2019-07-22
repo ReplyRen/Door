@@ -70,7 +70,7 @@ public class ProtalPen : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || open)
         {
             if (portalList.Count >= 2)
             {

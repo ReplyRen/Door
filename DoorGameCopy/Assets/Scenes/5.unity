@@ -1038,6 +1038,11 @@ PrefabInstance:
       propertyPath: limitCount
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 377983062206588263, guid: 2bb8bd08574d78c4a883d41a59ae47b2,
+        type: 3}
+      propertyPath: attractTime
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bb8bd08574d78c4a883d41a59ae47b2, type: 3}
 --- !u!1001 &654416135

@@ -61,12 +61,21 @@ public class BlackHoldPen : MonoBehaviour
         {
             cableline.SetPosition(j, cableline.GetPosition(j) + disVec);
         }
+        middlePoint = new Vector3(0, 0, 0);
+        for (int j = 0; j < posList.Count; j++)
+            middlePoint += posList[j];
+        middlePoint /= posList.Count;
+        disVec = cablecarpos - middlePoint; disVec.z = 0;
+        for (int j = 0; j < posList.Count; j++)
+            posList[j] += disVec;
+        Vector3 centerPoint = GetPoint(posList, vec3.center);
+        bHPosList[bHPosList.Count - 1] = centerPoint;
     }
     private void FixedUpdate()
     {
         if (bHPosList.Count < 2 && usageCount < limitCount)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) || open)
             {
                 clone = (GameObject)Instantiate(obs, obs.transform.position, transform.rotation);//克隆一个带有LineRender的物体   
                 line = clone.GetComponent<LineRenderer>();//获得该物体上的LineRender组件  
@@ -109,17 +118,6 @@ public class BlackHoldPen : MonoBehaviour
                 {
                     IsBHOpen(posList);
                     List<Vector3> changeList = new List<Vector3>();
-                    changeList = posList;
-                    Vector3 topPoint = new Vector3();
-                    Vector3 bottomPoint = new Vector3();
-                    Vector3 leftPoint = new Vector3();
-                    Vector3 rightPoint = new Vector3();
-                    Vector3 centerPoint = new Vector3();
-                    topPoint = posList[posList.Count - 1];
-                    bottomPoint = GetPoint(changeList, vec3.bottom);
-                    rightPoint = GetPoint(changeList, vec3.right);
-                    leftPoint = GetPoint(changeList, vec3.left);
-                    centerPoint = GetPoint(changeList, vec3.center);
                     if (isBlackHoleOpen)
                     {
                         Debug.Log("黑洞门");
@@ -128,6 +126,17 @@ public class BlackHoldPen : MonoBehaviour
                             clone.tag = "CableCarClone";
                             cableline = line;
                         }
+                        changeList = posList;
+                        Vector3 topPoint = new Vector3();
+                        Vector3 bottomPoint = new Vector3();
+                        Vector3 leftPoint = new Vector3();
+                        Vector3 rightPoint = new Vector3();
+                        Vector3 centerPoint = new Vector3();
+                        topPoint = posList[posList.Count - 1];
+                        bottomPoint = GetPoint(changeList, vec3.bottom);
+                        rightPoint = GetPoint(changeList, vec3.right);
+                        leftPoint = GetPoint(changeList, vec3.left);
+                        centerPoint = GetPoint(changeList, vec3.center);
                         if (bHList.Count == 0)
                         {
                             DoorHeight = topPoint.y - bottomPoint.y;
@@ -143,7 +152,6 @@ public class BlackHoldPen : MonoBehaviour
                         Destroy(clone);
                     }
                 }
-
             }
             else if (!open)
                 Destroy(clone);
@@ -151,7 +159,7 @@ public class BlackHoldPen : MonoBehaviour
         if (bHPosList.Count == 2)
         {
             timer += Time.deltaTime;
-            if(!count)
+            if (!count)
             {
                 usageCount++;
                 count = true;
@@ -161,7 +169,6 @@ public class BlackHoldPen : MonoBehaviour
                 bHList[0].transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 angle++;
                 isAttracting = true;
-
             }
             else
             {
@@ -171,11 +178,8 @@ public class BlackHoldPen : MonoBehaviour
                 Destroy(bHList[1]);
                 bHList.Clear();
                 timer = 0f;
-
             }
-
         }
-
     }
     private void IsBHOpen(List<Vector3> list)
     {
