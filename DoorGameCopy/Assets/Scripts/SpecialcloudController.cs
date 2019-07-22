@@ -11,7 +11,7 @@ public class SpecialcloudController : MonoBehaviour
     private bool isLarge;
     public SpriteRenderer Lightning;
     public Transform boxTransform;
-    private bool boxFollow;
+    private bool boxFollow; //控制箱子跟随的布尔变量
 
     public float MarginLeft;
     public float MarginRight;
@@ -34,21 +34,24 @@ public class SpecialcloudController : MonoBehaviour
         if (isLarge)
         {
             this.transform.localScale -= step;
-            if(Lightning != null)
+            if (Lightning != null)
                 Lightning.color = new Color(Lightning.color.r, Lightning.color.g, Lightning.color.b, 0.5f);
             if (this.transform.localScale.x <= targetScale.x)
+            {
                 isLarge = false;
+                AudioSource.PlayClipAtPoint(GlobalController._instance.lightningSound, new Vector3(0, 0, 0));
+            }
         }
         else
         {
             this.transform.localScale += step;
-            if(Lightning != null)
+            if (Lightning != null)
                 Lightning.color = new Color(Lightning.color.r, Lightning.color.g, Lightning.color.b, 1f);
             if (this.transform.localScale.x >= originScale.x)
                 isLarge = true;
         }
         if(Lightning != null)
-            Lightning.gameObject.transform.position = new Vector3(this.transform.position.x, Lightning.gameObject.transform.position.y, Lightning.gameObject.transform.position.z);
+            Lightning.gameObject.transform.position = new Vector3(this.transform.position.x + 0.1f, Lightning.gameObject.transform.position.y, Lightning.gameObject.transform.position.z);
 
         if (isForwardRight)
         {

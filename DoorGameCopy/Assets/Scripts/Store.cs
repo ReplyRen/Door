@@ -21,6 +21,7 @@ public class Store : MonoBehaviour
     public float gSmooth = 2f;//达到最高点时的重力值
     public float smoothCriticalSpeed = 10f;
     public float fallMaxSpeed = 150f;
+    private bool isInWater;
 
     private void Start()
     {
@@ -115,8 +116,14 @@ public class Store : MonoBehaviour
                 downHit[i].collider.tag == "LeftLift" || downHit[i].collider.tag == "RightLift" || downHit[i].collider.tag == "Water")
             {
                 downHitStatus[i] = 0;
-                if(downHit[i].collider.tag == "Water")
-                    gameObject.transform.parent = downHit[i].collider.transform;
+                if (downHit[i].collider.tag == "Water")
+                {
+                    if (!isInWater)
+                    {
+                        AudioSource.PlayClipAtPoint(GlobalController._instance.bigfalldownSound, new Vector3(0, 0, 0));
+                        isInWater = true;
+                    }
+                }
             }
             else if (downHit[i].collider.tag == "Canvas"|| downHit[i].collider.tag =="Water" )
             {

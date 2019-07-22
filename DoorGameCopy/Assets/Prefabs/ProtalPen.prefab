@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obs: {fileID: 1577260111425243454, guid: 635ac2b7f7ccd0341be756eca3b3f7b3, type: 3}
-  lineWidth: 0.1
+  lineWidth: 0.08
   precision: 0.05
   minDoorHeight: 0.1
   minDoorWidth: 0.1

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3310767389354307621}
   - component: {fileID: 5120640790280199770}
-  - component: {fileID: -6900070871911051319}
+  - component: {fileID: 2668925436402638444}
   m_Layer: 0
   m_Name: Lightning
   m_TagString: floor
@@ -80,8 +80,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!68 &-6900070871911051319
-EdgeCollider2D:
+--- !u!61 &2668925436402638444
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -93,22 +93,16 @@ EdgeCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.26327485, y: 0.18078327}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.21, y: 7.3}
+    newSize: {x: 1.21, y: 7.3}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.17261207, y: 6.9384336}
   m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.16691573, y: 3.6779597}
-  - {x: -0.282809, y: 2.6644328}
-  - {x: -0.20566545, y: 2.4724169}
-  - {x: -0.36566684, y: 1.5191075}
-  - {x: -0.3881689, y: 0.7439279}
-  - {x: -0.016345907, y: -0.11492494}
-  - {x: 0.009057865, y: -0.73637205}
-  - {x: 0.22837035, y: -1.3464088}
-  - {x: 0.24662709, y: -1.8648137}
-  - {x: 0.38929063, y: -3.0425909}
-  - {x: 0.43150207, y: -3.6592183}
-  - {x: 0.33052704, y: -1.3557043}
-  - {x: 0.12893519, y: -0.66297895}
-  - {x: -0.24219438, y: 0.87534815}
-  - {x: -0.16804317, y: 2.7308252}
-  - {x: -0.21081464, y: 3.6360614}

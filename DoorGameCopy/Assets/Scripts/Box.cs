@@ -25,6 +25,7 @@ public class Box : MonoBehaviour
     private bool move = false;
     private bool nextToWall = false;
     private Vector3 distance = new Vector3();
+    private bool isInWater;
 
     private void Start()
     { 
@@ -130,7 +131,11 @@ public class Box : MonoBehaviour
                         new Vector3(transform.position.x, downHit[i].collider.transform.position.y + 3.3f), 2 * Time.deltaTime);
                 }
                 else if (downHit[i].collider.tag == "Water")
-                    gameObject.transform.parent = downHit[i].collider.transform;
+                    if (!isInWater)
+                    {
+                        AudioSource.PlayClipAtPoint(GlobalController._instance.midfalldownSound, new Vector3(0, 0, 0));
+                        isInWater = true;
+                    }
             }
             else if (downHit[i].collider.tag == "Canvas")
             {

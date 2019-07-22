@@ -26,6 +26,7 @@ public class Pig : MonoBehaviour
     public float verticalForce = 100f;
     public float horizontalForce = 100f;
     private bool dead;
+    private bool isInWater;
 
     private void Start()
     { 
@@ -140,6 +141,11 @@ public class Pig : MonoBehaviour
             else if(downHit[i].collider.tag == "Water")
             {
                 downHitStatus[i] = 0;
+                if (!isInWater)
+                {
+                    AudioSource.PlayClipAtPoint(GlobalController._instance.midfalldownSound, new Vector3(0, 0, 0));
+                    isInWater = true;
+                }
                 isDead();
             }
             else if (downHit[i].collider.tag == "Canvas")

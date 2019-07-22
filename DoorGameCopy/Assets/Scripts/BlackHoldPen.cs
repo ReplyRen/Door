@@ -71,8 +71,8 @@ public class BlackHoldPen : MonoBehaviour
                 clone = (GameObject)Instantiate(obs, obs.transform.position, transform.rotation);//克隆一个带有LineRender的物体   
                 line = clone.GetComponent<LineRenderer>();//获得该物体上的LineRender组件  
                 //line.SetColors(Color.blue, Color.blue);//设置颜色
-                line.startColor = Color.white;
-                line.endColor = Color.white;
+                line.startColor = new Color32(135, 206, 235, 50);
+                line.endColor = new Color32(135, 206, 235, 50);
                 line.SetWidth(lineWidth, lineWidth);//设置宽度  
                 i = 0;
                 posList.Clear();

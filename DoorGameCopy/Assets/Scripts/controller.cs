@@ -41,6 +41,7 @@ public class controller : MonoBehaviour
     public float mashroomSpeed = 300f;
     private bool dead;
     private float deadtimer;
+    private bool isInWater;
     private void Start()
     {
         angle = 0f;
@@ -63,13 +64,13 @@ public class controller : MonoBehaviour
     {
         if (dead)
         {
-
             float timeTmp = deadtimer;
             deadtimer = timeTmp + Time.deltaTime;
             if(deadtimer > 2)
             {
                 deadtimer = 0;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                GlobalController._instance.GetComponent<AudioSource>().Play();
             }
         }
     }
@@ -222,6 +223,11 @@ public class controller : MonoBehaviour
                 ang[i] = Vector2.Angle(downHit[i].normal, Vector2.up);
                 if (downHit[i].collider.tag == "Water")
                 {
+                    if (!isInWater)
+                    {
+                        AudioSource.PlayClipAtPoint(GlobalController._instance.midfalldownSound, new Vector3(0, 0, 0));
+                        isInWater = true;
+                    }
                     isDead();
                 }
                 else if (downHit[i].collider.tag == "Lift")

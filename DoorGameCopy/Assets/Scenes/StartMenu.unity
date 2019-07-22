@@ -453,6 +453,11 @@ MonoBehaviour:
   translateSound: {fileID: 8300000, guid: 80f16e67ae6624f498bd9bbd7fdd5171, type: 3}
   jumpSound: {fileID: 8300000, guid: 4cb26b08f3f08ea43b4a5bc6aa2d7528, type: 3}
   deadSound: {fileID: 8300000, guid: 92a342fe63a270f4fadb305145079874, type: 3}
+  midfalldownSound: {fileID: 8300000, guid: 4d91870bb8b4db4409b848a6f802656b, type: 3}
+  bigfalldownSound: {fileID: 8300000, guid: bafbf5a5644b3f54fbe36a0b856203a2, type: 3}
+  startbuttonSound: {fileID: 8300000, guid: f556f195324acba47b2d4e3dc7d59c3e, type: 3}
+  lightningSound: {fileID: 8300000, guid: 27dd8b0e25830d84cab03af315c05c0e, type: 3}
+  gamebeginSound: {fileID: 8300000, guid: 693b7e838b19e834d895edb8d4e79e2d, type: 3}
 --- !u!4 &1107479457
 Transform:
   m_ObjectHideFlags: 0

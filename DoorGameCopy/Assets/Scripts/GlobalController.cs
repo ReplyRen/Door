@@ -15,6 +15,11 @@ public class GlobalController : MonoBehaviour
     public AudioClip translateSound;
     public AudioClip jumpSound;
     public AudioClip deadSound;
+    public AudioClip midfalldownSound;
+    public AudioClip bigfalldownSound;
+    public AudioClip startbuttonSound;
+    public AudioClip lightningSound;
+    public AudioClip gamebeginSound;
 
     private void Awake()
     {

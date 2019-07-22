@@ -44,8 +44,8 @@ public class ConcealedPen : MonoBehaviour
 
             clone = (GameObject)Instantiate(obs, obs.transform.position, transform.rotation);//克隆一个带有LineRender的物体   
             line = clone.GetComponent<LineRenderer>();//获得该物体上的LineRender组件  
-            line.startColor = Color.blue;
-            line.endColor = Color.green;
+            line.startColor = new Color32(255, 215, 0, 50);
+            line.endColor = new Color32(255, 215, 0, 50);
             line.SetWidth(lineWidth, lineWidth);//设置宽度  
             i = 0;
             posList.Clear();
