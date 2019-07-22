@@ -458,6 +458,7 @@ MonoBehaviour:
   startbuttonSound: {fileID: 8300000, guid: f556f195324acba47b2d4e3dc7d59c3e, type: 3}
   lightningSound: {fileID: 8300000, guid: 27dd8b0e25830d84cab03af315c05c0e, type: 3}
   gamebeginSound: {fileID: 8300000, guid: 693b7e838b19e834d895edb8d4e79e2d, type: 3}
+  forestBgm: {fileID: 8300000, guid: 89802a4d6cfefce4ca8e3c9633f82f5c, type: 3}
 --- !u!4 &1107479457
 Transform:
   m_ObjectHideFlags: 0

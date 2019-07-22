@@ -20,6 +20,7 @@ public class GlobalController : MonoBehaviour
     public AudioClip startbuttonSound;
     public AudioClip lightningSound;
     public AudioClip gamebeginSound;
+    public AudioClip forestBgm;
 
     private void Awake()
     {

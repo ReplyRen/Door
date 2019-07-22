@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obs: {fileID: 2728144563930848612, guid: 93b95b8e8706b4741af32971b3baf702, type: 3}
-  lineWidth: 0.05
-  cPosList: []
+  lineWidth: 0.08
   isAttracting: 0
   attractTime: 3
+  concealedTime: 3

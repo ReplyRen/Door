@@ -55,7 +55,10 @@ public class DestinationController : MonoBehaviour
                 {
                     this.gameObject.SetActive(false);
                     if (SceneManager.GetActiveScene().buildIndex + 1 <= 14)
+                    {
                         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                        GlobalController._instance.GetComponent<AudioSource>().Play();
+                    }
                     else
                     {
                         SceneManager.LoadScene(1);
