@@ -1071,11 +1071,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 626642800}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a85cc3a55c047425a8d1c9979e1dccfc, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a9865bdb8f4b4c6baa062e953eccd02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bHPosList: []
-  portalList: []
+  bHPen: {fileID: 1991062086}
 --- !u!4 &626642802
 Transform:
   m_ObjectHideFlags: 0
@@ -2619,6 +2618,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2052719156}
+  - component: {fileID: 2052719157}
   m_Layer: 0
   m_Name: maintainRedPen
   m_TagString: Untagged
@@ -2640,6 +2640,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2052719157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052719155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0f79043a03854e16bfa6e0aee659337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  proPen: {fileID: 810689873}
 --- !u!1001 &67435611932624340
 PrefabInstance:
   m_ObjectHideFlags: 0
