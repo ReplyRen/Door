@@ -47,6 +47,9 @@ public class ProtalPen : MonoBehaviour
             {
                 foreach (GameObject x in GameObject.FindGameObjectsWithTag("clonedLine"))
                     Destroy(x);
+                foreach (GameObject x in GameObject.FindGameObjectsWithTag("CableCarClone"))
+                    if (x.name != "BlackHoldLine(Clone)")
+                        Destroy(x);
                 portalList.Clear();
             }
             clone = (GameObject)Instantiate(obs, obs.transform.position, transform.rotation);//克隆一个带有LineRender的物体   

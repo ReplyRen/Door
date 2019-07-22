@@ -43,7 +43,7 @@ public class letRedPen : MonoBehaviour
         for (int j = 0; j < posList.Count; j++)
             posList[j] += disVec;
         var centerPoint = GetPoint(posList, vec3.center);
-        portalList[cableProtalID] = centerPoint;
+        if(cableProtalID != -1) portalList[cableProtalID] = centerPoint;
     }
 
     private Vector3 GetPoint(List<Vector3> list, vec3 vec)
