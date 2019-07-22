@@ -2,81 +2,58 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class NpcController : MonoBehaviour
 {
-    static private bool first = true;
-    private int lastNum;
-    public Text smallTalk;
-    public string[] content;
-    public Vector3 triggerPoint;
-    public GameObject player;
-    private float timeCounter;
-    private float resttime;
+    public string[] contents;
+    public Text talkLayout;
+    public Image talkBackground;
+    static bool firstTalkEnd;
+    static bool secondTalkEnd;
     private bool talkStart;
-    private bool talkEnd;
-    private int stringnum;
+    public GameObject Player;
+    private int currentNum;
+    public Text reminder;
+
+    public Text times;
+    public Sprite blackholeSprite;
+    public Sprite concealedSprite;
+    public Image currentPen;
+    public GameObject blackholePen;
+    public GameObject concealedPen;
 
     private void Start()
     {
-        int index = Random.Range(0, 3);
-        if (index == 0)
-            smallTalk.text = "咳咳。。。";
-        else if (index == 1)
-            smallTalk.text = "咳咳咳。。。";
-        else
-            smallTalk.text = "咳咳咳咳。。。";
-        if (first) lastNum = 5;
-        else lastNum = 1;
+        currentNum = 0;
+        talkLayout.enabled = false;
+        talkBackground.enabled = false;
     }
 
     private void Update()
     {
-        float timeTmp = timeCounter;
-        timeCounter = timeTmp + Time.deltaTime;
-
-        float distance = (player.transform.position - triggerPoint).magnitude;
-        if (distance < 0.5)
-        {
-            if (talkStart == false)
-                timeCounter = 0;
+        if (Player.GetComponent<GravitationalController>().status == 0)
             talkStart = true;
-        }
-        if (talkStart == false || talkEnd == true)
+        if(talkStart && !firstTalkEnd && SceneManager.GetActiveScene().buildIndex == 6)
         {
-            if (timeCounter > 4)
+            talkLayout.enabled = true;
+            talkBackground.enabled = true;
+            Player.GetComponent<GravitationalController>().enabled = false;
+            talkLayout.text = contents[currentNum];
+            talkBackground.GetComponent<RectTransform>().sizeDelta = new Vector2(contents[currentNum].Length * 20f, talkBackground.GetComponent<RectTransform>().rect.height);
+            if (Input.GetKeyDown(KeyCode.Return))
             {
-                smallTalk.text = "";
-                if (timeCounter >= 7)
+                reminder.enabled = false;
+                currentNum += 1;
+                if (currentNum == contents.Length)
                 {
-                    int index = Random.Range(0, 3);
-                    if (index == 0)
-                        smallTalk.text = "咳咳。。。";
-                    else if (index == 1)
-                        smallTalk.text = "咳咳咳。。。";
-                    else
-                        smallTalk.text = "咳咳咳咳。。。";
+                    firstTalkEnd = true;
+                    Player.GetComponent<GravitationalController>().enabled = true;
+                    talkLayout.enabled = false;
+                    talkBackground.enabled = false;
 
-                    timeCounter = 0;
-                }
-            }
-        }
-        else if (talkStart && talkEnd != true)
-        {
-            if (timeCounter > 3)
-            {
-                smallTalk.text = "";
-                if (timeCounter >= 5)
-                {
-                    smallTalk.text = content[stringnum];
-                    stringnum += 1;
-                    timeCounter = 0;
-                    if (stringnum == lastNum)
-                    {
-                        talkEnd = true;
-                        timeCounter = 0;
-                        first = false;
-                    }
+                    currentPen.sprite =blackholeSprite;
+                    times.text = "- " + blackholePen.GetComponent<BlackHoldPen>().limitCount;
                 }
             }
         }

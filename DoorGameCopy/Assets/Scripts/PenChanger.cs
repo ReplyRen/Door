@@ -8,40 +8,61 @@ public class PenChanger : MonoBehaviour
 {
     public GameObject blackholePen;
     public GameObject portalPen;
+    public GameObject concealedPen;
 
     public Image currentPen;
     public Sprite blackholeSprite;
     public Sprite portalSprite;
+    public Sprite concealedSprite;
     public Text times;
     private int blackholeTimes;
 
     private void Start()
     {
-        blackholeTimes = blackholePen.GetComponent<BlackHoldPen>().limitCount;
-        times.text = "- " + blackholeTimes;
+        if (SceneManager.GetActiveScene().buildIndex >= 3 && SceneManager.GetActiveScene().buildIndex < 6)
+            times.text = "- " + "∞";
+        else if (SceneManager.GetActiveScene().buildIndex >= 6 && SceneManager.GetActiveScene().buildIndex < 12)
+        {
+            if (SceneManager.GetActiveScene().buildIndex != 6)
+            {
+                currentPen.sprite = blackholeSprite;
+                blackholeTimes = blackholePen.GetComponent<BlackHoldPen>().limitCount;
+                times.text = "- " + blackholeTimes;
+            }
+            else
+            {
+                currentPen.sprite = portalSprite;
+                times.text = "- " + "∞";
+            }
+        }
+        else if(SceneManager.GetActiveScene().buildIndex >= 12) { }
     }
 
     private void Update()
     {
-        blackholeTimes = blackholePen.GetComponent<BlackHoldPen>().limitCount - blackholePen.GetComponent<BlackHoldPen>().usageCount;
-        if(blackholePen.activeSelf)
-            times.text = "- " + blackholeTimes;
-
-        if (Input.GetKeyDown(KeyCode.E))
+        if (SceneManager.GetActiveScene().buildIndex >= 6 && SceneManager.GetActiveScene().buildIndex < 12)
         {
-            if (blackholePen.activeSelf == true)
-            {
-                currentPen.sprite = portalSprite;
-                blackholePen.SetActive(false);
-                portalPen.SetActive(true);
-                times.text = "- " + "∞";
-            }
-            else
-            {
-                currentPen.sprite = blackholeSprite;
-                blackholePen.SetActive(true);
-                portalPen.SetActive(false);
+            blackholeTimes = blackholePen.GetComponent<BlackHoldPen>().limitCount - blackholePen.GetComponent<BlackHoldPen>().usageCount;
+
+            if (blackholePen.activeSelf)
                 times.text = "- " + blackholeTimes;
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (blackholePen.activeSelf == true)
+                {
+                    currentPen.sprite = portalSprite;
+                    blackholePen.SetActive(false);
+                    portalPen.SetActive(true);
+                    times.text = "- " + "∞";
+                }
+                else
+                {
+                    currentPen.sprite = blackholeSprite;
+                    blackholePen.SetActive(true);
+                    portalPen.SetActive(false);
+                    times.text = "- " + blackholeTimes;
+                }
             }
         }
     }

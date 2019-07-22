@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 6427365863747542915}
   - component: {fileID: 6427365863747542940}
   - component: {fileID: 6427365863747542941}
-  - component: {fileID: 6427365863747542914}
+  - component: {fileID: 945530296}
   m_Layer: 0
   m_Name: Stick
-  m_TagString: floor
+  m_TagString: Store
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 6427365863747542942}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.56, y: 2.826, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.837, z: 0.9}
+  m_LocalScale: {x: 0.79469997, y: 0.739071, z: 0.79469997}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -107,7 +107,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.0771482, y: 5.1794796}
   m_EdgeRadius: 0
---- !u!114 &6427365863747542914
+--- !u!114 &945530296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,9 +116,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6427365863747542942}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e40210decd013ef45a750ee604deff34, type: 3}
+  m_Script: {fileID: 11500000, guid: bd30c77f833b4754f8e9fa08e1f43add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: 0
   density: 0.1
-  startRotate: 0
-  point: {fileID: 0}
+  verticalSpeed: 0
+  gNormal: 9.8
+  g: 0
+  gSmooth: 2
+  smoothCriticalSpeed: 10
+  fallMaxSpeed: 150
