@@ -41,35 +41,7 @@ public class BlackHoldPen : MonoBehaviour
         angle = 0f;
         usageCount = 0;
     }
-    //private void LateUpdate()
-    //{
-    //    if (cableline == null) return;
-    //    int cntPoints = cableline.positionCount;
-    //    Vector3 middlePoint = new Vector3(0, 0, 0);
-    //    for (int j = 0; j < cntPoints; j++)
-    //    {
-    //        middlePoint += cableline.GetPosition(j);
-    //    }
-    //    middlePoint /= cntPoints;
-    //    var cablecar = GameObject.FindWithTag("CableCar");
-    //    var cablecarfa = cablecar.transform.parent.gameObject;
-    //    var cablecarpos = cablecarfa.transform.TransformPoint(cablecar.transform.localPosition);
-    //    Vector3 disVec = cablecarpos - middlePoint;  disVec.z = 0;
-    //    Debug.Log(cablecarpos + " " + disVec);
-    //    for (int j = 0; j < cntPoints; j++)
-    //    {
-    //        cableline.SetPosition(j, cableline.GetPosition(j) + disVec);
-    //    }
-    //    middlePoint = new Vector3(0, 0, 0);
-    //    for (int j = 0; j < posList.Count; j++)
-    //        middlePoint += posList[j];
-    //    middlePoint /= posList.Count;
-    //    disVec = cablecarpos - middlePoint; disVec.z = 0;
-    //    for (int j = 0; j < posList.Count; j++)
-    //        posList[j] += disVec;
-    //    Vector3 centerPoint = GetPoint(posList, vec3.center);
-    //    bHPosList[bHPosList.Count - 1] = centerPoint;
-    //}
+
     private void FixedUpdate()
     {
         if (bHPosList.Count < 2 && usageCount < limitCount)

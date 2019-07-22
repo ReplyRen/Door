@@ -106,7 +106,7 @@ public class ProtalPen : MonoBehaviour
                 {
                     if ((topPoint.y - bottomPoint.y) < minDoorHeight || (rightPoint.x - leftPoint.x) < minDoorWidth)
                     {
-                        Debug.Log("太小了");
+                        //Debug.Log("太小了");
                         Destroy(clone);
 
                     }

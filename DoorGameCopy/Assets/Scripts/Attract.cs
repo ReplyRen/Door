@@ -40,7 +40,7 @@ public class Attract : MonoBehaviour
                 targetPos = bHPen.GetComponent<BlackHoldPen>().bHPosList[0];
                 protalPos = bHPen.GetComponent<BlackHoldPen>().bHPosList[1];
                 timer += Time.deltaTime;
-                Debug.Log(IsDisClose(targetPos));
+//                Debug.Log(IsDisClose(targetPos));
                 if (IsDisClose(targetPos))
                 {
                     if (gameObject.tag == "Player")
