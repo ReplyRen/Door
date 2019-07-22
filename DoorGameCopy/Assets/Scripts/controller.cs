@@ -25,7 +25,7 @@ public class controller : MonoBehaviour
     private float height;//物体的高度
     private int l;//长度上的射线根数
     private int h;//宽度上的射线根数
-    private int verticalStatus;//水平方向的状态
+    public int verticalStatus;//水平方向的状态
     private float maxUpPos;
     public float density=0.1f;//射线密度
     private  float timer = 0f;
@@ -311,6 +311,7 @@ public class controller : MonoBehaviour
                 else if (leftHit[i].collider.tag == "floor"|| leftHit[i].collider.tag =="Mushroom"||
                      leftHit[i].collider.tag == "Store")
                 {
+                    
                     leftHitStatus[i] = 1;
                 }
                 else if (leftHit[i].collider.tag == "Box")

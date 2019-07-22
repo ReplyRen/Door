@@ -211,36 +211,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8286fbd4520745447a623e3a3b5f65cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  density: 0.1
+  density: 0.5
   verticalSpeed: 0
   verticalForce: 100
   horizontalForce: 100
---- !u!61 &190792004
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 190792000}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.21, y: 7.3}
-    newSize: {x: 1.21, y: 7.3}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.21, y: 7.3}
-  m_EdgeRadius: 0
 --- !u!1 &202487895
 GameObject:
   m_ObjectHideFlags: 0
@@ -1335,7 +1309,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1025714646}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.018, y: -0.055, z: 0}
+  m_LocalPosition: {x: 0.018, y: -0.07, z: 0}
   m_LocalScale: {x: 0.9280086, y: 1.2362092, z: 1}
   m_Children: []
   m_Father: {fileID: 58370088}
@@ -2984,6 +2958,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2668925436402638444, guid: 4c68e9a9286f5fa46b8cfa1a44e29a4a,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2668925436402638444, guid: 4c68e9a9286f5fa46b8cfa1a44e29a4a,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2668925436402638444, guid: 4c68e9a9286f5fa46b8cfa1a44e29a4a,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2668925436402638444, guid: 4c68e9a9286f5fa46b8cfa1a44e29a4a,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: -6900070871911051319, guid: 4c68e9a9286f5fa46b8cfa1a44e29a4a,
         type: 3}
