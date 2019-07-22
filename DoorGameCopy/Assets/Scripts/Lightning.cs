@@ -98,8 +98,7 @@ public class Lightning : MonoBehaviour
                     rightHit[i].collider.gameObject.GetComponent<Force>().horizontalSpeed = horizontalForce;
                     rightHit[i].collider.gameObject.transform.position += new Vector3(0, 0.1f, 0);
                     rightHit[i].collider.gameObject.GetComponent<GravitationalController>().verticalSpeed = verticalForce;
-                    rightHit[i].collider.gameObject.GetComponent<GravitationalController>().isDead();
-                }
+                    rightHit[i].collider.gameObject.GetComponent<GravitationalController>().isDead();                }
             }
         }
     }
